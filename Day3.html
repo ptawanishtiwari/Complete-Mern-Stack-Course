@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 3 - Complete HTML</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body{background:#f4f7fb}
+.hero{background:linear-gradient(135deg,#16a34a,#0f172a);color:white;padding:70px 0}
+.sidebar{position:sticky;top:20px}
+.cardx{border-radius:18px;margin-bottom:24px}
+.code{background:#111827;color:#fff;padding:15px;border-radius:10px;overflow:auto}
+</style>
+</head>
+<body>
+
+<section class="hero">
+<div class="container">
+<h1>Day 3 : Complete HTML</h1>
+<p class="lead">HTML Fundamentals, Tags, Forms, Tables, Semantic HTML, SEO, Accessibility and Interview Preparation</p>
+</div>
+</section>
+
+<div class="container my-5">
+<div class="row">
+
+<div class="col-lg-3">
+<div class="card sidebar">
+<div class="card-body">
+<h5>Topics Covered</h5>
+<ul>
+<li>Introduction to HTML</li>
+<li>HTML Structure</li>
+<li>Elements & Tags</li>
+<li>Text Formatting</li>
+<li>Lists</li>
+<li>Tables</li>
+<li>Forms</li>
+<li>Media Tags</li>
+<li>Semantic HTML</li>
+<li>SEO Tags</li>
+<li>Accessibility</li>
+<li>Interview Questions</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="col-lg-9">
+
+<div class="card cardx">
+<div class="card-body">
+<h2>1. Introduction to HTML</h2>
+<p>HTML stands for HyperText Markup Language. It is the standard language used to create web pages. HTML defines the structure and content of a webpage.</p>
+
+<p>HTML is not a programming language. It is a markup language that uses tags to organize content.</p>
+
+<h4>Example</h4>
+<pre class="code">
+&lt;h1&gt;Welcome to HTML&lt;/h1&gt;
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+</pre>
+</div>
+</div>
+
+<div class="card cardx">
+<div class="card-body">
+<h2>2. HTML Document Structure</h2>
+
+<pre class="code">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Website&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    Content Here
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<table class="table table-bordered">
+<tr><th>Tag</th><th>Purpose</th></tr>
+<tr><td>html</td><td>Root Element</td></tr>
+<tr><td>head</td><td>Metadata</td></tr>
+<tr><td>title</td><td>Browser Tab Title</td></tr>
+<tr><td>body</td><td>Visible Content</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card cardx">
+<div class="card-body">
+<h2>3. HTML Elements and Tags</h2>
+
+<p>HTML elements are building blocks of webpages.</p>
+
+<table class="table table-striped">
+<tr><th>Tag</th><th>Description</th></tr>
+<tr><td>h1-h6</td><td>Headings</td></tr>
+<tr><td>p</td><td>Paragraph</td></tr>
+<tr><td>br</td><td>Line Break</td></tr>
+<tr><td>hr</td><td>Horizontal Line</td></tr>
+<tr><td>div</td><td>Container</td></tr>
+<tr><td>span</td><td>Inline Container</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card cardx">
+<div class="card-body">
+<h2>4. Text Formatting Tags</h2>
+
+<table class="table table-bordered">
+<tr><th>Tag</th><th>Purpose</th></tr>
+<tr><td>b</td><td>Bold</td></tr>
+<tr><td>strong</td><td>Important Text</td></tr>
+<tr><td>i</td><td>Italic</td></tr>
+<tr><td>em</td><td>Emphasized Text</td></tr>
+<tr><td>u</td><td>Underline</td></tr>
+<tr><td>mark</td><td>Highlight</td></tr>
+</table>
+
+<pre class="code">
+&lt;b&gt;Bold Text&lt;/b&gt;
+&lt;i&gt;Italic Text&lt;/i&gt;
+&lt;mark&gt;Highlighted&lt;/mark&gt;
+</pre>
+</div>
+</div>
+
+<div class="card cardx">
+<div class="card-body">
+<h2>5. Lists in HTML</h2>
+
+<h4>Ordered List</h4>
+<pre class="code">
+&lt;ol&gt;
+&lt;li&gt;HTML&lt;/li&gt;
+&lt;li&gt;CSS&lt;/li&gt;
+&lt;/ol&gt;
+</pre>
+
+<h4>Unordered List</h4>
+<pre class="code">
+&lt;ul&gt;
+&lt;li&gt;React&lt;/li&gt;
+&lt;li&gt;Node&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<h4>Description List</h4>
+<pre class="code">
+&lt;dl&gt;
+&lt;dt&gt;HTML&lt;/dt&gt;
+&lt;dd&gt;Markup Language&lt;/dd&gt;
+&lt;/dl&gt;
+</pre>
+</div>
+</div>
+
+<div class="card cardx">
+<div class="card-body">
+<h2>6. Tables in HTML</h2>
+
+<pre class="code">
+&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Age&lt;/th&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Awanish&lt;/td&gt;
+&lt;td&gt;25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+
+<p>Tables are used to display structured data in rows and columns.</p>
+</div>
+</div>
+
+<div class="card cardx">
+<div class="card-body">
+<h2>7. Forms in HTML</h2>
+
+<p>Forms collect user input.</p>
+
+<pre class="code">
+&lt;form&gt;
+
+&lt;input type="text"&gt;
+
+&lt;input type="email"&gt;
+
+&lt;input type="password"&gt;
+
+&lt;button&gt;Submit&lt;/button&gt;
+
+&lt;/form&gt;
+</pre>
+
+<table class="table table-bordered">
+<tr><th>Input Type</th><th>Purpose</th></tr>
+<tr><td>text</td><td>Text Input</td></tr>
+<tr><td>email</td><td>Email Input</td></tr>
+<tr><td>password</td><td>Password Input</td></tr>
+<tr><td>date</td><td>Date Picker</td></tr>
+<tr><td>file</td><td>File Upload</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card cardx">
+<div class="card-body">
+<h2>8. Media Tags</h2>
+
+<pre class="code">
+&lt;img src="image.jpg"&gt;
+
+&lt;audio controls&gt;
+&lt;/audio&gt;
+
+&lt;video controls&gt;
+&lt;/video&gt;
+</pre>
+
+<p>Media tags help display images, audio and videos on webpages.</p>
+</div>
+</div>
+
+<div class="card cardx">
+<div class="card-body">
+<h2>9. Semantic HTML</h2>
+
+<p>Semantic tags improve readability, SEO and accessibility.</p>
+
+<table class="table table-bordered">
+<tr><th>Tag</th><th>Purpose</th></tr>
+<tr><td>header</td><td>Page Header</td></tr>
+<tr><td>nav</td><td>Navigation</td></tr>
+<tr><td>section</td><td>Content Section</td></tr>
+<tr><td>article</td><td>Article Content</td></tr>
+<tr><td>footer</td><td>Page Footer</td></tr>
+</table>
+
+<pre class="code">
+&lt;header&gt;&lt;/header&gt;
+&lt;nav&gt;&lt;/nav&gt;
+&lt;section&gt;&lt;/section&gt;
+&lt;footer&gt;&lt;/footer&gt;
+</pre>
+</div>
+</div>
+
+<div class="card cardx">
+<div class="card-body">
+<h2>10. SEO Tags</h2>
+
+<pre class="code">
+&lt;meta charset="UTF-8"&gt;
+&lt;meta name="description" content="Website Description"&gt;
+&lt;meta name="keywords" content="HTML,CSS,JS"&gt;
+</pre>
+
+<p>SEO tags help search engines understand webpage content.</p>
+</div>
+</div>
+
+<div class="card cardx">
+<div class="card-body">
+<h2>11. Accessibility</h2>
+
+<p>Accessibility ensures websites can be used by all users including people with disabilities.</p>
+
+<ul>
+<li>Use alt attribute in images</li>
+<li>Use semantic HTML</li>
+<li>Provide labels for forms</li>
+<li>Maintain proper heading hierarchy</li>
+</ul>
+</div>
+</div>
+
+<div class="card cardx">
+<div class="card-body">
+<h2>12. Interview Questions</h2>
+<ol>
+<li>What is HTML?</li>
+<li>Difference between HTML and HTML5?</li>
+<li>What are semantic tags?</li>
+<li>Difference between div and span?</li>
+<li>What is the purpose of meta tags?</li>
+<li>What are forms in HTML?</li>
+<li>Difference between id and class?</li>
+<li>What is accessibility?</li>
+<li>What are block and inline elements?</li>
+<li>What is SEO in HTML?</li>
+</ol>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

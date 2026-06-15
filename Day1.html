@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 1 - Introduction to MERN Stack</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body{background:#f4f7fb}
+.hero{background:linear-gradient(135deg,#16a34a,#0f172a);color:white;padding:70px 0}
+.sidebar{position:sticky;top:20px}
+.code{background:#111827;color:#f8fafc;padding:15px;border-radius:10px}
+.section-card{border-radius:18px;margin-bottom:25px}
+</style>
+</head>
+<body>
+<section class="hero">
+<div class="container">
+<h1>Day 1 : Introduction to MERN Stack</h1>
+<p class="lead">Complete Beginner Guide with Theory, Comparisons, Architecture, Examples and Interview Preparation</p>
+</div>
+</section>
+
+<div class="container my-5">
+<div class="row">
+<div class="col-lg-3">
+<div class="card sidebar">
+<div class="card-body">
+<h5>Topics</h5>
+<ul>
+<li>Web Development</li>
+<li>Frontend vs Backend</li>
+<li>MERN Stack</li>
+<li>MongoDB</li>
+<li>Express.js</li>
+<li>React.js</li>
+<li>Node.js</li>
+<li>Architecture</li>
+<li>Interview Questions</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="col-lg-9">
+
+<div class="card section-card">
+<div class="card-body">
+<h2>1. What is Web Development?</h2>
+<p>Web Development is the process of creating websites and web applications that run on the internet. It includes designing user interfaces, writing business logic, managing databases, deploying applications and maintaining systems.</p>
+
+<h4>Types of Web Development</h4>
+<table class="table table-bordered">
+<tr><th>Type</th><th>Description</th></tr>
+<tr><td>Frontend</td><td>User Interface visible to users.</td></tr>
+<tr><td>Backend</td><td>Business logic and APIs.</td></tr>
+<tr><td>Database</td><td>Stores application data.</td></tr>
+</table>
+
+<h4>Examples</h4>
+<ul>
+<li>Google Search</li>
+<li>Facebook</li>
+<li>Amazon</li>
+<li>Netflix</li>
+<li>Instagram</li>
+</ul>
+
+<p>A complete web application combines all three layers: frontend, backend and database.</p>
+</div>
+</div>
+
+<div class="card section-card">
+<div class="card-body">
+<h2>2. Frontend vs Backend</h2>
+<table class="table table-striped">
+<tr><th>Frontend</th><th>Backend</th></tr>
+<tr><td>Runs in Browser</td><td>Runs on Server</td></tr>
+<tr><td>HTML, CSS, JavaScript</td><td>Node.js, Java, Python, PHP</td></tr>
+<tr><td>User Interface</td><td>Business Logic</td></tr>
+<tr><td>User Interaction</td><td>Data Processing</td></tr>
+</table>
+
+<p><strong>Real Example:</strong> On Amazon, product pages are frontend, order processing is backend and product records are stored in the database.</p>
+</div>
+</div>
+
+<div class="card section-card">
+<div class="card-body">
+<h2>3. What is MERN Stack?</h2>
+<p>MERN is a Full Stack JavaScript technology stack consisting of MongoDB, Express.js, React.js and Node.js.</p>
+
+<table class="table table-bordered">
+<tr><th>Technology</th><th>Purpose</th></tr>
+<tr><td>MongoDB</td><td>Database</td></tr>
+<tr><td>Express.js</td><td>Backend Framework</td></tr>
+<tr><td>React.js</td><td>Frontend Library</td></tr>
+<tr><td>Node.js</td><td>Runtime Environment</td></tr>
+</table>
+
+<pre class="code">
+React UI
+   |
+HTTP Request
+   |
+Express API
+   |
+Node.js
+   |
+MongoDB
+</pre>
+</div>
+</div>
+
+<div class="card section-card">
+<div class="card-body">
+<h2>4. MongoDB Overview</h2>
+<p>MongoDB is a NoSQL database that stores data in BSON documents. Unlike traditional relational databases, MongoDB uses collections and documents.</p>
+
+<h4>SQL vs MongoDB</h4>
+<table class="table table-bordered">
+<tr><th>SQL</th><th>MongoDB</th></tr>
+<tr><td>Table</td><td>Collection</td></tr>
+<tr><td>Row</td><td>Document</td></tr>
+<tr><td>Fixed Schema</td><td>Flexible Schema</td></tr>
+</table>
+
+<pre class="code">
+{
+ "name":"Awanish",
+ "course":"MERN",
+ "age":25
+}
+</pre>
+</div>
+</div>
+
+<div class="card section-card">
+<div class="card-body">
+<h2>5. Express.js Introduction</h2>
+<p>Express.js is a lightweight framework built on Node.js. It simplifies route creation, middleware management and API development.</p>
+
+<pre class="code">
+const express=require("express");
+const app=express();
+
+app.get("/",(req,res)=>{
+ res.send("Hello MERN");
+});
+
+app.listen(3000);
+</pre>
+</div>
+</div>
+
+<div class="card section-card">
+<div class="card-body">
+<h2>6. React.js Introduction</h2>
+<p>React is a JavaScript library created by Facebook for building reusable user interface components.</p>
+
+<h4>Advantages</h4>
+<ul>
+<li>Reusable Components</li>
+<li>Virtual DOM</li>
+<li>Fast Rendering</li>
+<li>Single Page Applications</li>
+<li>Huge Ecosystem</li>
+</ul>
+
+<pre class="code">
+function App(){
+ return <h1>Hello React</h1>;
+}
+</pre>
+</div>
+</div>
+
+<div class="card section-card">
+<div class="card-body">
+<h2>7. Node.js Introduction</h2>
+<p>Node.js is a JavaScript runtime that allows developers to execute JavaScript outside the browser.</p>
+
+<ul>
+<li>Fast Execution using V8 Engine</li>
+<li>Event Driven Architecture</li>
+<li>Non Blocking I/O</li>
+<li>Scalable Applications</li>
+</ul>
+
+<pre class="code">
+console.log("Hello Node.js");
+</pre>
+</div>
+</div>
+
+<div class="card section-card">
+<div class="card-body">
+<h2>8. How MERN Works Together</h2>
+<ol>
+<li>User interacts with React UI.</li>
+<li>React sends API request.</li>
+<li>Express receives request.</li>
+<li>Node executes business logic.</li>
+<li>MongoDB stores/retrieves data.</li>
+<li>Response returns to React.</li>
+<li>UI updates dynamically.</li>
+</ol>
+</div>
+</div>
+
+<div class="card section-card">
+<div class="card-body">
+<h2>9. Interview Questions</h2>
+<ol>
+<li>What is MERN Stack?</li>
+<li>Difference between Frontend and Backend?</li>
+<li>Why MongoDB is called NoSQL?</li>
+<li>What is Express.js?</li>
+<li>What is Virtual DOM?</li>
+<li>Why Node.js is fast?</li>
+<li>Explain MERN Architecture.</li>
+</ol>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</body>
+</html>
