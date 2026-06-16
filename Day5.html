@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Day 5 - Advanced CSS</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#f4f7fb;
+}
+
+.hero{
+    background:linear-gradient(135deg,#16a34a,#0f172a);
+    color:white;
+    padding:70px 0;
+}
+
+.sidebar{
+    position:sticky;
+    top:20px;
+}
+
+.section-card{
+    border-radius:20px;
+    margin-bottom:25px;
+}
+
+.code{
+    background:#111827;
+    color:white;
+    padding:15px;
+    border-radius:10px;
+    overflow:auto;
+}
+
+</style>
+
+</head>
+<body>
+
+<section class="hero">
+
+<div class="container">
+
+<h1>Day 5 : Advanced CSS</h1>
+
+<p class="lead">
+Master modern CSS concepts including Flexbox, Grid, Positioning,
+Animations, Transitions and Responsive Design.
+</p>
+
+</div>
+
+</section>
+
+<div class="container my-5">
+
+<div class="row">
+
+<div class="col-lg-3">
+
+<div class="card sidebar">
+
+<div class="card-body">
+
+<h5>Topics</h5>
+
+<ul>
+
+<li>Introduction to Advanced CSS</li>
+<li>Display Property</li>
+<li>Position Property</li>
+<li>Flexbox</li>
+<li>CSS Grid</li>
+<li>Transform</li>
+<li>Transition</li>
+<li>Animation</li>
+<li>Overflow</li>
+<li>Z-Index</li>
+<li>Media Queries</li>
+<li>Responsive Design</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-9">
+
+<!-- SECTION 1 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>1. Introduction to Advanced CSS</h2>
+
+<p>
+Advanced CSS allows developers to create professional,
+interactive and responsive websites.
+It provides powerful layout systems and visual effects
+that improve user experience.
+</p>
+
+<p>
+Modern websites heavily depend on Flexbox, Grid,
+Animations and Media Queries to work properly
+on different devices.
+</p>
+
+</div>
+
+</div>
+
+<!-- SECTION 2 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>2. Display Property</h2>
+
+<p>
+The display property controls how an element is rendered.
+</p>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+
+<tr>
+<td>block</td>
+<td>Takes full width</td>
+</tr>
+
+<tr>
+<td>inline</td>
+<td>Takes content width only</td>
+</tr>
+
+<tr>
+<td>inline-block</td>
+<td>Combination of block and inline</td>
+</tr>
+
+<tr>
+<td>none</td>
+<td>Completely hides element</td>
+</tr>
+
+</table>
+
+<pre class="code">
+div{
+    display:block;
+}
+
+span{
+    display:inline;
+}
+
+button{
+    display:inline-block;
+}
+</pre>
+
+</div>
+
+</div>
+
+<!-- SECTION 3 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>3. Position Property</h2>
+
+<p>
+Position property controls the placement of elements.
+</p>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+
+<tr>
+<td>static</td>
+<td>Default position</td>
+</tr>
+
+<tr>
+<td>relative</td>
+<td>Relative to itself</td>
+</tr>
+
+<tr>
+<td>absolute</td>
+<td>Relative to nearest positioned parent</td>
+</tr>
+
+<tr>
+<td>fixed</td>
+<td>Fixed on screen</td>
+</tr>
+
+<tr>
+<td>sticky</td>
+<td>Acts like relative and fixed</td>
+</tr>
+
+</table>
+
+<pre class="code">
+.box{
+    position:absolute;
+    top:50px;
+    left:100px;
+}
+</pre>
+
+</div>
+
+</div>
+
+<!-- SECTION 4 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>4. Flexbox</h2>
+
+<p>
+Flexbox is a one-dimensional layout system used for
+aligning and distributing space among elements.
+</p>
+
+<pre class="code">
+.container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+</pre>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Property</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>justify-content</td>
+<td>Horizontal alignment</td>
+</tr>
+
+<tr>
+<td>align-items</td>
+<td>Vertical alignment</td>
+</tr>
+
+<tr>
+<td>flex-direction</td>
+<td>Row or Column</td>
+</tr>
+
+<tr>
+<td>gap</td>
+<td>Spacing between items</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- SECTION 5 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>5. CSS Grid</h2>
+
+<p>
+Grid is a two-dimensional layout system.
+</p>
+
+<pre class="code">
+.container{
+    display:grid;
+    grid-template-columns:
+    1fr 1fr 1fr;
+
+    gap:20px;
+}
+</pre>
+
+<p>
+Grid allows control over rows and columns simultaneously.
+</p>
+
+</div>
+
+</div>
+
+<!-- SECTION 6 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>6. Transform Property</h2>
+
+<p>
+Transform changes shape, size and position of elements.
+</p>
+
+<pre class="code">
+.box:hover{
+    transform:scale(1.1);
+}
+
+.box:hover{
+    transform:rotate(45deg);
+}
+</pre>
+
+<ul>
+
+<li>translate()</li>
+<li>rotate()</li>
+<li>scale()</li>
+<li>skew()</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- SECTION 7 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>7. Transition Property</h2>
+
+<p>
+Transition creates smooth effects between property changes.
+</p>
+
+<pre class="code">
+.box{
+
+    background:red;
+    transition:0.5s;
+
+}
+
+.box:hover{
+
+    background:green;
+
+}
+</pre>
+
+</div>
+
+</div>
+
+<!-- SECTION 8 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>8. Animation</h2>
+
+<p>
+Animations create movement without JavaScript.
+</p>
+
+<pre class="code">
+@keyframes move{
+
+from{
+    left:0;
+}
+
+to{
+    left:200px;
+}
+
+}
+
+.box{
+
+animation:move 3s infinite;
+
+}
+</pre>
+
+</div>
+
+</div>
+
+<!-- SECTION 9 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>9. Overflow</h2>
+
+<p>
+Controls content that exceeds container size.
+</p>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+
+<tr>
+<td>visible</td>
+<td>Default</td>
+</tr>
+
+<tr>
+<td>hidden</td>
+<td>Hide overflow</td>
+</tr>
+
+<tr>
+<td>scroll</td>
+<td>Always show scrollbar</td>
+</tr>
+
+<tr>
+<td>auto</td>
+<td>Scrollbar when needed</td>
+</tr>
+
+</table>
+
+<pre class="code">
+.box{
+    overflow:auto;
+}
+</pre>
+
+</div>
+
+</div>
+
+<!-- SECTION 10 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>10. Z-Index</h2>
+
+<p>
+Z-index controls stacking order of elements.
+</p>
+
+<pre class="code">
+.box1{
+    z-index:10;
+}
+
+.box2{
+    z-index:5;
+}
+</pre>
+
+</div>
+
+</div>
+
+<!-- SECTION 11 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>11. Media Queries</h2>
+
+<p>
+Media queries help create responsive websites.
+</p>
+
+<pre class="code">
+@media(max-width:768px){
+
+h1{
+    font-size:24px;
+}
+
+}
+</pre>
+
+<p>
+Different styles can be applied for mobile,
+tablet and desktop devices.
+</p>
+
+</div>
+
+</div>
+
+<!-- SECTION 12 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>12. Responsive Design</h2>
+
+<p>
+Responsive design ensures a website looks good
+on all devices.
+</p>
+
+<ul>
+
+<li>Fluid Layouts</li>
+<li>Flexible Images</li>
+<li>Media Queries</li>
+<li>Bootstrap Grid System</li>
+<li>Mobile First Design</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- INTERVIEW QUESTIONS -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Interview Questions</h2>
+
+<ol>
+
+<li>What is Display Property?</li>
+
+<li>Difference between Block and Inline?</li>
+
+<li>What is Position Absolute?</li>
+
+<li>Difference between Relative and Absolute?</li>
+
+<li>What is Flexbox?</li>
+
+<li>What is CSS Grid?</li>
+
+<li>Difference between Grid and Flexbox?</li>
+
+<li>What is Transform Property?</li>
+
+<li>What is Transition?</li>
+
+<li>What is Animation?</li>
+
+<li>What is Overflow?</li>
+
+<li>What is Z-Index?</li>
+
+<li>What are Media Queries?</li>
+
+<li>What is Responsive Design?</li>
+
+<li>How does Bootstrap help in responsiveness?</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

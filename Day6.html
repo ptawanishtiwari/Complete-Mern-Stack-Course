@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Day 6 - GitHub & Deployment</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#f4f7fb;
+}
+
+.hero{
+    background:linear-gradient(135deg,#16a34a,#0f172a);
+    color:white;
+    padding:70px 0;
+}
+
+.sidebar{
+    position:sticky;
+    top:20px;
+}
+
+.section-card{
+    border-radius:20px;
+    margin-bottom:25px;
+}
+
+.code{
+    background:#111827;
+    color:white;
+    padding:15px;
+    border-radius:10px;
+    overflow:auto;
+}
+
+</style>
+
+</head>
+<body>
+
+<section class="hero">
+
+<div class="container">
+
+<h1>Day 6 : Git, GitHub & Deployment</h1>
+
+<p class="lead">
+Learn Version Control, GitHub Workflow and Deploy Your Website Live Using Netlify.
+</p>
+
+</div>
+
+</section>
+
+<div class="container my-5">
+
+<div class="row">
+
+<div class="col-lg-3">
+
+<div class="card sidebar">
+
+<div class="card-body">
+
+<h5>Topics</h5>
+
+<ul>
+
+<li>Introduction to Git</li>
+<li>Why Git is Used</li>
+<li>Git vs GitHub</li>
+<li>Install Git</li>
+<li>Git Configuration</li>
+<li>Create Repository</li>
+<li>Git Commands</li>
+<li>Push & Pull</li>
+<li>Branches</li>
+<li>Merge</li>
+<li>GitHub Workflow</li>
+<li>Netlify Deployment</li>
+<li>Custom Domain</li>
+<li>Interview Questions</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-9">
+
+<!-- SECTION 1 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>1. Introduction to Git</h2>
+
+<p>
+Git is a Distributed Version Control System (DVCS).
+It helps developers track code changes, collaborate with teams,
+and maintain project history.
+</p>
+
+<p>
+Git was created by Linus Torvalds in 2005 and is widely used in software development.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 2 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>2. Why Git is Used?</h2>
+
+<ul>
+
+<li>Track Code Changes</li>
+<li>Team Collaboration</li>
+<li>Version Management</li>
+<li>Backup Source Code</li>
+<li>Restore Previous Versions</li>
+<li>Manage Multiple Features</li>
+
+</ul>
+
+<p>
+Without Git, managing large software projects becomes difficult and risky.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 3 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>3. Git vs GitHub</h2>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Git</th>
+<th>GitHub</th>
+</tr>
+
+<tr>
+<td>Version Control Tool</td>
+<td>Cloud Hosting Platform</td>
+</tr>
+
+<tr>
+<td>Works Locally</td>
+<td>Works Online</td>
+</tr>
+
+<tr>
+<td>Tracks Changes</td>
+<td>Stores Repositories</td>
+</tr>
+
+<tr>
+<td>Installed on System</td>
+<td>Website Platform</td>
+</tr>
+
+</table>
+
+</div>
+</div>
+
+<!-- SECTION 4 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>4. Installing Git</h2>
+
+<p>
+Download Git from the official website and install it on your system.
+</p>
+
+<pre class="code">
+https://git-scm.com
+</pre>
+
+<p>
+After installation verify Git:
+</p>
+
+<pre class="code">
+git --version
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 5 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>5. Git Configuration</h2>
+
+<p>
+Set username and email before using Git.
+</p>
+
+<pre class="code">
+git config --global user.name "Awanish"
+
+git config --global user.email "example@gmail.com"
+</pre>
+
+<p>
+Check configuration:
+</p>
+
+<pre class="code">
+git config --list
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 6 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>6. Create Repository</h2>
+
+<p>
+Repository is a project folder managed by Git.
+</p>
+
+<pre class="code">
+mkdir myproject
+
+cd myproject
+
+git init
+</pre>
+
+<p>
+This creates a new Git repository.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 7 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>7. Important Git Commands</h2>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>git init</td>
+<td>Create Repository</td>
+</tr>
+
+<tr>
+<td>git status</td>
+<td>Check Status</td>
+</tr>
+
+<tr>
+<td>git add .</td>
+<td>Add Files</td>
+</tr>
+
+<tr>
+<td>git commit -m "msg"</td>
+<td>Create Commit</td>
+</tr>
+
+<tr>
+<td>git log</td>
+<td>View History</td>
+</tr>
+
+</table>
+
+</div>
+</div>
+
+<!-- SECTION 8 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>8. Add and Commit</h2>
+
+<p>
+Git follows a staging process.
+</p>
+
+<pre class="code">
+git add .
+
+git commit -m "Initial Commit"
+</pre>
+
+<p>
+Commit saves project snapshot permanently.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 9 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>9. Connect GitHub Repository</h2>
+
+<p>
+Create repository on GitHub and connect it.
+</p>
+
+<pre class="code">
+git remote add origin
+https://github.com/username/project.git
+</pre>
+
+<p>
+Check remote:
+</p>
+
+<pre class="code">
+git remote -v
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 10 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>10. Push Code to GitHub</h2>
+
+<pre class="code">
+git branch -M main
+
+git push -u origin main
+</pre>
+
+<p>
+Your project is now uploaded to GitHub.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 11 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>11. Pull Changes from GitHub</h2>
+
+<p>
+Download latest changes from remote repository.
+</p>
+
+<pre class="code">
+git pull origin main
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 12 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>12. Branches</h2>
+
+<p>
+Branches allow developers to work on features independently.
+</p>
+
+<pre class="code">
+git branch feature-login
+
+git checkout feature-login
+</pre>
+
+<p>
+List all branches:
+</p>
+
+<pre class="code">
+git branch
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 13 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>13. Merge Branches</h2>
+
+<p>
+Merge combines feature branch into main branch.
+</p>
+
+<pre class="code">
+git checkout main
+
+git merge feature-login
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 14 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>14. Complete GitHub Workflow</h2>
+
+<pre class="code">
+Create Project
+
+↓
+git init
+
+↓
+git add .
+
+↓
+git commit
+
+↓
+Create GitHub Repo
+
+↓
+git remote add origin
+
+↓
+git push origin main
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 15 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>15. Deploy Website Using Netlify</h2>
+
+<p>
+Netlify is a free hosting platform used to deploy frontend projects.
+</p>
+
+<h5>Deployment Steps</h5>
+
+<ol>
+
+<li>Create GitHub Repository</li>
+
+<li>Push Project to GitHub</li>
+
+<li>Login to Netlify</li>
+
+<li>Click Add New Site</li>
+
+<li>Import From GitHub</li>
+
+<li>Select Repository</li>
+
+<li>Deploy Site</li>
+
+</ol>
+
+<p>
+Netlify automatically generates a live website URL.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 16 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>16. Custom Domain Setup</h2>
+
+<p>
+Netlify allows connecting custom domains.
+</p>
+
+<ol>
+
+<li>Open Site Settings</li>
+<li>Go To Domains</li>
+<li>Add Custom Domain</li>
+<li>Configure DNS Records</li>
+</ol>
+
+<p>
+Example:
+</p>
+
+<pre class="code">
+www.myportfolio.com
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 17 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>17. Advantages of GitHub & Netlify</h2>
+
+<ul>
+
+<li>Free Hosting</li>
+<li>Version Control</li>
+<li>Easy Collaboration</li>
+<li>Automatic Deployment</li>
+<li>Project Backup</li>
+<li>Professional Portfolio</li>
+
+</ul>
+
+</div>
+</div>
+
+<!-- INTERVIEW QUESTIONS -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>Interview Questions</h2>
+
+<ol>
+
+<li>What is Git?</li>
+
+<li>What is GitHub?</li>
+
+<li>Difference between Git and GitHub?</li>
+
+<li>What is Repository?</li>
+
+<li>What is Commit?</li>
+
+<li>What is Staging Area?</li>
+
+<li>What is git init?</li>
+
+<li>What is git add?</li>
+
+<li>What is git commit?</li>
+
+<li>What is git push?</li>
+
+<li>What is git pull?</li>
+
+<li>What is Branching?</li>
+
+<li>What is Merge?</li>
+
+<li>Why use GitHub?</li>
+
+<li>What is Netlify?</li>
+
+<li>How do you deploy a website on Netlify?</li>
+
+<li>What is Continuous Deployment?</li>
+
+<li>What is a Custom Domain?</li>
+
+<li>How does GitHub help in teamwork?</li>
+
+<li>Explain complete deployment workflow.</li>
+
+</ol>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
