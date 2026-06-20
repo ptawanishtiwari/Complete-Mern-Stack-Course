@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Day 7 - Bootstrap & Responsive Design</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#f4f7fb;
+}
+
+.hero{
+    background:linear-gradient(135deg,#16a34a,#0f172a);
+    color:white;
+    padding:70px 0;
+}
+
+.sidebar{
+    position:sticky;
+    top:20px;
+}
+
+.section-card{
+    border-radius:20px;
+    margin-bottom:25px;
+}
+
+.code{
+    background:#111827;
+    color:white;
+    padding:15px;
+    border-radius:10px;
+    overflow:auto;
+}
+
+</style>
+
+</head>
+<body>
+
+<section class="hero">
+
+<div class="container">
+
+<h1>Day 7 : Bootstrap & Responsive Design</h1>
+
+<p class="lead">
+Learn Bootstrap Framework, Responsive Layouts, Grid System, Components and Mobile First Design.
+</p>
+
+</div>
+
+</section>
+
+<div class="container my-5">
+
+<div class="row">
+
+<!-- SIDEBAR -->
+
+<div class="col-lg-3">
+
+<div class="card sidebar">
+
+<div class="card-body">
+
+<h5>Topics</h5>
+
+<ul>
+
+<li>Introduction to Bootstrap</li>
+<li>Why Bootstrap?</li>
+<li>Bootstrap Installation</li>
+<li>Container System</li>
+<li>Bootstrap Grid</li>
+<li>Typography</li>
+<li>Colors</li>
+<li>Buttons</li>
+<li>Cards</li>
+<li>Navbar</li>
+<li>Forms</li>
+<li>Tables</li>
+<li>Utilities</li>
+<li>Responsive Design</li>
+<li>Breakpoints</li>
+<li>Media Queries</li>
+<li>Bootstrap Project</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="col-lg-9">
+
+<!-- SECTION 1 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>1. Introduction to Bootstrap</h2>
+
+<p>
+Bootstrap is the world's most popular CSS framework used for creating responsive and modern websites quickly.
+</p>
+
+<p>
+It was developed by Twitter and provides pre-built CSS classes and JavaScript components.
+</p>
+
+<p>
+Instead of writing large amounts of CSS manually, developers can use Bootstrap classes to build websites faster.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 2 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>2. Why Bootstrap?</h2>
+
+<ul>
+
+<li>Fast Development</li>
+<li>Responsive Design</li>
+<li>Mobile First Approach</li>
+<li>Cross Browser Compatibility</li>
+<li>Ready Made Components</li>
+<li>Professional UI Design</li>
+
+</ul>
+
+</div>
+</div>
+
+<!-- SECTION 3 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>3. Bootstrap Installation</h2>
+
+<p>
+Bootstrap can be added using CDN.
+</p>
+
+<pre class="code">
+&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet"&gt;
+</pre>
+
+<p>
+This allows Bootstrap classes to be used immediately.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 4 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>4. Bootstrap Container System</h2>
+
+<p>
+Containers are used to wrap page content.
+</p>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Class</th>
+<th>Description</th>
+</tr>
+
+<tr>
+<td>.container</td>
+<td>Fixed Width Container</td>
+</tr>
+
+<tr>
+<td>.container-fluid</td>
+<td>Full Width Container</td>
+</tr>
+
+</table>
+
+<pre class="code">
+&lt;div class="container"&gt;
+
+Content Here
+
+&lt;/div&gt;
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 5 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>5. Bootstrap Grid System</h2>
+
+<p>
+Bootstrap uses a 12-column grid system.
+</p>
+
+<pre class="code">
+&lt;div class="row"&gt;
+
+    &lt;div class="col-md-6"&gt;
+        Left
+    &lt;/div&gt;
+
+    &lt;div class="col-md-6"&gt;
+        Right
+    &lt;/div&gt;
+
+&lt;/div&gt;
+</pre>
+
+<p>
+Grid helps create responsive layouts.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 6 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>6. Bootstrap Typography</h2>
+
+<pre class="code">
+&lt;h1&gt;Heading&lt;/h1&gt;
+
+&lt;p class="lead"&gt;
+Lead Paragraph
+&lt;/p&gt;
+</pre>
+
+<p>
+Bootstrap provides predefined typography styles.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 7 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>7. Bootstrap Colors</h2>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Class</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>bg-primary</td>
+<td>Blue Background</td>
+</tr>
+
+<tr>
+<td>bg-success</td>
+<td>Green Background</td>
+</tr>
+
+<tr>
+<td>bg-danger</td>
+<td>Red Background</td>
+</tr>
+
+<tr>
+<td>bg-warning</td>
+<td>Yellow Background</td>
+</tr>
+
+</table>
+
+<pre class="code">
+&lt;div class="bg-success text-white"&gt;
+
+Success
+
+&lt;/div&gt;
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 8 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>8. Bootstrap Buttons</h2>
+
+<pre class="code">
+&lt;button class="btn btn-primary"&gt;
+Submit
+&lt;/button&gt;
+
+&lt;button class="btn btn-success"&gt;
+Save
+&lt;/button&gt;
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 9 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>9. Bootstrap Cards</h2>
+
+<p>
+Cards are used to display content professionally.
+</p>
+
+<pre class="code">
+&lt;div class="card"&gt;
+
+    &lt;div class="card-body"&gt;
+        Card Content
+    &lt;/div&gt;
+
+&lt;/div&gt;
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 10 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>10. Bootstrap Navbar</h2>
+
+<p>
+Navbar helps create responsive navigation menus.
+</p>
+
+<pre class="code">
+&lt;nav class="navbar navbar-expand-lg"&gt;
+
+&lt;/nav&gt;
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 11 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>11. Bootstrap Forms</h2>
+
+<pre class="code">
+&lt;input
+type="text"
+class="form-control"&gt;
+</pre>
+
+<p>
+Bootstrap forms automatically provide modern styling.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 12 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>12. Bootstrap Tables</h2>
+
+<pre class="code">
+&lt;table class="table table-bordered"&gt;
+
+&lt;/table&gt;
+</pre>
+
+<p>
+Bootstrap tables are responsive and visually attractive.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 13 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>13. Bootstrap Utility Classes</h2>
+
+<ul>
+
+<li>m-3 (Margin)</li>
+<li>p-3 (Padding)</li>
+<li>text-center</li>
+<li>d-flex</li>
+<li>w-100</li>
+<li>shadow</li>
+
+</ul>
+
+<pre class="code">
+&lt;div class="text-center p-3"&gt;
+
+Hello
+
+&lt;/div&gt;
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 14 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>14. Responsive Design</h2>
+
+<p>
+Responsive Design means a website adapts automatically to different screen sizes.
+</p>
+
+<ul>
+
+<li>Desktop</li>
+<li>Laptop</li>
+<li>Tablet</li>
+<li>Mobile</li>
+
+</ul>
+
+<p>
+A responsive website improves user experience.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 15 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>15. Bootstrap Breakpoints</h2>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Breakpoint</th>
+<th>Screen Size</th>
+</tr>
+
+<tr>
+<td>sm</td>
+<td>≥576px</td>
+</tr>
+
+<tr>
+<td>md</td>
+<td>≥768px</td>
+</tr>
+
+<tr>
+<td>lg</td>
+<td>≥992px</td>
+</tr>
+
+<tr>
+<td>xl</td>
+<td>≥1200px</td>
+</tr>
+
+<tr>
+<td>xxl</td>
+<td>≥1400px</td>
+</tr>
+
+</table>
+
+</div>
+</div>
+
+<!-- SECTION 16 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>16. Media Queries</h2>
+
+<p>
+Media Queries allow different CSS styles for different devices.
+</p>
+
+<pre class="code">
+@media(max-width:768px){
+
+h1{
+font-size:24px;
+}
+
+}
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 17 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>17. Mini Bootstrap Project</h2>
+
+<p>
+Create a responsive portfolio page using:
+</p>
+
+<ul>
+
+<li>Navbar</li>
+<li>Hero Section</li>
+<li>Cards</li>
+<li>Grid Layout</li>
+<li>Contact Form</li>
+
+</ul>
+
+<p>
+This project combines all Bootstrap concepts learned today.
+</p>
+
+</div>
+</div>
+
+<!-- INTERVIEW QUESTIONS -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>Interview Questions</h2>
+
+<ol>
+
+<li>What is Bootstrap?</li>
+
+<li>Why is Bootstrap used?</li>
+
+<li>What is a CSS Framework?</li>
+
+<li>Difference between container and container-fluid?</li>
+
+<li>Explain Bootstrap Grid System.</li>
+
+<li>How many columns are available in Bootstrap Grid?</li>
+
+<li>What are Bootstrap Breakpoints?</li>
+
+<li>What is Responsive Design?</li>
+
+<li>What is Mobile First Design?</li>
+
+<li>What are Utility Classes?</li>
+
+<li>What is Bootstrap Navbar?</li>
+
+<li>How do Bootstrap Forms work?</li>
+
+<li>Difference between Bootstrap and Custom CSS?</li>
+
+<li>What are Media Queries?</li>
+
+<li>How does Bootstrap help responsiveness?</li>
+
+<li>What is col-md-6?</li>
+
+<li>What is the use of row class?</li>
+
+<li>What are Bootstrap Cards?</li>
+
+<li>What is Bootstrap CDN?</li>
+
+<li>Explain a Bootstrap project workflow.</li>
+
+</ol>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
