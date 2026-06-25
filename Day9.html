@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Day 9 - JavaScript Introduction</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#f4f7fb;
+}
+
+.hero{
+    background:linear-gradient(135deg,#f59e0b,#0f172a);
+    color:white;
+    padding:70px 0;
+}
+
+.sidebar{
+    position:sticky;
+    top:20px;
+}
+
+.section-card{
+    border-radius:20px;
+    margin-bottom:25px;
+}
+
+.code{
+    background:#111827;
+    color:#22c55e;
+    padding:15px;
+    border-radius:10px;
+    overflow:auto;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section class="hero">
+
+<div class="container">
+
+<h1>Day 9 : JavaScript Introduction, Variables & Data Types</h1>
+
+<p class="lead">
+Learn JavaScript Fundamentals, Variables, Data Types and Basic Programming Concepts.
+</p>
+
+</div>
+
+</section>
+
+<div class="container my-5">
+
+<div class="row">
+
+<!-- SIDEBAR -->
+
+<div class="col-lg-3">
+
+<div class="card sidebar">
+
+<div class="card-body">
+
+<h5>Topics</h5>
+
+<ul>
+
+<li>Introduction to JavaScript</li>
+<li>History of JavaScript</li>
+<li>Why JavaScript?</li>
+<li>Features of JavaScript</li>
+<li>Applications of JavaScript</li>
+<li>Internal JavaScript</li>
+<li>External JavaScript</li>
+<li>Variables</li>
+<li>Variable Rules</li>
+<li>var Keyword</li>
+<li>let Keyword</li>
+<li>const Keyword</li>
+<li>var vs let vs const</li>
+<li>Data Types</li>
+<li>Primitive Types</li>
+<li>Non Primitive Types</li>
+<li>typeof Operator</li>
+<li>Interview Questions</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CONTENT -->
+
+<div class="col-lg-9">
+
+<!-- SECTION 1 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>1. Introduction to JavaScript</h2>
+
+<p>
+JavaScript is a high-level, interpreted and object-oriented programming language.
+It is mainly used to make websites interactive and dynamic.
+</p>
+
+<p>
+HTML provides structure, CSS provides styling and JavaScript provides behavior.
+Without JavaScript websites remain static and less interactive.
+</p>
+
+<p>
+JavaScript runs directly inside the browser and can also be used on servers using Node.js.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 2 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>2. History of JavaScript</h2>
+
+<p>
+JavaScript was created by Brendan Eich in 1995 while working at Netscape.
+</p>
+
+<ul>
+
+<li>Originally named Mocha</li>
+<li>Later renamed LiveScript</li>
+<li>Finally renamed JavaScript</li>
+<li>Standardized as ECMAScript</li>
+
+</ul>
+
+<p>
+Today JavaScript is one of the most popular programming languages in the world.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 3 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>3. Why JavaScript is Used?</h2>
+
+<ul>
+
+<li>Create Dynamic Websites</li>
+<li>Form Validation</li>
+<li>Interactive User Interfaces</li>
+<li>Single Page Applications</li>
+<li>Game Development</li>
+<li>Backend Development</li>
+<li>Mobile Application Development</li>
+
+</ul>
+
+<p>
+JavaScript allows developers to update content without reloading the page.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 4 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>4. Features of JavaScript</h2>
+
+<ul>
+
+<li>Lightweight Language</li>
+<li>Interpreted Language</li>
+<li>Cross Platform</li>
+<li>Object Oriented</li>
+<li>Dynamic Typing</li>
+<li>Event Driven</li>
+<li>Case Sensitive</li>
+<li>Easy to Learn</li>
+
+</ul>
+
+</div>
+</div>
+
+<!-- SECTION 5 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>5. Applications of JavaScript</h2>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Area</th>
+<th>Usage</th>
+</tr>
+
+<tr>
+<td>Frontend</td>
+<td>Interactive Websites</td>
+</tr>
+
+<tr>
+<td>Backend</td>
+<td>Node.js</td>
+</tr>
+
+<tr>
+<td>Mobile Apps</td>
+<td>React Native</td>
+</tr>
+
+<tr>
+<td>Desktop Apps</td>
+<td>Electron JS</td>
+</tr>
+
+<tr>
+<td>Games</td>
+<td>Browser Games</td>
+</tr>
+
+</table>
+
+</div>
+</div>
+
+<!-- SECTION 6 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>6. Internal JavaScript</h2>
+
+<p>
+JavaScript code written inside HTML file using script tag is called Internal JavaScript.
+</p>
+
+<pre class="code">
+&lt;script&gt;
+
+console.log("Hello JavaScript");
+
+&lt;/script&gt;
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 7 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>7. External JavaScript</h2>
+
+<p>
+JavaScript can also be written in a separate .js file.
+</p>
+
+<pre class="code">
+&lt;script src="app.js"&gt;&lt;/script&gt;
+</pre>
+
+<p>
+This improves code reusability and maintainability.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 8 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>8. Variables in JavaScript</h2>
+
+<p>
+Variables are containers used to store data values.
+</p>
+
+<pre class="code">
+let name = "Awanish";
+
+let age = 24;
+</pre>
+
+<p>
+Variables make programs flexible because values can be changed when required.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 9 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>9. Variable Naming Rules</h2>
+
+<ul>
+
+<li>Must start with letter, _ or $</li>
+<li>Cannot start with a number</li>
+<li>Cannot use reserved keywords</li>
+<li>JavaScript is case sensitive</li>
+<li>Meaningful names should be used</li>
+
+</ul>
+
+<h5>Valid Variables</h5>
+
+<pre class="code">
+let studentName;
+
+let _age;
+
+let $salary;
+</pre>
+
+<h5>Invalid Variables</h5>
+
+<pre class="code">
+let 123name;
+
+let var;
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 10 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>10. var Keyword</h2>
+
+<p>
+var is the old way of declaring variables in JavaScript.
+</p>
+
+<pre class="code">
+var city = "Lucknow";
+</pre>
+
+<ul>
+
+<li>Function Scoped</li>
+<li>Can be Redeclared</li>
+<li>Can be Reassigned</li>
+
+</ul>
+
+</div>
+</div>
+
+<!-- SECTION 11 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>11. let Keyword</h2>
+
+<p>
+let was introduced in ES6 and is the preferred way to declare variables.
+</p>
+
+<pre class="code">
+let age = 24;
+</pre>
+
+<ul>
+
+<li>Block Scoped</li>
+<li>Cannot be Redeclared</li>
+<li>Can be Reassigned</li>
+
+</ul>
+
+</div>
+</div>
+<!-- SECTION 12 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>12. const Keyword</h2>
+
+<p>
+const is used to declare constant values in JavaScript.
+Once a value is assigned, it cannot be reassigned.
+</p>
+
+<pre class="code">
+const country = "India";
+
+console.log(country);
+</pre>
+
+<ul>
+
+<li>Block Scoped</li>
+<li>Cannot be Redeclared</li>
+<li>Cannot be Reassigned</li>
+<li>Must be initialized during declaration</li>
+
+</ul>
+
+</div>
+</div>
+
+<!-- SECTION 13 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>13. Difference Between var, let and const</h2>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Feature</th>
+<th>var</th>
+<th>let</th>
+<th>const</th>
+</tr>
+
+<tr>
+<td>Scope</td>
+<td>Function Scope</td>
+<td>Block Scope</td>
+<td>Block Scope</td>
+</tr>
+
+<tr>
+<td>Redeclare</td>
+<td>Allowed</td>
+<td>Not Allowed</td>
+<td>Not Allowed</td>
+</tr>
+
+<tr>
+<td>Reassign</td>
+<td>Allowed</td>
+<td>Allowed</td>
+<td>Not Allowed</td>
+</tr>
+
+<tr>
+<td>Initialization Required</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+
+</table>
+
+</div>
+</div>
+
+<!-- SECTION 14 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>14. JavaScript Data Types</h2>
+
+<p>
+Data Type defines the type of value stored inside a variable.
+JavaScript supports Primitive and Non-Primitive Data Types.
+</p>
+
+<h4>Categories of Data Types</h4>
+
+<ul>
+
+<li>Primitive Data Types</li>
+<li>Non Primitive Data Types</li>
+
+</ul>
+
+</div>
+</div>
+
+<!-- SECTION 15 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>15. Primitive Data Types</h2>
+
+<p>
+Primitive Data Types store single values and are immutable.
+</p>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Data Type</th>
+<th>Example</th>
+</tr>
+
+<tr>
+<td>String</td>
+<td>"Hello"</td>
+</tr>
+
+<tr>
+<td>Number</td>
+<td>100</td>
+</tr>
+
+<tr>
+<td>Boolean</td>
+<td>true</td>
+</tr>
+
+<tr>
+<td>Undefined</td>
+<td>undefined</td>
+</tr>
+
+<tr>
+<td>Null</td>
+<td>null</td>
+</tr>
+
+<tr>
+<td>BigInt</td>
+<td>123456789n</td>
+</tr>
+
+<tr>
+<td>Symbol</td>
+<td>Symbol("id")</td>
+</tr>
+
+</table>
+
+</div>
+</div>
+
+<!-- SECTION 16 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>16. String Data Type</h2>
+
+<p>
+String is used to store textual data.
+</p>
+
+<pre class="code">
+let name = "Awanish";
+
+let city = 'Lucknow';
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 17 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>17. Number Data Type</h2>
+
+<p>
+Number stores integer and decimal values.
+</p>
+
+<pre class="code">
+let age = 24;
+
+let salary = 25000.50;
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 18 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>18. Boolean Data Type</h2>
+
+<p>
+Boolean stores only two values:
+true or false.
+</p>
+
+<pre class="code">
+let isStudent = true;
+
+let isLoggedIn = false;
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 19 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>19. Undefined Data Type</h2>
+
+<p>
+When a variable is declared but not assigned a value,
+JavaScript assigns undefined.
+</p>
+
+<pre class="code">
+let salary;
+
+console.log(salary);
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 20 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>20. Null Data Type</h2>
+
+<p>
+Null represents an intentionally empty value.
+</p>
+
+<pre class="code">
+let address = null;
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 21 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>21. BigInt Data Type</h2>
+
+<p>
+BigInt is used to store very large integer values.
+</p>
+
+<pre class="code">
+let bigNumber =
+12345678901234567890123456789n;
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 22 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>22. Symbol Data Type</h2>
+
+<p>
+Symbol creates unique identifiers.
+</p>
+
+<pre class="code">
+let id = Symbol("user");
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 23 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>23. Non Primitive Data Types</h2>
+
+<p>
+Non Primitive Data Types can store collections of values.
+</p>
+
+<ul>
+
+<li>Object</li>
+<li>Array</li>
+<li>Function</li>
+
+</ul>
+
+</div>
+</div>
+
+<!-- SECTION 24 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>24. Object Data Type</h2>
+
+<pre class="code">
+let student = {
+
+name : "Awanish",
+
+age : 24,
+
+city : "Lucknow"
+
+};
+</pre>
+
+<p>
+Objects store data in key-value pairs.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 25 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>25. Array Data Type</h2>
+
+<pre class="code">
+let skills = [
+
+"HTML",
+
+"CSS",
+
+"JavaScript"
+
+];
+</pre>
+
+<p>
+Arrays store multiple values in a single variable.
+</p>
+
+</div>
+</div>
+
+<!-- SECTION 26 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>26. typeof Operator</h2>
+
+<p>
+typeof operator is used to check the data type of a value.
+</p>
+
+<pre class="code">
+let name = "Awanish";
+
+console.log(typeof name);
+
+console.log(typeof 100);
+
+console.log(typeof true);
+</pre>
+
+</div>
+</div>
+
+<!-- SECTION 27 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>27. Practice Program</h2>
+
+<pre class="code">
+let name = "Awanish";
+
+let age = 24;
+
+let isDeveloper = true;
+
+console.log(name);
+
+console.log(age);
+
+console.log(isDeveloper);
+
+console.log(typeof name);
+
+console.log(typeof age);
+
+console.log(typeof isDeveloper);
+</pre>
+
+</div>
+</div>
+
+<!-- INTERVIEW QUESTIONS -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>Interview Questions</h2>
+
+<ol>
+
+<li>What is JavaScript?</li>
+<li>Who created JavaScript?</li>
+<li>What is a variable?</li>
+<li>Difference between var and let?</li>
+<li>Difference between let and const?</li>
+<li>What is a Data Type?</li>
+<li>What are Primitive Data Types?</li>
+<li>What is String?</li>
+<li>What is Number?</li>
+<li>What is Boolean?</li>
+<li>What is Undefined?</li>
+<li>What is Null?</li>
+<li>What is BigInt?</li>
+<li>What is Symbol?</li>
+<li>What is Object?</li>
+<li>What is Array?</li>
+<li>What is typeof operator?</li>
+<li>What is Block Scope?</li>
+<li>Why is const used?</li>
+<li>Difference between Object and Array?</li>
+
+</ol>
+
+</div>
+</div>
+
+<!-- ASSIGNMENT -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>Assignment</h2>
+
+<ol>
+
+<li>Create 5 variables using let.</li>
+
+<li>Create 3 constants using const.</li>
+
+<li>Create variables of all primitive data types.</li>
+
+<li>Create one object and one array.</li>
+
+<li>Use typeof operator on all variables.</li>
+
+<li>Print all outputs in console.</li>
+
+</ol>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</body>
+</html>
