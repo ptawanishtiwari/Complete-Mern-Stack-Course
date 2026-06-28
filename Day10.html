@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 10 - JavaScript Operators & Conditional Statements</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body{background:#f4f7fb}
+.hero{background:linear-gradient(135deg,#2563eb,#0f172a);color:#fff;padding:70px 0}
+.sidebar{position:sticky;top:20px}
+.section-card{border-radius:20px;margin-bottom:25px}
+.code{background:#111827;color:#22c55e;padding:15px;border-radius:10px;overflow:auto}
+</style>
+</head>
+<body>
+<section class="hero"><div class="container">
+<h1>Day 10 : JavaScript Operators & Conditional Statements</h1>
+<p class="lead">Complete notes with examples, interview questions and assignments.</p>
+</div></section>
+<div class="container my-5"><div class="row">
+<div class="col-lg-3"><div class="card sidebar"><div class="card-body">
+<h5>Topics</h5><ul>
+<li>Arithmetic</li><li>Assignment</li><li>Comparison</li><li>Logical</li>
+<li>Equality</li><li>Bitwise</li><li>Ternary</li><li>Nullish</li>
+<li>Spread & Rest</li><li>Operator Precedence</li>
+<li>if</li><li>if else</li><li>else if</li><li>Nested if</li>
+<li>switch</li><li>Truthy/Falsy</li><li>Interview Questions</li>
+</ul></div></div></div>
+<div class="col-lg-9">
+<div class="card section-card"><div class="card-body"><h2>1. Arithmetic Operators</h2><p>Used for mathematical calculations.</p><pre class="code">let a=10,b=3;\nconsole.log(a+b,a-b,a*b,a/b,a%b,a**b);</pre></div></div><div class="card section-card"><div class="card-body"><h2>2. Assignment Operators</h2><p>Assign values.</p><pre class="code">let x=5; x+=2; x*=3;</pre></div></div><div class="card section-card"><div class="card-body"><h2>3. Comparison Operators</h2><p>Compare two values.</p><pre class="code">console.log(10>5,10=='10',10==='10');</pre></div></div><div class="card section-card"><div class="card-body"><h2>4. Logical Operators</h2><p>&& || !</p><pre class="code">let age=20; console.log(age>=18 && age<60);</pre></div></div><div class="card section-card"><div class="card-body"><h2>5. Bitwise Operators</h2><p>Bit level operations.</p><pre class="code">console.log(5 & 1);</pre></div></div><div class="card section-card"><div class="card-body"><h2>6. Ternary Operator</h2><p>Short if else.</p><pre class="code">let msg=age>=18?'Adult':'Minor';</pre></div></div><div class="card section-card"><div class="card-body"><h2>7. Nullish Coalescing</h2><p>Default only for null/undefined.</p><pre class="code">let name=null; console.log(name ?? 'Guest');</pre></div></div><div class="card section-card"><div class="card-body"><h2>8. Spread & Rest</h2><p>Expand/collect values.</p><pre class="code">let a=[1,2]; let b=[...a,3];</pre></div></div><div class="card section-card"><div class="card-body"><h2>9. Operator Precedence</h2><p>Execution order.</p><pre class="code">console.log(2+3*4);</pre></div></div><div class="card section-card"><div class="card-body"><h2>10. if Statement</h2><p>Single condition.</p><pre class="code">if(age>=18){console.log('Eligible');}</pre></div></div><div class="card section-card"><div class="card-body"><h2>11. if else</h2><p>Two-way selection.</p><pre class="code">if(age>=18){} else {}</pre></div></div><div class="card section-card"><div class="card-body"><h2>12. else if Ladder</h2><p>Multiple conditions.</p><pre class="code">if(m>90){} else if(m>75){}</pre></div></div><div class="card section-card"><div class="card-body"><h2>13. Nested if</h2><p>if inside if.</p><pre class="code">if(a>0){if(a<10){}}</pre></div></div><div class="card section-card"><div class="card-body"><h2>14. switch</h2><p>Multiple choices.</p><pre class="code">switch(day){case 1:break;default:;}</pre></div></div><div class="card section-card"><div class="card-body"><h2>15. Truthy & Falsy</h2><p>Falsy: false,0,'',null,undefined,NaN</p><pre class="code">if(value){console.log('Truthy');}</pre></div></div>
+<div class="card section-card"><div class="card-body">
+<h2>Practice Programs</h2>
+<ol>
+<li>Even/Odd</li><li>Largest of 3</li><li>Calculator using switch</li>
+<li>Grade System</li><li>Leap Year</li><li>Positive/Negative</li>
+<li>Voting Eligibility</li><li>Divisible by 5 & 11</li>
+<li>Simple Login Check</li><li>Traffic Signal</li>
+<li>Electricity Bill</li><li>BMI Category</li>
+<li>Month using switch</li><li>Day using switch</li>
+<li>Character Type</li><li>Discount Calculator</li>
+<li>Age Category</li><li>Pass/Fail</li><li>Triangle Validity</li>
+<li>Number Sign</li><li>Simple Menu</li><li>Currency Choice</li>
+<li>Shipping Cost</li><li>Password Strength</li><li>FizzBuzz</li>
+</ol>
+</div></div>
+<div class="card section-card"><div class="card-body">
+<h2>Interview Questions</h2>
+<ol>
+<li>Difference between == and ===?</li>
+<li>Difference between && and ||?</li>
+<li>Explain operator precedence.</li>
+<li>What are truthy and falsy values?</li>
+<li>Difference between if and switch?</li>
+<li>What is ternary operator?</li>
+<li>What is nullish coalescing?</li>
+<li>What is spread operator?</li>
+<li>What is rest operator?</li>
+<li>When to use switch?</li>
+<li>Difference between = and ==?</li>
+<li>Explain short-circuit evaluation.</li>
+</ol>
+</div></div>
+<div class="card section-card"><div class="card-body">
+<h2>Assignment</h2>
+<ol>
+<li>Solve all 25 practice programs.</li>
+<li>Use every operator at least once.</li>
+<li>Create a calculator using switch.</li>
+<li>Create grade calculator using if-else.</li>
+<li>Use ternary in 5 programs.</li>
+</ol>
+</div></div>
+</div></div></div></body></html>

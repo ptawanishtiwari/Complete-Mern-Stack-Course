@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Day 11 - JavaScript Loops (Part 1)</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#f4f7fb;
+}
+
+.hero{
+    background:linear-gradient(135deg,#8b5cf6,#0f172a);
+    color:white;
+    padding:70px 0;
+}
+
+.sidebar{
+    position:sticky;
+    top:20px;
+}
+
+.section-card{
+    border-radius:20px;
+    margin-bottom:25px;
+}
+
+.code{
+    background:#111827;
+    color:#22c55e;
+    padding:15px;
+    border-radius:10px;
+    overflow:auto;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="container">
+
+<h1>Day 11 : JavaScript Loops</h1>
+
+<p class="lead">
+Learn every type of JavaScript loop with syntax, explanation and examples.
+</p>
+
+</div>
+
+</section>
+
+<div class="container my-5">
+
+<div class="row">
+
+<!-- SIDEBAR -->
+
+<div class="col-lg-3">
+
+<div class="card sidebar">
+
+<div class="card-body">
+
+<h5>Topics</h5>
+
+<ul>
+
+<li>Introduction to Loops</li>
+<li>Why Loops?</li>
+<li>for Loop</li>
+<li>while Loop</li>
+<li>do...while Loop</li>
+<li>for...in Loop</li>
+<li>for...of Loop</li>
+<li>forEach()</li>
+<li>break</li>
+<li>continue</li>
+<li>Nested Loops</li>
+<li>Pattern Printing</li>
+<li>Practice Programs</li>
+<li>Assignment</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CONTENT -->
+
+<div class="col-lg-9">
+
+<!-- SECTION 1 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>1. Introduction to Loops</h2>
+
+<p>
+
+A loop is used to execute the same block of code repeatedly until a specified condition becomes false.
+
+</p>
+
+<p>
+
+Loops help reduce code repetition, improve readability, and make programs easier to maintain.
+
+</p>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Without Loop</th>
+
+<th>With Loop</th>
+
+</tr>
+
+<tr>
+
+<td>
+
+Writing the same statement many times.
+
+</td>
+
+<td>
+
+Write one loop and execute it multiple times.
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- SECTION 2 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>2. Why Do We Use Loops?</h2>
+
+<ul>
+
+<li>Reduce code duplication</li>
+
+<li>Execute repetitive tasks</li>
+
+<li>Process arrays and strings</li>
+
+<li>Improve readability</li>
+
+<li>Save development time</li>
+
+<li>Easy to maintain code</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- SECTION 3 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>3. for Loop</h2>
+
+<p>
+
+The <strong>for loop</strong> is used when the number of iterations is already known.
+
+</p>
+
+<h5>Syntax</h5>
+
+<pre class="code">
+for(initialization; condition; increment/decrement){
+
+    // code
+
+}
+</pre>
+
+<h5>Flow</h5>
+
+<ol>
+
+<li>Initialization executes once.</li>
+
+<li>Condition is checked.</li>
+
+<li>Loop body executes.</li>
+
+<li>Increment/Decrement executes.</li>
+
+<li>Condition is checked again.</li>
+
+</ol>
+
+<h5>Example 1</h5>
+
+<pre class="code">
+for(let i = 1; i <= 5; i++){
+
+    console.log(i);
+
+}
+</pre>
+
+<h5>Output</h5>
+
+<pre class="code">
+1
+2
+3
+4
+5
+</pre>
+
+<h5>Example 2 : Print Even Numbers</h5>
+
+<pre class="code">
+for(let i = 2; i <= 20; i += 2){
+
+    console.log(i);
+
+}
+</pre>
+
+<h5>Example 3 : Reverse Counting</h5>
+
+<pre class="code">
+for(let i = 10; i >= 1; i--){
+
+    console.log(i);
+
+}
+</pre>
+
+<h5>Example 4 : Table of 5</h5>
+
+<pre class="code">
+for(let i = 1; i <= 10; i++){
+
+    console.log("5 x " + i + " = " + (5*i));
+
+}
+</pre>
+
+</div>
+
+</div>
+
+<!-- SECTION 4 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>4. while Loop</h2>
+
+<p>
+
+The <strong>while loop</strong> executes as long as the condition remains true.
+
+</p>
+
+<h5>Syntax</h5>
+
+<pre class="code">
+initialization;
+
+while(condition){
+
+    // code
+
+    increment/decrement;
+
+}
+</pre>
+
+<h5>Example 1</h5>
+
+<pre class="code">
+let i = 1;
+
+while(i <= 5){
+
+    console.log(i);
+
+    i++;
+
+}
+</pre>
+
+<h5>Example 2 : Even Numbers</h5>
+
+<pre class="code">
+let i = 2;
+
+while(i <= 20){
+
+    console.log(i);
+
+    i += 2;
+
+}
+</pre>
+
+<h5>Example 3 : Countdown</h5>
+
+<pre class="code">
+let i = 10;
+
+while(i >= 1){
+
+    console.log(i);
+
+    i--;
+
+}
+</pre>
+
+</div>
+
+</div>
+
+<!-- CONTINUE IN PART 1B -->
+ <!-- SECTION 5 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>5. do...while Loop</h2>
+
+<p>
+
+The <strong>do...while</strong> loop executes the code block at least once,
+even if the condition is false.
+
+</p>
+
+<h5>Syntax</h5>
+
+<pre class="code">
+do{
+
+    // code
+
+}while(condition);
+</pre>
+
+<h5>Example 1</h5>
+
+<pre class="code">
+let i = 1;
+
+do{
+
+    console.log(i);
+
+    i++;
+
+}while(i <= 5);
+</pre>
+
+<h5>Output</h5>
+
+<pre class="code">
+1
+2
+3
+4
+5
+</pre>
+
+<h5>Example 2</h5>
+
+<pre class="code">
+let i = 10;
+
+do{
+
+    console.log(i);
+
+    i--;
+
+}while(i >= 1);
+</pre>
+
+<p>
+
+The loop body executes once before checking the condition.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- SECTION 6 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>6. for...in Loop</h2>
+
+<p>
+
+The <strong>for...in</strong> loop is mainly used to iterate over
+the properties of an object.
+
+</p>
+
+<h5>Syntax</h5>
+
+<pre class="code">
+for(let key in object){
+
+    // code
+
+}
+</pre>
+
+<h5>Example 1 : Object</h5>
+
+<pre class="code">
+let student = {
+
+    name : "Awanish",
+
+    age : 24,
+
+    city : "Lucknow"
+
+};
+
+for(let key in student){
+
+    console.log(key);
+
+}
+</pre>
+
+<h5>Example 2 : Key & Value</h5>
+
+<pre class="code">
+for(let key in student){
+
+    console.log(key + " : " + student[key]);
+
+}
+</pre>
+
+<h5>Example 3 : Array Index</h5>
+
+<pre class="code">
+let numbers = [10,20,30,40];
+
+for(let index in numbers){
+
+    console.log(index);
+
+}
+</pre>
+
+<p>
+
+<strong>Note:</strong> for...in returns keys (property names or indexes).
+
+</p>
+
+</div>
+
+</div>
+
+<!-- SECTION 7 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>7. for...of Loop</h2>
+
+<p>
+
+The <strong>for...of</strong> loop is used to iterate over iterable
+objects like arrays, strings, maps and sets.
+
+</p>
+
+<h5>Syntax</h5>
+
+<pre class="code">
+for(let value of iterable){
+
+    // code
+
+}
+</pre>
+
+<h5>Example 1 : Array</h5>
+
+<pre class="code">
+let marks = [80,85,90,95];
+
+for(let value of marks){
+
+    console.log(value);
+
+}
+</pre>
+
+<h5>Example 2 : String</h5>
+
+<pre class="code">
+let name = "JavaScript";
+
+for(let ch of name){
+
+    console.log(ch);
+
+}
+</pre>
+
+<h5>Example 3 : Sum of Array</h5>
+
+<pre class="code">
+let arr = [10,20,30];
+
+let sum = 0;
+
+for(let value of arr){
+
+    sum += value;
+
+}
+
+console.log(sum);
+</pre>
+
+<p>
+
+<strong>Note:</strong> for...of returns actual values.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- SECTION 8 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>8. forEach() Method</h2>
+
+<p>
+
+The <strong>forEach()</strong> method executes a callback function once
+for each array element.
+
+</p>
+
+<h5>Syntax</h5>
+
+<pre class="code">
+array.forEach(function(value,index,array){
+
+});
+</pre>
+
+<h5>Example 1</h5>
+
+<pre class="code">
+let numbers = [10,20,30];
+
+numbers.forEach(function(value){
+
+    console.log(value);
+
+});
+</pre>
+
+<h5>Example 2 : Arrow Function</h5>
+
+<pre class="code">
+numbers.forEach((value)=>{
+
+    console.log(value);
+
+});
+</pre>
+
+<h5>Example 3 : Index & Value</h5>
+
+<pre class="code">
+numbers.forEach((value,index)=>{
+
+    console.log(index,value);
+
+});
+</pre>
+
+<h5>Example 4 : Square of Numbers</h5>
+
+<pre class="code">
+numbers.forEach((value)=>{
+
+    console.log(value * value);
+
+});
+</pre>
+
+</div>
+
+</div>
+
+<!-- SECTION 9 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>9. break Statement</h2>
+
+<p>
+
+The <strong>break</strong> statement immediately terminates the loop.
+
+</p>
+
+<h5>Example 1</h5>
+
+<pre class="code">
+for(let i = 1; i <= 10; i++){
+
+    if(i == 6){
+
+        break;
+
+    }
+
+    console.log(i);
+
+}
+</pre>
+
+<h5>Output</h5>
+
+<pre class="code">
+1
+2
+3
+4
+5
+</pre>
+
+</div>
+
+</div>
+
+<!-- SECTION 10 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>10. continue Statement</h2>
+
+<p>
+
+The <strong>continue</strong> statement skips the current iteration
+and moves to the next iteration.
+
+</p>
+
+<h5>Example 1</h5>
+
+<pre class="code">
+for(let i = 1; i <= 10; i++){
+
+    if(i == 5){
+
+        continue;
+
+    }
+
+    console.log(i);
+
+}
+</pre>
+
+<h5>Output</h5>
+
+<pre class="code">
+1
+2
+3
+4
+6
+7
+8
+9
+10
+</pre>
+
+</div>
+
+</div>
+
+<!-- CONTINUE IN PART 1C -->
+ <!-- SECTION 11 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>11. Nested Loops</h2>
+
+<p>
+
+A <strong>Nested Loop</strong> is a loop inside another loop.
+For every iteration of the outer loop, the inner loop executes completely.
+
+</p>
+
+<h5>Syntax</h5>
+
+<pre class="code">
+for(initialization; condition; increment){
+
+    for(initialization; condition; increment){
+
+        // code
+
+    }
+
+}
+</pre>
+
+<h5>Example 1</h5>
+
+<pre class="code">
+for(let i = 1; i <= 3; i++){
+
+    for(let j = 1; j <= 3; j++){
+
+        console.log(i , j);
+
+    }
+
+}
+</pre>
+
+<h5>Example 2 : Multiplication Table</h5>
+
+<pre class="code">
+for(let i = 1; i <= 5; i++){
+
+    for(let j = 1; j <= 10; j++){
+
+        console.log(i + " x " + j + " = " + (i*j));
+
+    }
+
+}
+</pre>
+
+</div>
+
+</div>
+
+<!-- SECTION 12 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>12. Pattern Printing Basics</h2>
+
+<p>
+
+Nested loops are commonly used to print patterns.
+
+</p>
+
+<h5>Square Pattern</h5>
+
+<pre class="code">
+*****
+*****
+*****
+*****
+*****
+</pre>
+
+<pre class="code">
+for(let i=1;i<=5;i++){
+
+    let pattern="";
+
+    for(let j=1;j<=5;j++){
+
+        pattern += "* ";
+
+    }
+
+    console.log(pattern);
+
+}
+</pre>
+
+<h5>Right Triangle</h5>
+
+<pre class="code">
+*
+**
+***
+****
+*****
+</pre>
+
+<pre class="code">
+for(let i=1;i<=5;i++){
+
+    let pattern="";
+
+    for(let j=1;j<=i;j++){
+
+        pattern += "* ";
+
+    }
+
+    console.log(pattern);
+
+}
+</pre>
+
+<h5>Inverted Triangle</h5>
+
+<pre class="code">
+*****
+****
+***
+**
+*
+</pre>
+
+<pre class="code">
+for(let i=5;i>=1;i--){
+
+    let pattern="";
+
+    for(let j=1;j<=i;j++){
+
+        pattern += "* ";
+
+    }
+
+    console.log(pattern);
+
+}
+</pre>
+
+<h5>Number Pattern</h5>
+
+<pre class="code">
+1
+12
+123
+1234
+12345
+</pre>
+
+<pre class="code">
+for(let i=1;i<=5;i++){
+
+    let pattern="";
+
+    for(let j=1;j<=i;j++){
+
+        pattern += j;
+
+    }
+
+    console.log(pattern);
+
+}
+</pre>
+
+</div>
+
+</div>
+
+<!-- SECTION 13 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>13. Practice Programs</h2>
+
+<ol>
+
+<li>Print numbers from 1 to 10</li>
+
+<li>Print numbers from 10 to 1</li>
+
+<li>Print even numbers</li>
+
+<li>Print odd numbers</li>
+
+<li>Multiplication table</li>
+
+<li>Sum of first N numbers</li>
+
+<li>Factorial of a number</li>
+
+<li>Reverse a number</li>
+
+<li>Count digits</li>
+
+<li>Sum of digits</li>
+
+<li>Palindrome Number</li>
+
+<li>Prime Number</li>
+
+<li>Armstrong Number</li>
+
+<li>Fibonacci Series</li>
+
+<li>Print square star pattern</li>
+
+<li>Print right triangle pattern</li>
+
+<li>Print inverted triangle</li>
+
+<li>Print number triangle</li>
+
+<li>Print alphabet triangle</li>
+
+<li>Print multiplication tables from 1 to 10</li>
+
+</ol>
+
+</div>
+
+</div>
+
+<!-- SECTION 14 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Assignment</h2>
+
+<ol>
+
+<li>Create all five loop types.</li>
+
+<li>Print numbers from 1 to 100.</li>
+
+<li>Print even and odd numbers separately.</li>
+
+<li>Create multiplication tables.</li>
+
+<li>Find factorial using loops.</li>
+
+<li>Reverse a number.</li>
+
+<li>Print Fibonacci series.</li>
+
+<li>Create Prime Number program.</li>
+
+<li>Create Armstrong Number program.</li>
+
+<li>Create at least five star patterns.</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
