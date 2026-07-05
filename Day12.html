@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 11 - JavaScript Arrays</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    background:#f4f7fb;
+}
+
+.hero{
+    background:linear-gradient(135deg,#2563eb,#0f172a);
+    color:white;
+    padding:70px 0;
+}
+
+.sidebar{
+    position:sticky;
+    top:20px;
+}
+
+.section-card{
+    border-radius:20px;
+    margin-bottom:25px;
+}
+
+.code{
+    background:#111827;
+    color:#22c55e;
+    padding:15px;
+    border-radius:10px;
+    overflow:auto;
+}
+
+h2{
+    color:#2563eb;
+}
+
+.note{
+    background:#fff8dc;
+    border-left:5px solid orange;
+    padding:12px;
+    border-radius:8px;
+    margin-top:15px;
+}
+
+.output{
+    background:#eef2ff;
+    padding:10px;
+    border-left:4px solid #2563eb;
+    margin-top:10px;
+    border-radius:8px;
+}
+</style>
+
+</head>
+<body>
+
+<section class="hero">
+<div class="container">
+
+<h1>Day 12 : JavaScript Arrays</h1>
+
+<p class="lead">
+Complete Notes with Theory, Examples, Output, Interview Questions and Practice Programs.
+</p>
+
+</div>
+</section>
+
+<div class="container my-5">
+
+<div class="row">
+
+<div class="col-lg-3">
+
+<div class="card sidebar">
+
+<div class="card-body">
+
+<h5>Topics</h5>
+
+<ul>
+
+<li>Introduction</li>
+
+<li>Why Arrays?</li>
+
+<li>Creating Arrays</li>
+
+<li>Accessing Elements</li>
+
+<li>Updating Elements</li>
+
+<li>Array Length</li>
+
+<li>Traversing Arrays</li>
+
+<li>for Loop</li>
+
+<li>for...of Loop</li>
+
+<li>forEach()</li>
+
+<li>push()</li>
+
+<li>pop()</li>
+
+<li>shift()</li>
+
+<li>unshift()</li>
+
+<li>splice()</li>
+
+<li>slice()</li>
+
+<li>concat()</li>
+
+<li>join()</li>
+
+<li>includes()</li>
+
+<li>indexOf()</li>
+
+<li>lastIndexOf()</li>
+
+<li>reverse()</li>
+
+<li>sort()</li>
+
+<li>find()</li>
+
+<li>findIndex()</li>
+
+<li>filter()</li>
+
+<li>map()</li>
+
+<li>reduce()</li>
+
+<li>every()</li>
+
+<li>some()</li>
+
+<li>flat()</li>
+
+<li>flatMap()</li>
+
+<li>fill()</li>
+
+<li>copyWithin()</li>
+
+<li>Array.from()</li>
+
+<li>Array.of()</li>
+
+<li>Array.isArray()</li>
+
+<li>at()</li>
+
+<li>Spread Operator</li>
+
+<li>Destructuring</li>
+
+<li>Nested Arrays</li>
+
+<li>Practice Programs</li>
+
+<li>Interview Questions</li>
+
+<li>Assignment</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-9">
+
+<!-- Topic 1 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>1. Introduction to Arrays</h2>
+
+<p>
+
+An <strong>Array</strong> is a special variable that can store multiple values in a single variable.
+
+</p>
+
+<pre class="code">
+let numbers = [10,20,30,40,50];
+</pre>
+
+<div class="output">
+
+Output
+
+<pre>
+[10,20,30,40,50]
+</pre>
+
+</div>
+
+<div class="note">
+
+<b>Remember:</b>
+
+Arrays are zero-indexed.
+
+The first element starts from index <b>0</b>.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Topic 2 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>2. Why Do We Need Arrays?</h2>
+
+<p>
+
+Suppose you want to store marks of 100 students.
+
+Without arrays you need
+
+</p>
+
+<pre class="code">
+let s1=90;
+let s2=80;
+let s3=75;
+let s4=95;
+...
+</pre>
+
+<p>
+
+Using arrays,
+
+</p>
+
+<pre class="code">
+let marks=[90,80,75,95];
+</pre>
+
+<div class="note">
+
+Arrays reduce code duplication and make looping very easy.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Topic 3 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>3. Creating Arrays</h2>
+
+<p>
+
+There are multiple ways to create arrays.
+
+</p>
+
+<h5>Method 1</h5>
+
+<pre class="code">
+let arr=[1,2,3,4];
+</pre>
+
+<h5>Method 2</h5>
+
+<pre class="code">
+let fruits=new Array("Apple","Banana","Mango");
+</pre>
+
+<h5>Method 3</h5>
+
+<pre class="code">
+const names=["Aman","Rahul","Rohit"];
+</pre>
+
+<div class="note">
+
+Square brackets [] are the most commonly used method.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Topic 4 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>4. Accessing Array Elements</h2>
+
+<pre class="code">
+let colors=["Red","Green","Blue","Black"];
+
+console.log(colors[0]);
+
+console.log(colors[2]);
+
+console.log(colors[3]);
+</pre>
+
+<div class="output">
+
+Output
+
+<pre>
+Red
+Blue
+Black
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Topic 5 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>5. Updating Array Elements</h2>
+
+<pre class="code">
+let city=["Delhi","Lucknow","Kanpur"];
+
+city[1]="Mumbai";
+
+console.log(city);
+</pre>
+
+<div class="output">
+
+<pre>
+["Delhi","Mumbai","Kanpur"]
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Topic 6 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>6. Array Length Property</h2>
+
+<pre class="code">
+let numbers=[10,20,30,40,50];
+
+console.log(numbers.length);
+</pre>
+
+<div class="output">
+
+<pre>
+5
+</pre>
+
+</div>
+
+<p>
+
+length returns total number of elements.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- Topic 7 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>7. Traversing an Array</h2>
+
+<p>
+
+Traversing means visiting every element one by one.
+
+</p>
+
+<pre class="code">
+let nums=[10,20,30,40];
+
+for(let i=0;i<nums.length;i++){
+
+console.log(nums[i]);
+
+}
+</pre>
+
+<div class="output">
+
+<pre>
+10
+20
+30
+40
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Topic 8 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>8. for...of Loop</h2>
+
+<pre class="code">
+let fruits=["Apple","Banana","Orange"];
+
+for(let fruit of fruits){
+
+console.log(fruit);
+
+}
+</pre>
+
+<div class="output">
+
+<pre>
+Apple
+Banana
+Orange
+</pre>
+
+</div>
+
+<div class="note">
+
+for...of directly returns values.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Topic 9 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>9. forEach()</h2>
+
+<pre class="code">
+let numbers=[10,20,30];
+
+numbers.forEach(function(value){
+
+console.log(value);
+
+});
+</pre>
+
+<div class="output">
+
+<pre>
+10
+20
+30
+</pre>
+
+</div>
+
+<p>
+
+forEach executes a function for every array element.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- Topic 10 -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>10. push()</h2>
+
+<p>
+
+push() adds an element at the end of an array.
+
+</p>
+
+<pre class="code">
+let fruits=["Apple","Banana"];
+
+fruits.push("Orange");
+
+console.log(fruits);
+</pre>
+
+<div class="output">
+
+<pre>
+["Apple","Banana","Orange"]
+</pre>
+
+</div>
+
+<div class="note">
+
+Interview Question:
+
+Difference between push() and unshift()?
+
+push() inserts at end.
+
+unshift() inserts at beginning.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Continue in Part 2 -->
+
+<!-- Topic 11 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>11. pop()</h2>
+
+<p>
+The <b>pop()</b> method removes the last element from an array.
+</p>
+
+<pre class="code">
+let fruits=["Apple","Banana","Orange"];
+
+fruits.pop();
+
+console.log(fruits);
+</pre>
+
+<div class="output">
+<pre>
+["Apple","Banana"]
+</pre>
+</div>
+
+<div class="note">
+Returns the removed element.
+</div>
+
+</div>
+</div>
+
+<!-- Topic 12 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>12. shift()</h2>
+
+<p>
+shift() removes the first element.
+</p>
+
+<pre class="code">
+let arr=[10,20,30,40];
+
+arr.shift();
+
+console.log(arr);
+</pre>
+
+<div class="output">
+<pre>
+[20,30,40]
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 13 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>13. unshift()</h2>
+
+<p>
+Adds elements at the beginning.
+</p>
+
+<pre class="code">
+let arr=[20,30];
+
+arr.unshift(10);
+
+console.log(arr);
+</pre>
+
+<div class="output">
+<pre>
+[10,20,30]
+</pre>
+</div>
+
+<div class="note">
+push() → End
+
+unshift() → Beginning
+</div>
+
+</div>
+</div>
+
+<!-- Topic 14 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>14. splice()</h2>
+
+<p>
+Used to add, remove or replace elements.
+</p>
+
+<pre class="code">
+let arr=[10,20,30,40];
+
+arr.splice(2,1);
+
+console.log(arr);
+</pre>
+
+<div class="output">
+<pre>
+[10,20,40]
+</pre>
+</div>
+
+<h5>Add Element</h5>
+
+<pre class="code">
+let arr=[10,20,40];
+
+arr.splice(2,0,30);
+
+console.log(arr);
+</pre>
+
+<div class="output">
+<pre>
+[10,20,30,40]
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 15 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>15. slice()</h2>
+
+<p>
+Returns a portion of an array without changing the original array.
+</p>
+
+<pre class="code">
+let arr=[10,20,30,40,50];
+
+console.log(arr.slice(1,4));
+</pre>
+
+<div class="output">
+<pre>
+[20,30,40]
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 16 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>16. concat()</h2>
+
+<p>
+Combines two or more arrays.
+</p>
+
+<pre class="code">
+let a=[1,2];
+
+let b=[3,4];
+
+console.log(a.concat(b));
+</pre>
+
+<div class="output">
+<pre>
+[1,2,3,4]
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 17 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>17. join()</h2>
+
+<p>
+Converts array into string.
+</p>
+
+<pre class="code">
+let arr=["HTML","CSS","JS"];
+
+console.log(arr.join("-"));
+</pre>
+
+<div class="output">
+<pre>
+HTML-CSS-JS
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 18 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>18. includes()</h2>
+
+<p>
+Checks whether an element exists.
+</p>
+
+<pre class="code">
+let arr=["Java","Python","JavaScript"];
+
+console.log(arr.includes("Python"));
+
+console.log(arr.includes("PHP"));
+</pre>
+
+<div class="output">
+<pre>
+true
+false
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 19 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>19. indexOf()</h2>
+
+<p>
+Returns first occurrence index.
+</p>
+
+<pre class="code">
+let arr=["A","B","C","B"];
+
+console.log(arr.indexOf("B"));
+</pre>
+
+<div class="output">
+<pre>
+1
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 20 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>20. lastIndexOf()</h2>
+
+<p>
+Returns last occurrence index.
+</p>
+
+<pre class="code">
+let arr=["A","B","C","B"];
+
+console.log(arr.lastIndexOf("B"));
+</pre>
+
+<div class="output">
+<pre>
+3
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 21 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>21. reverse()</h2>
+
+<p>
+Reverses an array.
+</p>
+
+<pre class="code">
+let arr=[1,2,3,4];
+
+arr.reverse();
+
+console.log(arr);
+</pre>
+
+<div class="output">
+<pre>
+[4,3,2,1]
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 22 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>22. sort()</h2>
+
+<p>
+Sorts array elements.
+</p>
+
+<pre class="code">
+let arr=[5,1,8,3];
+
+arr.sort();
+
+console.log(arr);
+</pre>
+
+<div class="output">
+<pre>
+[1,3,5,8]
+</pre>
+</div>
+
+<div class="note">
+For numbers always use compare function.
+</div>
+
+<pre class="code">
+arr.sort((a,b)=>a-b);
+</pre>
+
+</div>
+</div>
+
+<!-- Topic 23 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>23. find()</h2>
+
+<p>
+Returns first matching element.
+</p>
+
+<pre class="code">
+let arr=[10,20,30,40];
+
+let result=arr.find(x=>x>25);
+
+console.log(result);
+</pre>
+
+<div class="output">
+<pre>
+30
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 24 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>24. findIndex()</h2>
+
+<p>
+Returns index of first matching element.
+</p>
+
+<pre class="code">
+let arr=[10,20,30,40];
+
+console.log(arr.findIndex(x=>x>25));
+</pre>
+
+<div class="output">
+<pre>
+2
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 25 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>25. filter()</h2>
+
+<p>
+Returns all matching elements.
+</p>
+
+<pre class="code">
+let arr=[10,15,20,25,30];
+
+let even=arr.filter(x=>x%2==0);
+
+console.log(even);
+</pre>
+
+<div class="output">
+<pre>
+[10,20,30]
+</pre>
+</div>
+
+<div class="note">
+
+Interview Difference
+
+find() → Returns first matching value.
+
+filter() → Returns all matching values.
+
+</div>
+
+</div>
+</div>
+
+<!-- ========================= -->
+<!-- Practice Programs -->
+<!-- ========================= -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>Practice Programs</h2>
+
+<ol>
+
+<li>Print all elements of an array.</li>
+
+<li>Find the sum of all elements.</li>
+
+<li>Find the average of array elements.</li>
+
+<li>Find the maximum element.</li>
+
+<li>Find the minimum element.</li>
+
+<li>Search an element in an array.</li>
+
+<li>Count even numbers.</li>
+
+<li>Count odd numbers.</li>
+
+<li>Reverse an array.</li>
+
+<li>Sort an array in ascending order.</li>
+
+<li>Sort an array in descending order.</li>
+
+<li>Remove duplicate elements.</li>
+
+<li>Merge two arrays.</li>
+
+<li>Copy one array into another.</li>
+
+<li>Find second largest element.</li>
+
+<li>Find second smallest element.</li>
+
+<li>Print elements at even index.</li>
+
+<li>Print elements at odd index.</li>
+
+<li>Rotate array left by one position.</li>
+
+<li>Rotate array right by one position.</li>
+
+<li>Insert an element at a given position.</li>
+
+<li>Delete an element from a given position.</li>
+
+<li>Find frequency of every element.</li>
+
+<li>Check if array is sorted.</li>
+
+<li>Separate even and odd numbers.</li>
+
+<li>Print duplicate elements.</li>
+
+<li>Print unique elements.</li>
+
+<li>Convert string into character array.</li>
+
+<li>Flatten a nested array.</li>
+
+<li>Create a student marks management system using arrays.</li>
+
+</ol>
+
+</div>
+</div>
+
+<!-- ========================= -->
+<!-- Interview Questions -->
+<!-- ========================= -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>Interview Questions</h2>
+
+<ol>
+
+<li>What is an array in JavaScript?</li>
+
+<li>Difference between Array and Object?</li>
+
+<li>How do you create an array?</li>
+
+<li>How do you access array elements?</li>
+
+<li>What is zero-based indexing?</li>
+
+<li>Difference between push() and pop()?</li>
+
+<li>Difference between shift() and unshift()?</li>
+
+<li>Difference between slice() and splice()?</li>
+
+<li>Difference between map() and forEach()?</li>
+
+<li>Difference between filter() and find()?</li>
+
+<li>Difference between every() and some()?</li>
+
+<li>Difference between concat() and spread operator?</li>
+
+<li>What is reduce()?</li>
+
+<li>What is flat()?</li>
+
+<li>What is flatMap()?</li>
+
+<li>Difference between indexOf() and includes()?</li>
+
+<li>What does Array.from() do?</li>
+
+<li>What is Array.of()?</li>
+
+<li>What is Array.isArray()?</li>
+
+<li>Difference between sort() and reverse()?</li>
+
+<li>How to sort numbers correctly?</li>
+
+<li>Explain array destructuring.</li>
+
+<li>What is a multidimensional array?</li>
+
+<li>How do you remove duplicates from an array?</li>
+
+<li>Which array methods modify the original array?</li>
+
+</ol>
+
+</div>
+</div>
+
+<!-- ========================= -->
+<!-- Assignment -->
+<!-- ========================= -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>Assignment</h2>
+
+<ol>
+
+<li>Create an array of 20 student names.</li>
+
+<li>Perform CRUD operations on an array.</li>
+
+<li>Implement all insertion and deletion methods.</li>
+
+<li>Solve all 30 practice programs.</li>
+
+<li>Use every array method at least once.</li>
+
+<li>Create a Student Result System using arrays.</li>
+
+<li>Create an Employee Management System using arrays.</li>
+
+<li>Create a Shopping Cart using arrays.</li>
+
+<li>Find highest and lowest marks.</li>
+
+<li>Remove duplicate values from an array.</li>
+
+</ol>
+
+</div>
+</div>
+
+<!-- ========================= -->
+<!-- Cheat Sheet -->
+<!-- ========================= -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>JavaScript Arrays Cheat Sheet</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>Method</th>
+
+<th>Purpose</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr><td>push()</td><td>Add at end</td></tr>
+
+<tr><td>pop()</td><td>Remove from end</td></tr>
+
+<tr><td>shift()</td><td>Remove first element</td></tr>
+
+<tr><td>unshift()</td><td>Add at beginning</td></tr>
+
+<tr><td>splice()</td><td>Add/Remove elements</td></tr>
+
+<tr><td>slice()</td><td>Extract portion</td></tr>
+
+<tr><td>concat()</td><td>Merge arrays</td></tr>
+
+<tr><td>join()</td><td>Convert into string</td></tr>
+
+<tr><td>includes()</td><td>Check existence</td></tr>
+
+<tr><td>indexOf()</td><td>Find first index</td></tr>
+
+<tr><td>lastIndexOf()</td><td>Find last index</td></tr>
+
+<tr><td>reverse()</td><td>Reverse array</td></tr>
+
+<tr><td>sort()</td><td>Sort array</td></tr>
+
+<tr><td>find()</td><td>Return first matching element</td></tr>
+
+<tr><td>findIndex()</td><td>Return first matching index</td></tr>
+
+<tr><td>filter()</td><td>Return all matching elements</td></tr>
+
+<tr><td>map()</td><td>Create transformed array</td></tr>
+
+<tr><td>reduce()</td><td>Reduce into one value</td></tr>
+
+<tr><td>every()</td><td>All elements satisfy condition</td></tr>
+
+<tr><td>some()</td><td>At least one satisfies condition</td></tr>
+
+<tr><td>flat()</td><td>Flatten nested arrays</td></tr>
+
+<tr><td>flatMap()</td><td>Map + Flat</td></tr>
+
+<tr><td>fill()</td><td>Fill values</td></tr>
+
+<tr><td>copyWithin()</td><td>Copy elements internally</td></tr>
+
+<tr><td>Array.from()</td><td>Create array from iterable</td></tr>
+
+<tr><td>Array.of()</td><td>Create array from arguments</td></tr>
+
+<tr><td>Array.isArray()</td><td>Check if value is array</td></tr>
+
+<tr><td>at()</td><td>Access using positive/negative index</td></tr>
+
+</tbody>
+
+</table>
+
+</div>
+</div>
+
+<!-- ========================= -->
+<!-- Summary -->
+<!-- ========================= -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>Summary</h2>
+
+<ul>
+
+<li>Arrays store multiple values in one variable.</li>
+
+<li>Array indexing starts from <b>0</b>.</li>
+
+<li>Arrays can contain any type of data.</li>
+
+<li>JavaScript provides many built-in methods for array manipulation.</li>
+
+<li>Methods like <b>map()</b>, <b>filter()</b>, and <b>reduce()</b> are frequently asked in interviews.</li>
+
+<li>Practice array questions regularly because they are one of the most important JavaScript interview topics.</li>
+
+</ul>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
