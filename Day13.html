@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 12 - JavaScript Functions</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{background:#f4f7fb}
+
+.hero{
+background:linear-gradient(135deg,#2563eb,#0f172a);
+color:white;
+padding:70px 0;
+}
+
+.sidebar{
+position:sticky;
+top:20px;
+}
+
+.section-card{
+border-radius:20px;
+margin-bottom:25px;
+}
+
+.code{
+background:#111827;
+color:#22c55e;
+padding:15px;
+border-radius:10px;
+overflow:auto;
+}
+
+h2{
+color:#2563eb;
+}
+
+.note{
+background:#fff8dc;
+border-left:5px solid orange;
+padding:12px;
+border-radius:8px;
+margin-top:15px;
+}
+
+.output{
+background:#eef2ff;
+padding:10px;
+border-left:4px solid #2563eb;
+margin-top:10px;
+border-radius:8px;
+}
+</style>
+
+</head>
+
+<body>
+
+<section class="hero">
+<div class="container">
+
+<h1>Day 13 : JavaScript Functions</h1>
+
+<p class="lead">
+Complete Notes with Theory, Examples, Interview Questions and Practice Programs.
+</p>
+
+</div>
+</section>
+
+<div class="container my-5">
+
+<div class="row">
+
+<div class="col-lg-3">
+
+<div class="card sidebar">
+
+<div class="card-body">
+
+<h5>Topics</h5>
+
+<ul>
+
+<li>Introduction to Functions</li>
+<li>Why Functions?</li>
+<li>Function Declaration</li>
+<li>Function Calling</li>
+<li>Parameters</li>
+<li>Arguments</li>
+<li>Return Statement</li>
+<li>Function Expression</li>
+<li>Anonymous Function</li>
+<li>Arrow Function</li>
+
+<li>Default Parameters</li>
+<li>Rest Parameters</li>
+<li>Callback Functions</li>
+<li>Higher Order Functions</li>
+<li>IIFE</li>
+<li>Recursive Functions</li>
+<li>Nested Functions</li>
+<li>Scope</li>
+<li>Hoisting</li>
+<li>Closures</li>
+
+<li>Interview Questions</li>
+<li>Practice Programs</li>
+<li>Assignment</li>
+
+</ul>
+
+</div>
+</div>
+</div>
+
+<div class="col-lg-9">
+
+<!-- Topic 1 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>1. Introduction to Functions</h2>
+
+<p>
+
+A function is a reusable block of code that performs a specific task.
+
+</p>
+
+<pre class="code">
+function greet(){
+
+console.log("Welcome");
+
+}
+</pre>
+
+<div class="note">
+
+Functions help avoid code repetition.
+
+</div>
+
+</div>
+</div>
+
+<!-- Topic 2 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>2. Why Functions?</h2>
+
+<p>
+
+Without functions, the same code must be written repeatedly.
+
+</p>
+
+<pre class="code">
+console.log("Hello");
+
+console.log("Hello");
+
+console.log("Hello");
+</pre>
+
+<p>
+
+Using function:
+
+</p>
+
+<pre class="code">
+function sayHello(){
+
+console.log("Hello");
+
+}
+
+sayHello();
+sayHello();
+sayHello();
+</pre>
+
+</div>
+</div>
+
+<!-- Topic 3 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>3. Function Declaration</h2>
+
+<p>
+
+A normal function definition.
+
+</p>
+
+<pre class="code">
+function display(){
+
+console.log("Function Called");
+
+}
+</pre>
+
+<div class="note">
+
+Syntax:
+
+function functionName(){
+
+// code
+
+}
+
+</div>
+
+</div>
+</div>
+
+<!-- Topic 4 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>4. Function Calling</h2>
+
+<p>
+
+Functions execute only when called.
+
+</p>
+
+<pre class="code">
+function greet(){
+
+console.log("Good Morning");
+
+}
+
+greet();
+</pre>
+
+<div class="output">
+<pre>
+Good Morning
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 5 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>5. Function Parameters</h2>
+
+<p>
+
+Parameters receive values.
+
+</p>
+
+<pre class="code">
+function greet(name){
+
+console.log("Hello " + name);
+
+}
+</pre>
+
+</div>
+</div>
+
+<!-- Topic 6 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>6. Function Arguments</h2>
+
+<p>
+
+Arguments are actual values passed.
+
+</p>
+
+<pre class="code">
+function greet(name){
+
+console.log("Hello " + name);
+
+}
+
+greet("Awanish");
+</pre>
+
+<div class="output">
+<pre>
+Hello Awanish
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 7 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>7. Return Statement</h2>
+
+<p>
+
+return sends a value back.
+
+</p>
+
+<pre class="code">
+function add(a,b){
+
+return a+b;
+
+}
+
+let result=add(10,20);
+
+console.log(result);
+</pre>
+
+<div class="output">
+<pre>
+30
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 8 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>8. Function Expression</h2>
+
+<p>
+
+Function stored inside a variable.
+
+</p>
+
+<pre class="code">
+const greet=function(){
+
+console.log("Hello");
+
+};
+
+greet();
+</pre>
+
+</div>
+</div>
+
+<!-- Topic 9 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>9. Anonymous Function</h2>
+
+<p>
+
+Function without a name.
+
+</p>
+
+<pre class="code">
+let demo=function(){
+
+console.log("Anonymous Function");
+
+};
+</pre>
+
+<div class="note">
+
+Mostly used as callback functions.
+
+</div>
+
+</div>
+</div>
+
+<!-- Topic 10 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>10. Arrow Function</h2>
+
+<p>
+
+Modern ES6 syntax.
+
+</p>
+
+<pre class="code">
+const add=(a,b)=>{
+
+return a+b;
+
+};
+
+console.log(add(5,10));
+</pre>
+
+<div class="output">
+<pre>
+15
+</pre>
+</div>
+
+<div class="note">
+
+Arrow functions are heavily used in React.js.
+
+</div>
+
+</div>
+</div>
+
+<!-- Continue in Part 2 -->
+ <!-- Topic 11 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>11. Default Parameters</h2>
+
+<p>
+Default parameters assign a default value if no argument is passed.
+</p>
+
+<pre class="code">
+function greet(name="Guest"){
+
+console.log("Welcome "+name);
+
+}
+
+greet();
+
+greet("Awanish");
+</pre>
+
+<div class="output">
+<pre>
+Welcome Guest
+Welcome Awanish
+</pre>
+</div>
+
+<div class="note">
+Default parameters were introduced in ES6.
+</div>
+
+</div>
+</div>
+
+<!-- Topic 12 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>12. Rest Parameters (...)</h2>
+
+<p>
+Rest parameters allow a function to accept any number of arguments.
+</p>
+
+<pre class="code">
+function sum(...numbers){
+
+let total=0;
+
+for(let num of numbers){
+
+total+=num;
+
+}
+
+return total;
+
+}
+
+console.log(sum(10,20,30,40));
+</pre>
+
+<div class="output">
+<pre>
+100
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 13 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>13. Callback Function</h2>
+
+<p>
+A callback is a function passed as an argument to another function.
+</p>
+
+<pre class="code">
+function greet(name){
+
+console.log("Hello "+name);
+
+}
+
+function processUser(callback){
+
+callback("Awanish");
+
+}
+
+processUser(greet);
+</pre>
+
+<div class="output">
+<pre>
+Hello Awanish
+</pre>
+</div>
+
+<div class="note">
+Callbacks are widely used in JavaScript asynchronous programming.
+</div>
+
+</div>
+</div>
+
+<!-- Topic 14 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>14. Higher Order Functions</h2>
+
+<p>
+A Higher Order Function either accepts another function as a parameter or returns a function.
+</p>
+
+<pre class="code">
+function calculate(a,b,operation){
+
+return operation(a,b);
+
+}
+
+function add(x,y){
+
+return x+y;
+
+}
+
+console.log(calculate(10,20,add));
+</pre>
+
+<div class="output">
+<pre>
+30
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 15 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>15. Immediately Invoked Function Expression (IIFE)</h2>
+
+<p>
+Runs immediately after it is defined.
+</p>
+
+<pre class="code">
+(function(){
+
+console.log("IIFE Executed");
+
+})();
+</pre>
+
+<div class="output">
+<pre>
+IIFE Executed
+</pre>
+</div>
+
+<div class="note">
+Used to avoid polluting the global scope.
+</div>
+
+</div>
+</div>
+
+<!-- Topic 16 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>16. Recursive Function</h2>
+
+<p>
+A recursive function calls itself.
+</p>
+
+<pre class="code">
+function factorial(n){
+
+if(n==1){
+
+return 1;
+
+}
+
+return n*factorial(n-1);
+
+}
+
+console.log(factorial(5));
+</pre>
+
+<div class="output">
+<pre>
+120
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 17 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>17. Nested Functions</h2>
+
+<p>
+A function declared inside another function.
+</p>
+
+<pre class="code">
+function outer(){
+
+function inner(){
+
+console.log("Inner Function");
+
+}
+
+inner();
+
+}
+
+outer();
+</pre>
+
+<div class="output">
+<pre>
+Inner Function
+</pre>
+</div>
+
+</div>
+</div>
+
+<!-- Topic 18 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>18. Function Scope</h2>
+
+<p>
+Variables declared inside a function are accessible only within that function.
+</p>
+
+<pre class="code">
+function demo(){
+
+let message="Hello";
+
+console.log(message);
+
+}
+
+demo();
+
+// console.log(message); // Error
+</pre>
+
+<div class="note">
+Local variables cannot be accessed outside the function.
+</div>
+
+</div>
+</div>
+
+<!-- Topic 19 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>19. Function Hoisting</h2>
+
+<p>
+Function declarations are hoisted in JavaScript.
+</p>
+
+<pre class="code">
+greet();
+
+function greet(){
+
+console.log("Hello");
+
+}
+</pre>
+
+<div class="output">
+<pre>
+Hello
+</pre>
+</div>
+
+<div class="note">
+Only function declarations are hoisted, not function expressions.
+</div>
+
+</div>
+</div>
+
+<!-- Topic 20 -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>20. Closures</h2>
+
+<p>
+A closure allows an inner function to access variables of its outer function even after the outer function has finished execution.
+</p>
+
+<pre class="code">
+function outer(){
+
+let count=0;
+
+return function(){
+
+count++;
+
+console.log(count);
+
+}
+
+}
+
+let counter=outer();
+
+counter();
+
+counter();
+
+counter();
+</pre>
+
+<div class="output">
+<pre>
+1
+2
+3
+</pre>
+</div>
+
+<div class="note">
+Closures are one of the most important JavaScript interview topics.
+</div>
+
+</div>
+</div>
+
+<!-- Continue in Part 3 -->
+ <!-- ========================= -->
+<!-- Practice Programs -->
+<!-- ========================= -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>Practice Programs</h2>
+
+<ol>
+
+<li>Create a function to print "Hello World".</li>
+
+<li>Create a function to add two numbers.</li>
+
+<li>Create a function to subtract two numbers.</li>
+
+<li>Create a function to multiply two numbers.</li>
+
+<li>Create a function to divide two numbers.</li>
+
+<li>Find the square of a number using a function.</li>
+
+<li>Find the cube of a number using a function.</li>
+
+<li>Find the factorial using recursion.</li>
+
+<li>Check whether a number is even or odd using a function.</li>
+
+<li>Check whether a number is prime using a function.</li>
+
+<li>Find the largest of three numbers using a function.</li>
+
+<li>Find the smallest of three numbers.</li>
+
+<li>Check palindrome using a function.</li>
+
+<li>Reverse a number using a function.</li>
+
+<li>Reverse a string using a function.</li>
+
+<li>Count vowels in a string.</li>
+
+<li>Check Armstrong number using a function.</li>
+
+<li>Find the sum of array elements using a function.</li>
+
+<li>Find the maximum element of an array.</li>
+
+<li>Find the minimum element of an array.</li>
+
+<li>Print Fibonacci series using recursion.</li>
+
+<li>Create a calculator using functions.</li>
+
+<li>Swap two numbers using a function.</li>
+
+<li>Convert Celsius to Fahrenheit.</li>
+
+<li>Convert Fahrenheit to Celsius.</li>
+
+</ol>
+
+</div>
+</div>
+
+<!-- ========================= -->
+<!-- Interview Questions -->
+<!-- ========================= -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>Interview Questions</h2>
+
+<ol>
+
+<li>What is a function in JavaScript?</li>
+
+<li>Why are functions used?</li>
+
+<li>Difference between parameters and arguments?</li>
+
+<li>Difference between function declaration and function expression?</li>
+
+<li>What is an anonymous function?</li>
+
+<li>What is an arrow function?</li>
+
+<li>Difference between normal function and arrow function?</li>
+
+<li>What is the return statement?</li>
+
+<li>Can a function return another function?</li>
+
+<li>What is a callback function?</li>
+
+<li>What is a Higher Order Function?</li>
+
+<li>What is an IIFE?</li>
+
+<li>What is recursion?</li>
+
+<li>What is function scope?</li>
+
+<li>Difference between local and global variables?</li>
+
+<li>What is function hoisting?</li>
+
+<li>What are closures?</li>
+
+<li>Can JavaScript functions have default parameters?</li>
+
+<li>What are rest parameters?</li>
+
+<li>Difference between rest (...) and spread (...)?</li>
+
+<li>Can functions be stored in variables?</li>
+
+<li>Can functions be passed as arguments?</li>
+
+<li>What is lexical scope?</li>
+
+<li>Explain first-class functions.</li>
+
+<li>What are pure and impure functions?</li>
+
+</ol>
+
+</div>
+</div>
+
+<!-- ========================= -->
+<!-- Assignment -->
+<!-- ========================= -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>Assignment</h2>
+
+<ol>
+
+<li>Create 20 different functions.</li>
+
+<li>Solve all 25 practice programs.</li>
+
+<li>Create a calculator using functions.</li>
+
+<li>Create a student result system using functions.</li>
+
+<li>Create a banking menu using functions.</li>
+
+<li>Use recursion to solve factorial and Fibonacci.</li>
+
+<li>Create a menu-driven program using functions.</li>
+
+<li>Practice callback functions.</li>
+
+<li>Practice arrow functions.</li>
+
+<li>Create your own Higher Order Function.</li>
+
+</ol>
+
+</div>
+</div>
+
+<!-- ========================= -->
+<!-- Cheat Sheet -->
+<!-- ========================= -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>JavaScript Functions Cheat Sheet</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>Concept</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr><td>function</td><td>Create a function</td></tr>
+
+<tr><td>Call</td><td>Execute a function</td></tr>
+
+<tr><td>Parameters</td><td>Variables in function definition</td></tr>
+
+<tr><td>Arguments</td><td>Values passed to function</td></tr>
+
+<tr><td>return</td><td>Returns a value</td></tr>
+
+<tr><td>Function Expression</td><td>Function stored inside variable</td></tr>
+
+<tr><td>Anonymous Function</td><td>Function without name</td></tr>
+
+<tr><td>Arrow Function</td><td>Modern ES6 function syntax</td></tr>
+
+<tr><td>Default Parameters</td><td>Assign default values</td></tr>
+
+<tr><td>Rest Parameters</td><td>Accept unlimited arguments</td></tr>
+
+<tr><td>Callback Function</td><td>Function passed as parameter</td></tr>
+
+<tr><td>Higher Order Function</td><td>Accepts/Returns another function</td></tr>
+
+<tr><td>IIFE</td><td>Immediately Invoked Function Expression</td></tr>
+
+<tr><td>Recursion</td><td>Function calling itself</td></tr>
+
+<tr><td>Nested Function</td><td>Function inside another function</td></tr>
+
+<tr><td>Scope</td><td>Variable accessibility</td></tr>
+
+<tr><td>Hoisting</td><td>Function declarations move to top</td></tr>
+
+<tr><td>Closure</td><td>Access outer variables after execution</td></tr>
+
+</tbody>
+
+</table>
+
+</div>
+</div>
+
+<!-- ========================= -->
+<!-- Summary -->
+<!-- ========================= -->
+
+<div class="card section-card">
+<div class="card-body">
+
+<h2>Summary</h2>
+
+<ul>
+
+<li>Functions are reusable blocks of code.</li>
+
+<li>Functions reduce code duplication.</li>
+
+<li>Parameters receive values, while arguments pass values.</li>
+
+<li>The <b>return</b> statement sends data back to the caller.</li>
+
+<li>Arrow functions provide concise syntax and are heavily used in modern JavaScript and React.</li>
+
+<li>Callbacks and Higher Order Functions are fundamental concepts for asynchronous programming.</li>
+
+<li>Closures are among the most frequently asked JavaScript interview topics.</li>
+
+<li>Understanding scope and hoisting helps avoid common programming errors.</li>
+
+</ul>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
