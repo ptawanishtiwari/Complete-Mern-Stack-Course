@@ -1,0 +1,2497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Day 15 - MongoDB CRUD Operations (Beginner)</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:#f4f7fb;
+}
+
+.hero{
+background:linear-gradient(135deg,#16a34a,#14532d);
+color:white;
+padding:70px 0;
+}
+
+.sidebar{
+position:sticky;
+top:20px;
+}
+
+.section-card{
+border-radius:20px;
+margin-bottom:25px;
+}
+
+.code{
+background:#111827;
+color:#22c55e;
+padding:15px;
+border-radius:10px;
+overflow:auto;
+}
+
+.note{
+background:#fff8dc;
+border-left:5px solid orange;
+padding:12px;
+border-radius:8px;
+margin-top:15px;
+}
+
+.output{
+background:#eef2ff;
+padding:12px;
+border-left:4px solid green;
+border-radius:8px;
+margin-top:10px;
+}
+
+h2{
+color:#15803d;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section class="hero">
+
+<div class="container">
+
+<h1>Day 15 : MongoDB CRUD Operations (Beginner)</h1>
+
+<p class="lead">
+
+Complete Beginner Notes with Theory, Examples, Interview Questions and Practice Queries.
+
+</p>
+
+</div>
+
+</section>
+
+<div class="container my-5">
+
+<div class="row">
+
+<div class="col-lg-3">
+
+<div class="card sidebar">
+
+<div class="card-body">
+
+<h5>Topics</h5>
+
+<ul>
+
+<li>Introduction to CRUD</li>
+
+<li>Insert Documents</li>
+
+<li>insertOne()</li>
+
+<li>insertMany()</li>
+
+<li>Find Documents</li>
+
+<li>find()</li>
+
+<li>findOne()</li>
+
+<li>pretty()</li>
+
+<li>Projection</li>
+
+<li>Query Operators</li>
+
+<li>Comparison Operators</li>
+
+<li>Logical Operators</li>
+
+<li>Update Documents</li>
+
+<li>Delete Documents</li>
+
+<li>Sort</li>
+
+<li>Limit</li>
+
+<li>Skip</li>
+
+<li>Count</li>
+
+<li>Distinct</li>
+
+<li>Practice Queries</li>
+
+<li>Interview Questions</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-9">
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+    
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2> Introduction to MongoDB</h2>
+
+<p>
+
+<b>MongoDB</b> is a popular <b>NoSQL (Not Only SQL)</b> database used to store data in the form of <b>documents</b> instead of tables.
+
+Unlike traditional relational databases (MySQL, Oracle, SQL Server), MongoDB stores data in <b>BSON (Binary JSON)</b> format, which makes it flexible and easy to work with modern web applications.
+
+</p>
+
+<div class="note">
+
+MongoDB was developed by <b>MongoDB Inc.</b> and is one of the most widely used databases in MERN Stack (MongoDB, Express.js, React.js, Node.js).
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2> Why MongoDB?</h2>
+
+<p>
+
+MongoDB is preferred because it is fast, flexible, scalable, and schema-less.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Feature</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Schema-less</td>
+
+<td>No fixed table structure is required.</td>
+
+</tr>
+
+<tr>
+
+<td>JSON Based</td>
+
+<td>Stores data in JSON-like documents.</td>
+
+</tr>
+
+<tr>
+
+<td>High Performance</td>
+
+<td>Fast read and write operations.</td>
+
+</tr>
+
+<tr>
+
+<td>Scalable</td>
+
+<td>Supports Horizontal Scaling (Sharding).</td>
+
+</tr>
+
+<tr>
+
+<td>Easy to Learn</td>
+
+<td>Simple query syntax.</td>
+
+</tr>
+
+<tr>
+
+<td>Flexible</td>
+
+<td>Different documents can have different fields.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2> SQL vs MongoDB</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>SQL Database</th>
+
+<th>MongoDB</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Database</td>
+
+<td>Database</td>
+
+</tr>
+
+<tr>
+
+<td>Table</td>
+
+<td>Collection</td>
+
+</tr>
+
+<tr>
+
+<td>Row</td>
+
+<td>Document</td>
+
+</tr>
+
+<tr>
+
+<td>Column</td>
+
+<td>Field</td>
+
+</tr>
+
+<tr>
+
+<td>Primary Key</td>
+
+<td>_id</td>
+
+</tr>
+
+<tr>
+
+<td>Fixed Schema</td>
+
+<td>Schema-less</td>
+
+</tr>
+
+<tr>
+
+<td>SQL Queries</td>
+
+<td>JavaScript-like Queries</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2> MongoDB Terminology</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>MongoDB Term</th>
+
+<th>Meaning</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Database</td>
+
+<td>Container of Collections</td>
+
+</tr>
+
+<tr>
+
+<td>Collection</td>
+
+<td>Group of Documents</td>
+
+</tr>
+
+<tr>
+
+<td>Document</td>
+
+<td>JSON Object</td>
+
+</tr>
+
+<tr>
+
+<td>Field</td>
+
+<td>Key-Value Pair</td>
+
+</tr>
+
+<tr>
+
+<td>_id</td>
+
+<td>Unique Identifier</td>
+
+</tr>
+
+<tr>
+
+<td>BSON</td>
+
+<td>Binary JSON Format</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2> Installing MongoDB Community Server</h2>
+
+<h5>Step 1</h5>
+
+<p>
+
+Download MongoDB Community Server from the official MongoDB website.
+
+</p>
+
+<h5>Step 2</h5>
+
+<p>
+
+Run the installer (.msi file).
+
+</p>
+
+<h5>Step 3</h5>
+
+<p>
+
+Choose <b>Complete Installation</b>.
+
+</p>
+
+<h5>Step 4</h5>
+
+<p>
+
+Keep <b>Install MongoDB as a Service</b> checked.
+
+</p>
+
+<h5>Step 5</h5>
+
+<p>
+
+Finish the installation.
+
+</p>
+
+<div class="note">
+
+During installation you can also install <b>MongoDB Compass</b>.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2> Installing MongoDB Compass</h2>
+
+<p>
+
+MongoDB Compass is the official GUI (Graphical User Interface) for MongoDB.
+
+</p>
+
+<p>
+
+It allows you to create databases, collections, and documents without writing commands.
+
+</p>
+
+<ul>
+
+<li>Create Database</li>
+
+<li>Create Collection</li>
+
+<li>Insert Documents</li>
+
+<li>Update Documents</li>
+
+<li>Delete Documents</li>
+
+<li>Visual Query Builder</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2> Verify MongoDB Installation</h2>
+
+<p>
+
+Open Command Prompt and run the following commands.
+
+</p>
+
+<pre class="code">
+mongod --version
+</pre>
+
+<pre class="code">
+mongosh
+</pre>
+
+<div class="output">
+
+If MongoDB is installed correctly, the Mongo Shell will start successfully.
+
+</div>
+
+<div class="note">
+
+If you get
+
+<b>'mongod' is not recognized...</b>
+
+then add the MongoDB <b>bin</b> folder to the Windows Environment Variables (PATH).
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2> Folder Structure</h2>
+
+<p>
+
+After installation, MongoDB creates important folders.
+
+</p>
+
+<pre class="code">
+C:\Program Files\MongoDB\Server\8.0\bin
+</pre>
+
+<p>
+
+The <b>bin</b> folder contains commands like:
+
+</p>
+
+<ul>
+
+<li>mongod</li>
+
+<li>mongosh</li>
+
+<li>mongos</li>
+
+</ul>
+
+<div class="note">
+
+Add this <b>bin</b> folder to your PATH variable.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2> Important MongoDB Commands</h2>
+
+<pre class="code">
+show dbs
+</pre>
+
+<p>Display all databases.</p>
+
+<pre class="code">
+use college
+</pre>
+
+<p>Create or switch database.</p>
+
+<pre class="code">
+show collections
+</pre>
+
+<p>Display collections.</p>
+
+<pre class="code">
+db
+</pre>
+
+<p>Display current database.</p>
+
+<pre class="code">
+cls
+</pre>
+
+<p>Clear the Mongo Shell screen.</p>
+
+<pre class="code">
+exit
+</pre>
+
+<p>Exit Mongo Shell.</p>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2> Sample Document Structure</h2>
+
+<p>
+
+A MongoDB document is stored in JSON format.
+
+</p>
+
+<pre class="code">
+{
+
+name:"Awanish",
+
+age:22,
+
+course:"B.Tech",
+
+city:"Prayagraj",
+
+skills:["Java","Spring Boot","MongoDB"]
+
+}
+</pre>
+
+<div class="note">
+
+Unlike SQL, every document can have a different structure.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2> Beginner Tips</h2>
+
+<ul>
+
+<li>Always start MongoDB Service before using mongosh.</li>
+
+<li>Learn shell commands before using Compass.</li>
+
+<li>Practice every CRUD command daily.</li>
+
+<li>Remember the SQL vs MongoDB terminology.</li>
+
+<li>Understand Documents and Collections clearly.</li>
+
+<li>Practice with real-world collections like Student, Employee, Product, and Customer.</li>
+
+<li>Do not memorize commands—understand their purpose.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Quick Revision</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Topic</th>
+
+<th>Remember</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr><td>MongoDB</td><td>NoSQL Database</td></tr>
+
+<tr><td>Collection</td><td>Like a Table</td></tr>
+
+<tr><td>Document</td><td>Like a Row</td></tr>
+
+<tr><td>Field</td><td>Like a Column</td></tr>
+
+<tr><td>CRUD</td><td>Create, Read, Update, Delete</td></tr>
+
+<tr><td>Compass</td><td>GUI Tool</td></tr>
+
+<tr><td>mongosh</td><td>MongoDB Shell</td></tr>
+
+<tr><td>_id</td><td>Unique Identifier</td></tr>
+
+<tr><td>BSON</td><td>Binary JSON</td></tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<h2>1. What is CRUD?</h2>
+
+<p>
+
+CRUD stands for the four basic database operations performed on data.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Letter</th>
+
+<th>Meaning</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>C</td>
+
+<td>Create (Insert Data)</td>
+
+</tr>
+
+<tr>
+
+<td>R</td>
+
+<td>Read (Retrieve Data)</td>
+
+</tr>
+
+<tr>
+
+<td>U</td>
+
+<td>Update (Modify Data)</td>
+
+</tr>
+
+<tr>
+
+<td>D</td>
+
+<td>Delete (Remove Data)</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="note">
+
+Every MongoDB application uses CRUD operations.
+
+CRUD is one of the most important interview topics.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>2. insertOne()</h2>
+
+<p>
+
+The <b>insertOne()</b> method inserts a single document into a collection.
+
+</p>
+
+<pre class="code">
+db.student.insertOne({
+
+name:"Awanish",
+
+age:22,
+
+course:"B.Tech"
+
+});
+</pre>
+
+<div class="output">
+
+Document Inserted Successfully
+
+</div>
+
+<div class="note">
+
+If the collection does not exist, MongoDB automatically creates it.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>3. insertMany()</h2>
+
+<p>
+
+The <b>insertMany()</b> method inserts multiple documents at once.
+
+</p>
+
+<pre class="code">
+db.student.insertMany([
+
+{
+
+name:"Rahul",
+
+age:21,
+
+course:"BCA"
+
+},
+
+{
+
+name:"Ravi",
+
+age:23,
+
+course:"MCA"
+
+},
+
+{
+
+name:"Priya",
+
+age:20,
+
+course:"B.Tech"
+
+}
+
+]);
+</pre>
+
+<div class="output">
+
+3 Documents Inserted
+
+</div>
+
+<div class="note">
+
+insertMany() is faster than inserting documents one by one.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>4. Read Documents</h2>
+
+<p>
+
+To retrieve data from MongoDB we use the <b>find()</b> and <b>findOne()</b> methods.
+
+</p>
+
+<ul>
+
+<li>find()</li>
+
+<li>findOne()</li>
+
+</ul>
+
+<div class="note">
+
+Read operation means fetching data from the database.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>5. find()</h2>
+
+<p>
+
+The <b>find()</b> method returns all matching documents.
+
+</p>
+
+<pre class="code">
+db.student.find();
+</pre>
+
+<div class="output">
+
+Returns every document present in the student collection.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>6. findOne()</h2>
+
+<p>
+
+Returns only the first matching document.
+
+</p>
+
+<pre class="code">
+db.student.findOne();
+</pre>
+
+<div class="output">
+
+Returns the first document only.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>7. pretty()</h2>
+
+<p>
+
+The <b>pretty()</b> method displays documents in a readable format.
+
+</p>
+
+<pre class="code">
+db.student.find().pretty();
+</pre>
+
+<div class="output">
+
+Documents are displayed with proper indentation.
+
+</div>
+
+<div class="note">
+
+Useful while learning MongoDB in the shell.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>8. Finding Specific Documents</h2>
+
+<p>
+
+You can search documents by providing a condition.
+
+</p>
+
+<pre class="code">
+db.student.find({
+
+name:"Rahul"
+
+});
+</pre>
+
+<div class="output">
+
+Returns all documents whose name is Rahul.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>9. Finding Multiple Conditions</h2>
+
+<p>
+
+You can search using more than one field.
+
+</p>
+
+<pre class="code">
+db.student.find({
+
+name:"Rahul",
+
+age:21
+
+});
+</pre>
+
+<div class="output">
+
+Returns only documents where both conditions match.
+
+</div>
+
+<div class="note">
+
+MongoDB uses AND logic when multiple fields are specified.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>10. Find by _id</h2>
+
+<p>
+
+Every MongoDB document contains a unique <b>_id</b> field.
+
+</p>
+
+<pre class="code">
+db.student.find({
+
+_id:ObjectId("6863e4f2a1b2c3d4e5f6a11")
+
+});
+</pre>
+
+<div class="note">
+
+The <b>_id</b> uniquely identifies every document in a collection.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Continue in Part 2 -->
+
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>11. Projection</h2>
+
+<p>
+
+Projection is used to display only the required fields from a document.
+
+</p>
+
+<pre class="code">
+db.student.find(
+{},
+{
+name:1,
+age:1
+}
+);
+</pre>
+
+<div class="output">
+
+Displays only the <b>name</b> and <b>age</b> fields.
+
+</div>
+
+<div class="note">
+
+<b>1</b> → Include Field
+
+<b>0</b> → Exclude Field
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>12. Excluding Fields</h2>
+
+<p>
+
+Use <b>0</b> to exclude a field.
+
+</p>
+
+<pre class="code">
+db.student.find(
+{},
+{
+course:0
+}
+);
+</pre>
+
+<div class="output">
+
+Returns all fields except <b>course</b>.
+
+</div>
+
+<div class="note">
+
+You cannot mix inclusion (1) and exclusion (0) except for the <b>_id</b> field.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>13. Comparison Operators</h2>
+
+<p>
+
+Comparison operators compare field values.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Operator</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr><td>$eq</td><td>Equal To</td></tr>
+
+<tr><td>$gt</td><td>Greater Than</td></tr>
+
+<tr><td>$gte</td><td>Greater Than or Equal To</td></tr>
+
+<tr><td>$lt</td><td>Less Than</td></tr>
+
+<tr><td>$lte</td><td>Less Than or Equal To</td></tr>
+
+<tr><td>$ne</td><td>Not Equal To</td></tr>
+
+<tr><td>$in</td><td>Match Any Value</td></tr>
+
+<tr><td>$nin</td><td>Not Match Any Value</td></tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>14. Using $gt</h2>
+
+<p>
+
+Find students whose age is greater than 21.
+
+</p>
+
+<pre class="code">
+db.student.find({
+
+age:{
+$gt:21
+}
+
+});
+</pre>
+
+<div class="output">
+
+Returns all students whose age is greater than 21.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>15. Using $gte</h2>
+
+<p>
+
+Find students whose age is greater than or equal to 22.
+
+</p>
+
+<pre class="code">
+db.student.find({
+
+age:{
+$gte:22
+}
+
+});
+</pre>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>16. Using $lt and $lte</h2>
+
+<p>
+
+Find students whose age is less than 22.
+
+</p>
+
+<pre class="code">
+db.student.find({
+
+age:{
+$lt:22
+}
+
+});
+</pre>
+
+<p>
+
+Less than or equal to:
+
+</p>
+
+<pre class="code">
+db.student.find({
+
+age:{
+$lte:22
+}
+
+});
+</pre>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>17. Using $ne</h2>
+
+<p>
+
+Find all students except Rahul.
+
+</p>
+
+<pre class="code">
+db.student.find({
+
+name:{
+$ne:"Rahul"
+}
+
+});
+</pre>
+
+<div class="output">
+
+Returns every document except Rahul.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>18. Using $in and $nin</h2>
+
+<p>
+
+Find students whose course is either BCA or MCA.
+
+</p>
+
+<pre class="code">
+db.student.find({
+
+course:{
+$in:["BCA","MCA"]
+}
+
+});
+</pre>
+
+<p>
+
+Exclude BCA and MCA students.
+
+</p>
+
+<pre class="code">
+db.student.find({
+
+course:{
+$nin:["BCA","MCA"]
+}
+
+});
+</pre>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>19. Logical Operators</h2>
+
+<p>
+
+Logical operators combine multiple conditions.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Operator</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr><td>$and</td><td>Both conditions must be true</td></tr>
+
+<tr><td>$or</td><td>Any one condition must be true</td></tr>
+
+<tr><td>$not</td><td>Negates a condition</td></tr>
+
+<tr><td>$nor</td><td>Neither condition should be true</td></tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>20. Using $and and $or</h2>
+
+<p>
+
+Students whose age is greater than 20 and course is B.Tech.
+
+</p>
+
+<pre class="code">
+db.student.find({
+
+$and:[
+
+{age:{$gt:20}},
+
+{course:"B.Tech"}
+
+]
+
+});
+</pre>
+
+<p>
+
+Students whose course is BCA or MCA.
+
+</p>
+
+<pre class="code">
+db.student.find({
+
+$or:[
+
+{course:"BCA"},
+
+{course:"MCA"}
+
+]
+
+});
+</pre>
+
+<div class="note">
+
+<b>$and</b> → All conditions must be true.
+
+<b>$or</b> → Any one condition can be true.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>21. updateOne()</h2>
+
+<p>
+
+Updates the first matching document.
+
+</p>
+
+<pre class="code">
+db.student.updateOne(
+
+{name:"Rahul"},
+
+{
+
+$set:{
+age:25
+}
+
+}
+
+);
+</pre>
+
+<div class="output">
+
+Rahul's age becomes 25.
+
+</div>
+
+<div class="note">
+
+Always use <b>$set</b> when updating fields.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>22. updateMany()</h2>
+
+<p>
+
+Updates all matching documents.
+
+</p>
+
+<pre class="code">
+db.student.updateMany(
+
+{course:"BCA"},
+
+{
+
+$set:{
+
+course:"BCA Graduate"
+
+}
+
+}
+
+);
+</pre>
+
+<div class="output">
+
+All BCA students are updated.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Continue in Part 3 -->
+
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>23. replaceOne()</h2>
+
+<p>
+
+The <b>replaceOne()</b> method replaces an entire document except the <b>_id</b> field.
+
+</p>
+
+<pre class="code">
+db.student.replaceOne(
+
+{name:"Rahul"},
+
+{
+
+name:"Rahul",
+
+age:24,
+
+course:"MCA",
+
+city:"Delhi"
+
+}
+
+);
+</pre>
+
+<div class="note">
+
+Unlike <b>updateOne()</b>, replaceOne() replaces the complete document.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>24. deleteOne()</h2>
+
+<p>
+
+Deletes the first matching document.
+
+</p>
+
+<pre class="code">
+db.student.deleteOne({
+
+name:"Rahul"
+
+});
+</pre>
+
+<div class="output">
+
+One document deleted successfully.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>25. deleteMany()</h2>
+
+<p>
+
+Deletes all matching documents.
+
+</p>
+
+<pre class="code">
+db.student.deleteMany({
+
+course:"BCA"
+
+});
+</pre>
+
+<div class="output">
+
+All BCA student documents deleted.
+
+</div>
+
+<div class="note">
+
+Use deleteMany() carefully because multiple documents may be removed.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>26. sort()</h2>
+
+<p>
+
+The <b>sort()</b> method sorts documents.
+
+</p>
+
+<h5>Ascending Order</h5>
+
+<pre class="code">
+db.student.find().sort({
+
+age:1
+
+});
+</pre>
+
+<h5>Descending Order</h5>
+
+<pre class="code">
+db.student.find().sort({
+
+age:-1
+
+});
+</pre>
+
+<div class="note">
+
+<b>1</b> → Ascending
+
+<b>-1</b> → Descending
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>27. limit()</h2>
+
+<p>
+
+Limits the number of returned documents.
+
+</p>
+
+<pre class="code">
+db.student.find().limit(5);
+</pre>
+
+<div class="output">
+
+Returns only the first five documents.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>28. skip()</h2>
+
+<p>
+
+Skips the specified number of documents.
+
+</p>
+
+<pre class="code">
+db.student.find().skip(3);
+</pre>
+
+<div class="output">
+
+Skips the first three documents.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>29. Combining sort(), limit() and skip()</h2>
+
+<p>
+
+These methods are commonly used together for pagination.
+
+</p>
+
+<pre class="code">
+db.student.find()
+
+.sort({age:-1})
+
+.skip(5)
+
+.limit(5);
+</pre>
+
+<div class="output">
+
+Returns the next five highest-age students after skipping the first five.
+
+</div>
+
+<div class="note">
+
+Very common in web applications for pagination.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>30. countDocuments()</h2>
+
+<p>
+
+Returns the total number of matching documents.
+
+</p>
+
+<pre class="code">
+db.student.countDocuments();
+</pre>
+
+<p>
+
+Count only B.Tech students.
+
+</p>
+
+<pre class="code">
+db.student.countDocuments({
+
+course:"B.Tech"
+
+});
+</pre>
+
+<div class="output">
+
+Displays the total number of matching documents.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>31. distinct()</h2>
+
+<p>
+
+Returns unique values of a field.
+
+</p>
+
+<pre class="code">
+db.student.distinct("course");
+</pre>
+
+<div class="output">
+
+["BCA","B.Tech","MCA"]
+
+</div>
+
+<div class="note">
+
+Useful for finding unique categories or values.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>32. Complete CRUD Example</h2>
+
+<p>
+
+A simple CRUD workflow.
+
+</p>
+
+<pre class="code">
+// Insert
+
+db.student.insertOne({
+
+name:"Awanish",
+
+age:22,
+
+course:"B.Tech"
+
+});
+
+// Read
+
+db.student.find();
+
+// Update
+
+db.student.updateOne(
+
+{name:"Awanish"},
+
+{
+
+$set:{
+
+age:23
+
+}
+
+}
+
+);
+
+// Delete
+
+db.student.deleteOne({
+
+name:"Awanish"
+
+});
+</pre>
+
+<div class="note">
+
+Most beginner interview questions are based on this CRUD flow.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>33. Important Update Operators</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Operator</th>
+
+<th>Purpose</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr><td>$set</td><td>Set or update a field</td></tr>
+
+<tr><td>$unset</td><td>Remove a field</td></tr>
+
+<tr><td>$inc</td><td>Increase numeric value</td></tr>
+
+<tr><td>$mul</td><td>Multiply numeric value</td></tr>
+
+<tr><td>$rename</td><td>Rename a field</td></tr>
+
+<tr><td>$min</td><td>Update only if value is smaller</td></tr>
+
+<tr><td>$max</td><td>Update only if value is larger</td></tr>
+
+<tr><td>$currentDate</td><td>Insert current date/time</td></tr>
+
+</tbody>
+
+</table>
+
+<pre class="code">
+db.student.updateOne(
+
+{name:"Ravi"},
+
+{
+
+$inc:{
+
+age:1
+
+}
+
+}
+
+);
+</pre>
+
+</div>
+
+</div>
+
+<!-- Continue in Part 4 -->
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Practice Queries</h2>
+
+<ol>
+
+<li>Create a <b>student</b> collection.</li>
+
+<li>Insert one student document.</li>
+
+<li>Insert five student documents using <b>insertMany()</b>.</li>
+
+<li>Display all student documents.</li>
+
+<li>Display only one student document.</li>
+
+<li>Find students whose age is greater than 20.</li>
+
+<li>Find students whose age is less than 25.</li>
+
+<li>Find students whose course is B.Tech.</li>
+
+<li>Find students whose city is Delhi.</li>
+
+<li>Find students whose age is between 20 and 25.</li>
+
+<li>Find students using <b>$or</b>.</li>
+
+<li>Find students using <b>$and</b>.</li>
+
+<li>Find students using <b>$in</b>.</li>
+
+<li>Find students using <b>$nin</b>.</li>
+
+<li>Update one student's age.</li>
+
+<li>Update all BCA students.</li>
+
+<li>Increase age using <b>$inc</b>.</li>
+
+<li>Rename a field using <b>$rename</b>.</li>
+
+<li>Remove a field using <b>$unset</b>.</li>
+
+<li>Delete one document.</li>
+
+<li>Delete multiple documents.</li>
+
+<li>Sort students by age (Ascending).</li>
+
+<li>Sort students by age (Descending).</li>
+
+<li>Display only first three documents.</li>
+
+<li>Skip first five documents.</li>
+
+<li>Count all students.</li>
+
+<li>Count only B.Tech students.</li>
+
+<li>Display distinct courses.</li>
+
+<li>Create a complete CRUD example.</li>
+
+<li>Create your own Employee collection and perform CRUD operations.</li>
+
+</ol>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Interview Questions</h2>
+
+<ol>
+
+<li>What is MongoDB?</li>
+
+<li>What is a Collection?</li>
+
+<li>What is a Document?</li>
+
+<li>Difference between SQL and MongoDB?</li>
+
+<li>What is CRUD?</li>
+
+<li>Difference between insertOne() and insertMany()?</li>
+
+<li>Difference between find() and findOne()?</li>
+
+<li>What is Projection?</li>
+
+<li>What is the use of pretty()?</li>
+
+<li>What are Comparison Operators?</li>
+
+<li>Explain <b>$gt</b> and <b>$gte</b>.</li>
+
+<li>Difference between <b>$in</b> and <b>$nin</b>?</li>
+
+<li>Difference between <b>$and</b> and <b>$or</b>?</li>
+
+<li>Difference between updateOne() and updateMany()?</li>
+
+<li>Difference between updateOne() and replaceOne()?</li>
+
+<li>Difference between deleteOne() and deleteMany()?</li>
+
+<li>Difference between sort(1) and sort(-1)?</li>
+
+<li>What is the use of limit()?</li>
+
+<li>What is skip()?</li>
+
+<li>How is pagination implemented in MongoDB?</li>
+
+<li>What is countDocuments()?</li>
+
+<li>What is distinct()?</li>
+
+<li>What is the purpose of the <b>_id</b> field?</li>
+
+<li>Can MongoDB create a collection automatically?</li>
+
+<li>Which CRUD operation is used most frequently in applications?</li>
+
+</ol>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Assignment</h2>
+
+<ol>
+
+<li>Create a Student Management database.</li>
+
+<li>Create an Employee collection.</li>
+
+<li>Insert at least 15 employee documents.</li>
+
+<li>Practice every CRUD operation.</li>
+
+<li>Use all comparison operators.</li>
+
+<li>Use all logical operators.</li>
+
+<li>Practice all update operators.</li>
+
+<li>Sort data in ascending and descending order.</li>
+
+<li>Use limit() and skip() together for pagination.</li>
+
+<li>Solve all 30 practice queries without referring to notes.</li>
+
+</ol>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>MongoDB CRUD Cheat Sheet</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Command</th>
+
+<th>Purpose</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr><td>insertOne()</td><td>Insert one document</td></tr>
+
+<tr><td>insertMany()</td><td>Insert multiple documents</td></tr>
+
+<tr><td>find()</td><td>Retrieve all matching documents</td></tr>
+
+<tr><td>findOne()</td><td>Retrieve first matching document</td></tr>
+
+<tr><td>pretty()</td><td>Display formatted output</td></tr>
+
+<tr><td>Projection</td><td>Select required fields</td></tr>
+
+<tr><td>$gt</td><td>Greater than</td></tr>
+
+<tr><td>$gte</td><td>Greater than or equal</td></tr>
+
+<tr><td>$lt</td><td>Less than</td></tr>
+
+<tr><td>$lte</td><td>Less than or equal</td></tr>
+
+<tr><td>$eq</td><td>Equal to</td></tr>
+
+<tr><td>$ne</td><td>Not equal to</td></tr>
+
+<tr><td>$in</td><td>Match any value</td></tr>
+
+<tr><td>$nin</td><td>Not match values</td></tr>
+
+<tr><td>$and</td><td>Logical AND</td></tr>
+
+<tr><td>$or</td><td>Logical OR</td></tr>
+
+<tr><td>updateOne()</td><td>Update first matching document</td></tr>
+
+<tr><td>updateMany()</td><td>Update all matching documents</td></tr>
+
+<tr><td>replaceOne()</td><td>Replace entire document</td></tr>
+
+<tr><td>deleteOne()</td><td>Delete one document</td></tr>
+
+<tr><td>deleteMany()</td><td>Delete multiple documents</td></tr>
+
+<tr><td>sort()</td><td>Sort documents</td></tr>
+
+<tr><td>limit()</td><td>Limit returned documents</td></tr>
+
+<tr><td>skip()</td><td>Skip documents</td></tr>
+
+<tr><td>countDocuments()</td><td>Count matching documents</td></tr>
+
+<tr><td>distinct()</td><td>Return unique values</td></tr>
+
+<tr><td>$set</td><td>Update field value</td></tr>
+
+<tr><td>$unset</td><td>Remove a field</td></tr>
+
+<tr><td>$inc</td><td>Increment numeric value</td></tr>
+
+<tr><td>$rename</td><td>Rename field</td></tr>
+
+<tr><td>$currentDate</td><td>Insert current date/time</td></tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Summary</h2>
+
+<ul>
+
+<li>CRUD stands for <b>Create, Read, Update, and Delete</b>.</li>
+
+<li><b>insertOne()</b> and <b>insertMany()</b> are used to insert documents.</li>
+
+<li><b>find()</b> and <b>findOne()</b> retrieve documents from a collection.</li>
+
+<li>Projection helps return only the required fields.</li>
+
+<li>Comparison and logical operators are used to filter data.</li>
+
+<li><b>updateOne()</b>, <b>updateMany()</b>, and <b>replaceOne()</b> modify documents.</li>
+
+<li><b>deleteOne()</b> and <b>deleteMany()</b> remove documents.</li>
+
+<li><b>sort()</b>, <b>limit()</b>, and <b>skip()</b> are commonly used for pagination.</li>
+
+<li><b>countDocuments()</b> counts matching documents, while <b>distinct()</b> returns unique values.</li>
+
+<li>Mastering CRUD operations is the foundation for learning MongoDB Aggregation, Indexing, and Mongoose.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
