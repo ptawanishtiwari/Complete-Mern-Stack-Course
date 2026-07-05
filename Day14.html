@@ -1,0 +1,2019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 13 - JavaScript DOM (Document Object Model)</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:#f4f7fb;
+}
+
+.hero{
+background:linear-gradient(135deg,#2563eb,#0f172a);
+color:white;
+padding:70px 0;
+}
+
+.sidebar{
+position:sticky;
+top:20px;
+}
+
+.section-card{
+border-radius:20px;
+margin-bottom:25px;
+}
+
+.code{
+background:#111827;
+color:#22c55e;
+padding:15px;
+border-radius:10px;
+overflow:auto;
+}
+
+.output{
+background:#eef2ff;
+padding:12px;
+border-left:4px solid #2563eb;
+border-radius:8px;
+margin-top:10px;
+}
+
+.note{
+background:#fff8dc;
+border-left:5px solid orange;
+padding:12px;
+border-radius:8px;
+margin-top:15px;
+}
+
+h2{
+color:#2563eb;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section class="hero">
+
+<div class="container">
+
+<h1>Day 13 : JavaScript DOM (Document Object Model)</h1>
+
+<p class="lead">
+
+Complete Notes with Theory, Examples, Interview Questions and Practice Programs.
+
+</p>
+
+</div>
+
+</section>
+
+<div class="container my-5">
+
+<div class="row">
+
+<div class="col-lg-3">
+
+<div class="card sidebar">
+
+<div class="card-body">
+
+<h5>Topics</h5>
+
+<ul>
+
+<li>Introduction to DOM</li>
+
+<li>DOM Tree</li>
+
+<li>Selecting Elements</li>
+
+<li>getElementById()</li>
+
+<li>getElementsByClassName()</li>
+
+<li>getElementsByTagName()</li>
+
+<li>querySelector()</li>
+
+<li>querySelectorAll()</li>
+
+<li>innerHTML</li>
+
+<li>innerText</li>
+
+<li>textContent</li>
+
+<li>Changing CSS</li>
+
+<li>classList</li>
+
+<li>Attributes</li>
+
+<li>Creating Elements</li>
+
+<li>appendChild()</li>
+
+<li>prepend()</li>
+
+<li>remove()</li>
+
+<li>replaceChild()</li>
+
+<li>DOM Traversing</li>
+
+<li>Events</li>
+
+<li>Event Listeners</li>
+
+<li>Practice Programs</li>
+
+<li>Interview Questions</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-9">
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>1. What is DOM?</h2>
+
+<p>
+
+DOM stands for <b>Document Object Model</b>.
+
+It is a programming interface provided by browsers that allows JavaScript to access and manipulate HTML documents.
+
+</p>
+
+<p>
+
+Whenever a web page loads, the browser converts the HTML document into a tree-like structure called the <b>DOM Tree</b>.
+
+JavaScript can use this tree to add, modify, delete, or update HTML elements dynamically.
+
+</p>
+
+<pre class="code">
+<!DOCTYPE html>
+
+<html>
+
+<body>
+
+<h1>Hello</h1>
+
+<p>Welcome</p>
+
+</body>
+
+</html>
+</pre>
+
+<div class="note">
+
+DOM acts as a bridge between HTML and JavaScript.
+
+Without DOM, JavaScript cannot modify webpage content.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>2. DOM Tree Structure</h2>
+
+<p>
+
+The browser converts HTML into nodes.
+
+Every tag becomes an object.
+
+</p>
+
+<pre class="code">
+Document
+
+|
+
+html
+
+|
+
+|----------------|
+
+head body
+
+|
+
+|-----------|
+
+h1 p
+</pre>
+
+<p>
+
+Everything inside HTML becomes a node.
+
+</p>
+
+<div class="note">
+
+Document is the root object.
+
+Every HTML element is represented as a node.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>3. Selecting Elements</h2>
+
+<p>
+
+Before changing any HTML element, JavaScript must first select it.
+
+</p>
+
+<p>
+
+There are multiple ways to select elements.
+
+</p>
+
+<ul>
+
+<li>getElementById()</li>
+
+<li>getElementsByClassName()</li>
+
+<li>getElementsByTagName()</li>
+
+<li>querySelector()</li>
+
+<li>querySelectorAll()</li>
+
+</ul>
+
+<div class="note">
+
+Selecting elements is the first step in every DOM manipulation.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>4. getElementById()</h2>
+
+<p>
+
+Selects an element using its unique id.
+
+</p>
+
+<pre class="code">
+<h1 id="title">
+
+Welcome
+
+</h1>
+
+<script>
+
+let heading=document.getElementById("title");
+
+console.log(heading);
+
+</script>
+</pre>
+
+<div class="output">
+
+Output
+
+<pre>
+<h1 id="title">Welcome</h1>
+</pre>
+
+</div>
+
+<div class="note">
+
+ID must always be unique.
+
+Only one element should have the same ID.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>5. getElementsByClassName()</h2>
+
+<p>
+
+Returns all elements having the same class name.
+
+</p>
+
+<pre class="code">
+<p class="demo">HTML</p>
+
+<p class="demo">CSS</p>
+
+<p class="demo">JavaScript</p>
+
+<script>
+
+let data=document.getElementsByClassName("demo");
+
+console.log(data);
+
+</script>
+</pre>
+
+<div class="output">
+
+Output
+
+<pre>
+
+HTMLCollection(3)
+
+</pre>
+
+</div>
+
+<div class="note">
+
+Returns an HTMLCollection, not a single element.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>6. getElementsByTagName()</h2>
+
+<p>
+
+Returns all elements with a specific HTML tag.
+
+</p>
+
+<pre class="code">
+<p>One</p>
+
+<p>Two</p>
+
+<p>Three</p>
+
+<script>
+
+let para=document.getElementsByTagName("p");
+
+console.log(para);
+
+</script>
+</pre>
+
+<div class="output">
+
+<pre>
+
+HTMLCollection(3)
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>7. querySelector()</h2>
+
+<p>
+
+Returns the first matching element.
+
+</p>
+
+<pre class="code">
+<p class="demo">
+
+Hello
+
+</p>
+
+<script>
+
+let element=document.querySelector(".demo");
+
+console.log(element);
+
+</script>
+</pre>
+
+<div class="note">
+
+Supports CSS selectors.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>8. querySelectorAll()</h2>
+
+<p>
+
+Returns all matching elements.
+
+</p>
+
+<pre class="code">
+<p class="demo">A</p>
+
+<p class="demo">B</p>
+
+<p class="demo">C</p>
+
+<script>
+
+let elements=document.querySelectorAll(".demo");
+
+console.log(elements);
+
+</script>
+</pre>
+
+<div class="output">
+
+<pre>
+
+NodeList(3)
+
+</pre>
+
+</div>
+
+<div class="note">
+
+Unlike HTMLCollection, NodeList supports forEach().
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>9. innerHTML</h2>
+
+<p>
+
+Reads or changes HTML content.
+
+</p>
+
+<pre class="code">
+<h1 id="title">
+
+Welcome
+
+</h1>
+
+<script>
+
+document.getElementById("title").innerHTML="Hello JavaScript";
+
+</script>
+</pre>
+
+<div class="note">
+
+innerHTML can insert HTML tags also.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>10. innerText</h2>
+
+<p>
+
+Changes only visible text.
+
+</p>
+
+<pre class="code">
+document.getElementById("title").innerText="Hello World";
+</pre>
+
+<div class="note">
+
+Difference:
+
+innerHTML → HTML + Text
+
+innerText → Only visible text
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Continue in Part 2 -->
+```
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>11. textContent</h2>
+
+<p>
+
+The <b>textContent</b> property gets or sets all text inside an element, including hidden text.
+
+</p>
+
+<pre class="code">
+<h2 id="heading">Welcome</h2>
+
+<script>
+
+document.getElementById("heading").textContent="Learning DOM";
+
+</script>
+</pre>
+
+<div class="note">
+
+<b>Difference:</b>
+
+innerHTML → Reads HTML + Text
+
+innerText → Reads only visible text
+
+textContent → Reads all text including hidden text
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>12. Changing CSS Styles</h2>
+
+<p>
+
+JavaScript can dynamically change CSS properties.
+
+</p>
+
+<pre class="code">
+<h1 id="title">
+
+Hello
+
+</h1>
+
+<script>
+
+let heading=document.getElementById("title");
+
+heading.style.color="red";
+
+heading.style.backgroundColor="yellow";
+
+heading.style.fontSize="40px";
+
+</script>
+</pre>
+
+<div class="output">
+
+Output
+
+<pre>
+
+Text becomes Red with Yellow background.
+
+</pre>
+
+</div>
+
+<div class="note">
+
+All CSS properties are written in camelCase.
+
+Example:
+
+background-color → backgroundColor
+
+font-size → fontSize
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>13. classList</h2>
+
+<p>
+
+The classList property is used to add, remove or toggle CSS classes.
+
+</p>
+
+<pre class="code">
+<div id="box"></div>
+
+<script>
+
+let box=document.getElementById("box");
+
+box.classList.add("active");
+
+box.classList.remove("active");
+
+box.classList.toggle("active");
+
+</script>
+</pre>
+
+<div class="note">
+
+Useful Methods
+
+• add()
+
+• remove()
+
+• toggle()
+
+• contains()
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>14. getAttribute()</h2>
+
+<p>
+
+Returns the value of an attribute.
+
+</p>
+
+<pre class="code">
+<img id="img"
+
+src="cat.jpg">
+
+<script>
+
+let image=document.getElementById("img");
+
+console.log(image.getAttribute("src"));
+
+</script>
+</pre>
+
+<div class="output">
+
+<pre>
+
+cat.jpg
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>15. setAttribute()</h2>
+
+<p>
+
+Creates or changes an attribute.
+
+</p>
+
+<pre class="code">
+<img id="img">
+
+<script>
+
+let image=document.getElementById("img");
+
+image.setAttribute("src","dog.jpg");
+
+</script>
+</pre>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>16. removeAttribute()</h2>
+
+<p>
+
+Removes an attribute from an element.
+
+</p>
+
+<pre class="code">
+<input id="txt"
+
+disabled>
+
+<script>
+
+document.getElementById("txt")
+
+.removeAttribute("disabled");
+
+</script>
+</pre>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>17. createElement()</h2>
+
+<p>
+
+Creates a new HTML element.
+
+</p>
+
+<pre class="code">
+let heading=document.createElement("h1");
+
+heading.innerText="Hello DOM";
+
+console.log(heading);
+</pre>
+
+<div class="note">
+
+The element is created in memory only.
+
+To display it, append it to the document.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>18. appendChild()</h2>
+
+<p>
+
+Adds a new child element at the end.
+
+</p>
+
+<pre class="code">
+<div id="container"></div>
+
+<script>
+
+let h1=document.createElement("h1");
+
+h1.innerText="JavaScript DOM";
+
+document.getElementById("container")
+
+.appendChild(h1);
+
+</script>
+</pre>
+
+<div class="output">
+
+<pre>
+
+<div>
+
+<h1>JavaScript DOM</h1>
+
+</div>
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>19. prepend()</h2>
+
+<p>
+
+Adds an element at the beginning.
+
+</p>
+
+<pre class="code">
+let para=document.createElement("p");
+
+para.innerText="First Paragraph";
+
+document.body.prepend(para);
+</pre>
+
+<div class="note">
+
+prepend() inserts before existing content.
+
+appendChild() inserts after existing content.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>20. remove() & removeChild()</h2>
+
+<p>
+
+Used to delete elements.
+
+</p>
+
+<h5>remove()</h5>
+
+<pre class="code">
+document.getElementById("box").remove();
+</pre>
+
+<h5>removeChild()</h5>
+
+<pre class="code">
+let parent=document.getElementById("container");
+
+let child=document.getElementById("title");
+
+parent.removeChild(child);
+</pre>
+
+<div class="note">
+
+remove() is the modern and easier method.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Continue in Part 3 -->
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>21. replaceChild()</h2>
+
+<p>
+
+The <b>replaceChild()</b> method replaces an existing child element with a new element.
+
+</p>
+
+<pre class="code">
+<div id="parent">
+
+<h2 id="old">Old Heading</h2>
+
+</div>
+
+<script>
+
+let parent=document.getElementById("parent");
+
+let newHeading=document.createElement("h2");
+
+newHeading.innerText="New Heading";
+
+let oldHeading=document.getElementById("old");
+
+parent.replaceChild(newHeading,oldHeading);
+
+</script>
+</pre>
+
+<div class="note">
+
+Syntax
+
+parent.replaceChild(newChild, oldChild);
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>22. DOM Traversing</h2>
+
+<p>
+
+DOM Traversing means moving from one element to another inside the DOM tree.
+
+</p>
+
+<ul>
+
+<li>parentElement</li>
+
+<li>children</li>
+
+<li>firstElementChild</li>
+
+<li>lastElementChild</li>
+
+<li>nextElementSibling</li>
+
+<li>previousElementSibling</li>
+
+</ul>
+
+<div class="note">
+
+DOM Traversing helps navigate through HTML elements without selecting them again.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>23. parentElement</h2>
+
+<p>
+
+Returns the parent element.
+
+</p>
+
+<pre class="code">
+<div id="parent">
+
+<p id="child">
+
+Hello
+
+</p>
+
+</div>
+
+<script>
+
+let child=document.getElementById("child");
+
+console.log(child.parentElement);
+
+</script>
+</pre>
+
+<div class="output">
+
+<pre>
+<div id="parent">...</div>
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>24. children</h2>
+
+<p>
+
+Returns all child elements.
+
+</p>
+
+<pre class="code">
+<div id="box">
+
+<h2>HTML</h2>
+
+<h2>CSS</h2>
+
+<h2>JavaScript</h2>
+
+</div>
+
+<script>
+
+let box = document.getElementById("box");
+
+console.log(box.children);
+
+</script>
+</pre>
+
+<div class="output">
+
+<pre>
+
+HTMLCollection(3)
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>25. firstElementChild & lastElementChild</h2>
+
+<p>
+
+Returns first and last child elements.
+
+</p>
+
+<pre class="code">
+let box=document.getElementById("box");
+
+console.log(box.firstElementChild);
+
+console.log(box.lastElementChild);
+</pre>
+
+<div class="output">
+
+<pre>
+
+<h2>HTML</h2>
+
+<h2>JavaScript</h2>
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>26. nextElementSibling</h2>
+
+<p>
+
+Returns the next sibling element.
+
+</p>
+
+<pre class="code">
+let first=document.getElementById("first");
+
+console.log(first.nextElementSibling);
+</pre>
+
+<div class="note">
+
+Moves forward in the DOM tree.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>27. previousElementSibling</h2>
+
+<p>
+
+Returns the previous sibling element.
+
+</p>
+
+<pre class="code">
+let second=document.getElementById("second");
+
+console.log(second.previousElementSibling);
+</pre>
+
+<div class="note">
+
+Moves backward in the DOM tree.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>28. Introduction to Events</h2>
+
+<p>
+
+Events are actions performed by the user or browser.
+
+</p>
+
+<p>
+
+Examples include:
+
+</p>
+
+<ul>
+
+<li>Click</li>
+
+<li>Double Click</li>
+
+<li>Mouse Over</li>
+
+<li>Keyboard Press</li>
+
+<li>Submit</li>
+
+<li>Resize</li>
+
+</ul>
+
+<div class="note">
+
+JavaScript responds to user actions through events.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>29. onclick Event</h2>
+
+<p>
+
+The onclick event executes when a user clicks an element.
+
+</p>
+
+<pre class="code">
+<button onclick="showMessage()">
+
+Click Me
+
+</button>
+
+<script>
+
+function showMessage(){
+
+alert("Button Clicked");
+
+}
+
+</script>
+</pre>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>30. addEventListener()</h2>
+
+<p>
+
+The recommended way to attach events.
+
+</p>
+
+<pre class="code">
+<button id="btn">
+
+Click
+
+</button>
+
+<script>
+
+let btn=document.getElementById("btn");
+
+btn.addEventListener("click",function(){
+
+alert("Button Clicked");
+
+});
+
+</script>
+</pre>
+
+<div class="note">
+
+Advantages
+
+✔ Multiple events on same element
+
+✔ Cleaner code
+
+✔ Preferred in modern JavaScript
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Continue in Part 4 -->
+ <!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>31. Mouse Events</h2>
+
+<p>
+
+Mouse events occur when the user interacts with the mouse.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-primary">
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr><td>click</td><td>Single Mouse Click</td></tr>
+
+<tr><td>dblclick</td><td>Double Mouse Click</td></tr>
+
+<tr><td>mouseover</td><td>Mouse enters element</td></tr>
+
+<tr><td>mouseout</td><td>Mouse leaves element</td></tr>
+
+<tr><td>mousedown</td><td>Mouse button pressed</td></tr>
+
+<tr><td>mouseup</td><td>Mouse button released</td></tr>
+
+<tr><td>mousemove</td><td>Mouse movement</td></tr>
+
+</tbody>
+
+</table>
+
+<pre class="code">
+let btn=document.getElementById("btn");
+
+btn.addEventListener("mouseover",function(){
+
+console.log("Mouse Entered");
+
+});
+</pre>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>32. Keyboard Events</h2>
+
+<p>
+
+Keyboard events occur whenever the user presses a key.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-primary">
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr><td>keydown</td><td>Key Pressed</td></tr>
+
+<tr><td>keyup</td><td>Key Released</td></tr>
+
+<tr><td>keypress</td><td>Key Typed (Deprecated)</td></tr>
+
+</tbody>
+
+</table>
+
+<pre class="code">
+let input=document.getElementById("txt");
+
+input.addEventListener("keyup",function(){
+
+console.log("Typing...");
+
+});
+</pre>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>33. Form Events</h2>
+
+<p>
+
+Form events are triggered while interacting with forms.
+
+</p>
+
+<ul>
+
+<li>submit</li>
+
+<li>change</li>
+
+<li>focus</li>
+
+<li>blur</li>
+
+<li>input</li>
+
+</ul>
+
+<pre class="code">
+let form=document.getElementById("myForm");
+
+form.addEventListener("submit",function(){
+
+alert("Form Submitted");
+
+});
+</pre>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>34. Event Object</h2>
+
+<p>
+
+Every event automatically provides an Event Object.
+
+</p>
+
+<pre class="code">
+document.getElementById("btn")
+
+.addEventListener("click",function(event){
+
+console.log(event);
+
+});
+</pre>
+
+<div class="note">
+
+Common Properties
+
+event.target
+
+event.type
+
+event.preventDefault()
+
+event.stopPropagation()
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>35. Event Bubbling</h2>
+
+<p>
+
+The event starts from the target element and moves upward.
+
+</p>
+
+<pre class="code">
+Child
+
+↓
+
+Parent
+
+↓
+
+Body
+
+↓
+
+Document
+</pre>
+
+<div class="note">
+
+Default behavior in JavaScript.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>36. Event Capturing</h2>
+
+<p>
+
+The event starts from the document and moves downward.
+
+</p>
+
+<pre class="code">
+Document
+
+↓
+
+Body
+
+↓
+
+Parent
+
+↓
+
+Child
+</pre>
+
+<div class="note">
+
+Enable capturing by passing true.
+
+</div>
+
+<pre class="code">
+element.addEventListener("click",demo,true);
+</pre>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>37. Event Delegation</h2>
+
+<p>
+
+Attach one event listener to a parent instead of multiple child elements.
+
+</p>
+
+<pre class="code">
+<ul id="menu">
+
+<li>Home</li>
+
+<li>About</li>
+
+<li>Contact</li>
+
+</ul>
+
+<script>
+
+document.getElementById("menu")
+
+.addEventListener("click",function(e){
+
+console.log(e.target.innerText);
+
+});
+
+</script>
+</pre>
+
+<div class="note">
+
+Improves performance when many child elements exist.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Practice Programs</h2>
+
+<ol>
+
+<li>Change heading text using DOM.</li>
+
+<li>Change paragraph color.</li>
+
+<li>Create a button that changes background color.</li>
+
+<li>Create a digital counter.</li>
+
+<li>Create a theme changer.</li>
+
+<li>Create a show/hide password button.</li>
+
+<li>Display current date and time.</li>
+
+<li>Create a character counter.</li>
+
+<li>Create an image changer.</li>
+
+<li>Create a simple to-do list.</li>
+
+<li>Create a live clock.</li>
+
+<li>Increase/decrease font size.</li>
+
+<li>Generate random background color.</li>
+
+<li>Create a traffic light simulation.</li>
+
+<li>Create a calculator UI using DOM.</li>
+
+<li>Create a simple quiz application.</li>
+
+<li>Validate login form.</li>
+
+<li>Create a BMI calculator.</li>
+
+<li>Create a multiplication table generator.</li>
+
+<li>Create a notes application.</li>
+
+</ol>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Interview Questions</h2>
+
+<ol>
+
+<li>What is the DOM?</li>
+
+<li>Difference between HTML and DOM?</li>
+
+<li>Difference between innerHTML, innerText and textContent?</li>
+
+<li>Difference between querySelector() and querySelectorAll()?</li>
+
+<li>Difference between HTMLCollection and NodeList?</li>
+
+<li>Difference between getElementById() and querySelector()?</li>
+
+<li>Difference between appendChild() and append()?</li>
+
+<li>Difference between remove() and removeChild()?</li>
+
+<li>What is Event Bubbling?</li>
+
+<li>What is Event Capturing?</li>
+
+<li>What is Event Delegation?</li>
+
+<li>Difference between click and dblclick?</li>
+
+<li>What is preventDefault()?</li>
+
+<li>What is stopPropagation()?</li>
+
+<li>How do you create elements dynamically?</li>
+
+<li>How do you remove an element?</li>
+
+<li>How do you change CSS using JavaScript?</li>
+
+<li>How do you add multiple classes?</li>
+
+<li>What is addEventListener()?</li>
+
+<li>Why is addEventListener() preferred over onclick?</li>
+
+</ol>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Assignment</h2>
+
+<ol>
+
+<li>Solve all 20 DOM practice programs.</li>
+
+<li>Create a complete To-Do List application.</li>
+
+<li>Create a Dark/Light Theme Switcher.</li>
+
+<li>Create an Image Slider.</li>
+
+<li>Create a Calculator.</li>
+
+<li>Create a Stopwatch.</li>
+
+<li>Create a Digital Clock.</li>
+
+<li>Create a Form Validation project.</li>
+
+<li>Create a Color Picker.</li>
+
+<li>Create a Student Registration Form using DOM.</li>
+
+</ol>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>JavaScript DOM Cheat Sheet</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>Method / Property</th>
+
+<th>Purpose</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr><td>getElementById()</td><td>Select element by ID</td></tr>
+
+<tr><td>getElementsByClassName()</td><td>Select by Class</td></tr>
+
+<tr><td>getElementsByTagName()</td><td>Select by Tag</td></tr>
+
+<tr><td>querySelector()</td><td>First matching element</td></tr>
+
+<tr><td>querySelectorAll()</td><td>All matching elements</td></tr>
+
+<tr><td>innerHTML</td><td>Read/Write HTML</td></tr>
+
+<tr><td>innerText</td><td>Visible text only</td></tr>
+
+<tr><td>textContent</td><td>All text</td></tr>
+
+<tr><td>style</td><td>Modify CSS</td></tr>
+
+<tr><td>classList</td><td>Manage CSS Classes</td></tr>
+
+<tr><td>getAttribute()</td><td>Read attribute</td></tr>
+
+<tr><td>setAttribute()</td><td>Create/Update attribute</td></tr>
+
+<tr><td>removeAttribute()</td><td>Delete attribute</td></tr>
+
+<tr><td>createElement()</td><td>Create element</td></tr>
+
+<tr><td>appendChild()</td><td>Add child</td></tr>
+
+<tr><td>prepend()</td><td>Insert first child</td></tr>
+
+<tr><td>replaceChild()</td><td>Replace child</td></tr>
+
+<tr><td>remove()</td><td>Delete element</td></tr>
+
+<tr><td>addEventListener()</td><td>Attach Events</td></tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ======================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Summary</h2>
+
+<ul>
+
+<li>DOM stands for <b>Document Object Model</b>.</li>
+
+<li>JavaScript uses the DOM to access and manipulate HTML elements.</li>
+
+<li>Elements can be selected using ID, class, tag name, or CSS selectors.</li>
+
+<li>DOM allows changing content, styles, attributes, and structure dynamically.</li>
+
+<li>Events make web pages interactive by responding to user actions.</li>
+
+<li><b>addEventListener()</b> is the preferred way to handle events.</li>
+
+<li>Event Bubbling, Capturing, and Delegation are essential interview topics.</li>
+
+<li>Strong DOM knowledge is the foundation for learning React.js and modern frontend development.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
