@@ -9,7 +9,8 @@ const allowedUsers = [
     "rrai95762@gmail.com",
     "babita250708@gmail.com",
     "ayushipatel7054190824@gmail.com",
-    "ptawanishtiwari@gmail.com"
+    "ptawanishtiwari@gmail.com",
+    "adityakumarsingh950899@gmail.com"
 ];
 
 
