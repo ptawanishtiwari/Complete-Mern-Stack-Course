@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MERN LMS Dashboard</title>
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="./css/dashboard.css">
+
+</head>
+
+<body onload="protectPage();showUser();">
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
+
+    <div class="container-fluid">
+
+        <button class="btn btn-dark d-lg-none me-2" id="menuBtn">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+        <a class="navbar-brand fw-bold" href="#">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            MERN LMS
+
+        </a>
+
+        <form class="d-none d-md-flex mx-auto w-50">
+
+            <input
+                type="search"
+                class="form-control"
+                placeholder="Search lesson...">
+
+        </form>
+
+        <div class="d-flex align-items-center">
+
+            <span id="loggedUser" class="text-white me-3"></span>
+
+            <button class="btn btn-success btn-sm" onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- ================= MAIN ================= -->
+
+<div class="wrapper">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <h5 class="text-success mb-4">
+
+            Course Content
+
+        </h5>
+
+        <ul>
+
+            <li class="active">
+
+                <i class="fa-solid fa-circle-play"></i>
+
+                Day 1 - Introduction
+
+            </li>
+
+            <li>
+
+                <i class="fa-solid fa-circle-play"></i>
+
+                Day 2 - Networking
+
+            </li>
+
+            <li>
+
+                <i class="fa-solid fa-circle-play"></i>
+
+                Day 3 - HTML
+
+            </li>
+
+            <li>
+
+                <i class="fa-solid fa-circle-play"></i>
+
+                Day 4 - CSS
+
+            </li>
+
+            <li>
+
+                <i class="fa-solid fa-circle-play"></i>
+
+                Day 5 - JavaScript
+
+            </li>
+
+            <li>
+
+                <i class="fa-solid fa-circle-play"></i>
+
+                Day 6 - React
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="content">
+
+        <!-- Welcome Banner -->
+
+        <section class="welcome">
+
+            <h2>
+
+                Welcome Back 👋
+
+            </h2>
+
+            <p>
+
+                Continue your MERN Stack Journey
+
+            </p>
+
+            <div class="progress mt-3">
+
+                <div
+                    class="progress-bar bg-success"
+                    style="width:42%">
+
+                    42%
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Video Section -->
+
+        <section class="video-card">
+
+            <video
+                controls
+                controlsList="nodownload"
+                width="100%"
+                poster="./images/poster.jpg">
+
+                <source src="./videos/day1.mp4" type="video/mp4">
+
+            </video>
+
+            <h3 class="mt-4">
+
+                Day 1 : Introduction to MERN Stack
+
+            </h3>
+
+            <p>
+
+                Duration : 1 Hour 20 Minutes
+
+            </p>
+
+        </section>
+
+        <!-- Previous Next -->
+
+        <div class="lesson-nav">
+
+            <button class="btn btn-outline-success">
+
+                ← Previous Lesson
+
+            </button>
+
+            <button class="btn btn-success">
+
+                Next Lesson →
+
+            </button>
+
+        </div>
+
+        <!-- Today's Topics -->
+
+        <section class="topics">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body">
+
+                    <h4>
+
+                        Today's Learning
+
+                    </h4>
+
+                    <ul>
+
+                        <li>Introduction</li>
+
+                        <li>Frontend vs Backend</li>
+
+                        <li>Node.js Overview</li>
+
+                        <li>React Overview</li>
+
+                        <li>MongoDB Overview</li>
+
+                        <li>Career Roadmap</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Resources -->
+
+        <section class="resources">
+
+            <h3>
+
+                Resources
+
+            </h3>
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <div class="resource">
+
+                        <i class="fa-solid fa-file-pdf"></i>
+
+                        <h5>
+
+                            Notes
+
+                        </h5>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="resource">
+
+                        <i class="fa-solid fa-code"></i>
+
+                        <h5>
+
+                            Source Code
+
+                        </h5>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="resource">
+
+                        <i class="fa-solid fa-file-powerpoint"></i>
+
+                        <h5>
+
+                            PPT
+
+                        </h5>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="resource">
+
+                        <i class="fa-solid fa-book"></i>
+
+                        <h5>
+
+                            Assignment
+
+                        </h5>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="./js/auth.js"></script>
+<script src="./js/dashboard.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,468 @@
+/* ===========================
+   Google Font
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:#f5f7fb;
+    color:#1f2937;
+
+}
+
+/* ===========================
+   Navbar
+=========================== */
+
+.navbar{
+
+    height:70px;
+    padding:0 20px;
+    background:#0f172a !important;
+
+}
+
+.navbar-brand{
+
+    font-size:1.4rem;
+    font-weight:700;
+
+}
+
+.navbar input{
+
+    border-radius:30px;
+    padding:10px 20px;
+
+}
+
+#loggedUser{
+
+    font-weight:500;
+
+}
+
+/* ===========================
+   Layout
+=========================== */
+
+.wrapper{
+
+    display:flex;
+    min-height:calc(100vh - 70px);
+
+}
+
+/* ===========================
+   Sidebar
+=========================== */
+
+.sidebar{
+
+    width:280px;
+    background:white;
+
+    padding:25px;
+
+    border-right:1px solid #e5e7eb;
+
+    overflow-y:auto;
+
+    transition:.3s;
+
+}
+
+.sidebar h5{
+
+    font-weight:700;
+
+}
+
+.sidebar ul{
+
+    list-style:none;
+    padding-left:0;
+
+}
+
+.sidebar li{
+
+    padding:14px 18px;
+    margin-bottom:10px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    display:flex;
+    align-items:center;
+
+}
+
+.sidebar li i{
+
+    margin-right:12px;
+    color:#16a34a;
+
+}
+
+.sidebar li:hover{
+
+    background:#dcfce7;
+
+}
+
+.sidebar .active{
+
+    background:#16a34a;
+    color:white;
+
+}
+
+.sidebar .active i{
+
+    color:white;
+
+}
+
+/* ===========================
+   Main Content
+=========================== */
+
+.content{
+
+    flex:1;
+
+    padding:30px;
+
+}
+
+/* ===========================
+   Welcome Card
+=========================== */
+
+.welcome{
+
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+
+    color:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+}
+
+.welcome h2{
+
+    font-weight:700;
+
+}
+
+.progress{
+
+    height:12px;
+    border-radius:20px;
+    overflow:hidden;
+
+}
+
+/* ===========================
+   Video Card
+=========================== */
+
+.video-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    margin-bottom:25px;
+
+}
+
+.video-card video{
+
+    width:100%;
+    border-radius:15px;
+    background:black;
+    aspect-ratio:16/9;
+
+}
+
+.video-card h3{
+
+    margin-top:20px;
+    font-weight:600;
+
+}
+
+/* ===========================
+   Navigation Buttons
+=========================== */
+
+.lesson-nav{
+
+    display:flex;
+    justify-content:space-between;
+
+    margin-bottom:30px;
+
+}
+
+.lesson-nav button{
+
+    border-radius:30px;
+    padding:10px 25px;
+
+}
+
+/* ===========================
+   Topics
+=========================== */
+
+.topics .card{
+
+    border:none;
+    border-radius:18px;
+
+    margin-bottom:30px;
+
+}
+
+.topics ul{
+
+    padding-left:20px;
+
+}
+
+.topics li{
+
+    margin-bottom:12px;
+
+}
+
+/* ===========================
+   Resources
+=========================== */
+
+.resources{
+
+    margin-top:20px;
+
+}
+
+.resources h3{
+
+    font-weight:700;
+    margin-bottom:20px;
+
+}
+
+.resource{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:35px 20px;
+
+    text-align:center;
+
+    transition:.3s;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    margin-bottom:20px;
+
+}
+
+.resource:hover{
+
+    transform:translateY(-8px);
+
+    background:#16a34a;
+
+    color:white;
+
+}
+
+.resource i{
+
+    font-size:45px;
+
+    margin-bottom:15px;
+
+}
+
+/* ===========================
+   Scrollbar
+=========================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#16a34a;
+    border-radius:20px;
+
+}
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media(max-width:992px){
+
+.sidebar{
+
+    position:fixed;
+
+    left:-300px;
+    top:70px;
+
+    height:100vh;
+
+    z-index:999;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+
+}
+
+.sidebar.show{
+
+    left:0;
+
+}
+
+.content{
+
+    width:100%;
+    padding:20px;
+
+}
+
+.navbar form{
+
+    display:none !important;
+
+}
+
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media(max-width:768px){
+
+.content{
+
+    padding:15px;
+
+}
+
+.welcome{
+
+    padding:20px;
+
+}
+
+.welcome h2{
+
+    font-size:24px;
+
+}
+
+.lesson-nav{
+
+    flex-direction:column;
+    gap:15px;
+
+}
+
+.lesson-nav button{
+
+    width:100%;
+
+}
+
+.resource{
+
+    padding:25px;
+
+}
+
+.video-card{
+
+    padding:15px;
+
+}
+
+}
+
+/* ===========================
+   Small Mobile
+=========================== */
+
+@media(max-width:576px){
+
+.navbar-brand{
+
+    font-size:1.1rem;
+
+}
+
+#loggedUser{
+
+    display:none;
+
+}
+
+.sidebar{
+
+    width:250px;
+
+}
+
+.welcome h2{
+
+    font-size:20px;
+
+}
+
+.video-card h3{
+
+    font-size:20px;
+
+}
+
+.resource i{
+
+    font-size:35px;
+
+}
+
+}
