@@ -1,0 +1,5192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Day 16 - Introduction to React JS</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:#f4f7fb;
+}
+
+.hero{
+background:linear-gradient(135deg,#16a34a,#14532d);
+color:white;
+padding:70px 0;
+}
+
+.sidebar{
+position:sticky;
+top:20px;
+}
+
+.section-card{
+border-radius:20px;
+margin-bottom:25px;
+}
+
+.code{
+background:#111827;
+color:#22c55e;
+padding:15px;
+border-radius:10px;
+overflow:auto;
+}
+
+.note{
+background:#fff8dc;
+border-left:5px solid orange;
+padding:12px;
+border-radius:8px;
+margin-top:15px;
+}
+
+.output{
+background:#eef2ff;
+padding:12px;
+border-left:4px solid green;
+border-radius:8px;
+margin-top:10px;
+}
+
+h2{
+color:#15803d;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section class="hero">
+
+<div class="container">
+
+<h1>Day 16 : Introduction to React JS</h1>
+
+<p class="lead">
+
+Complete Beginner Notes covering React Introduction, History, Features,
+Architecture, SPA, Virtual DOM, JSX and Components.
+
+</p>
+
+</div>
+
+</section>
+
+<div class="container my-5">
+
+<div class="row">
+
+<div class="col-lg-3">
+
+<div class="card sidebar">
+
+<div class="card-body">
+
+<h5>Topics</h5>
+
+<ul>
+
+<li>Introduction to React JS</li>
+
+<li>History of React</li>
+
+<li>Why React?</li>
+
+<li>Features of React</li>
+
+<li>Advantages</li>
+
+<li>React Architecture</li>
+
+<li>Single Page Application</li>
+
+<li>Virtual DOM</li>
+
+<li>Real DOM vs Virtual DOM</li>
+
+<li>Prerequisites</li>
+
+<li>Node.js</li>
+
+<li>NPM</li>
+
+<li>NPX</li>
+
+<li>Create React App</li>
+
+<li>Vite</li>
+
+<li>Folder Structure</li>
+
+<li>JSX</li>
+
+<li>Components</li>
+
+<li>Functional Components</li>
+
+<li>Interview Questions</li>
+
+<li>Assignment</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-9">
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Introduction to React JS</h2>
+
+<p>
+
+<b>React JS</b> is an open-source JavaScript library used for building modern,
+fast and interactive User Interfaces (UI). It helps developers create dynamic
+web applications by dividing the user interface into small reusable
+<b>Components</b>.
+
+</p>
+
+<p>
+
+Traditional websites reload the complete page whenever data changes.
+React solves this problem by updating only the required part of the webpage,
+making applications much faster and smoother.
+
+</p>
+
+<p>
+
+React follows a <b>Component-Based Architecture</b> and uses
+<b>Virtual DOM</b> for efficient rendering. Because of these features,
+React has become one of the most popular frontend technologies used by
+software companies around the world.
+
+</p>
+
+<div class="note">
+
+React is a <b>JavaScript Library</b>, not a complete Framework.
+Its primary purpose is to build beautiful and interactive User Interfaces.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>History of React JS</h2>
+
+<p>
+
+React was created by <b>Jordan Walke</b>, a software engineer at Facebook.
+It was first used internally by Facebook in 2011 to improve the performance
+of complex user interfaces.
+
+</p>
+
+<p>
+
+Seeing its success, Facebook released React as an open-source JavaScript
+library in <b>2013</b>. Today React is maintained by
+<b>Meta</b> along with thousands of contributors from the open-source
+community.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Property</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Developer</td>
+
+<td>Jordan Walke</td>
+
+</tr>
+
+<tr>
+
+<td>Maintained By</td>
+
+<td>Meta (Facebook)</td>
+
+</tr>
+
+<tr>
+
+<td>Released</td>
+
+<td>2013</td>
+
+</tr>
+
+<tr>
+
+<td>Programming Language</td>
+
+<td>JavaScript</td>
+
+</tr>
+
+<tr>
+
+<td>Current Usage</td>
+
+<td>Frontend Development</td>
+
+</tr>
+
+<tr>
+
+<td>License</td>
+
+<td>Open Source</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="output">
+
+Popular companies using React include Netflix, Instagram, Airbnb,
+WhatsApp Web, Dropbox and Microsoft.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Why React JS?</h2>
+
+<p>
+
+Earlier, developers built websites using HTML, CSS and JavaScript.
+As applications became larger, maintaining the code became difficult.
+The same HTML and JavaScript code had to be written repeatedly.
+
+</p>
+
+<p>
+
+React introduced reusable Components that allow developers to write code
+once and use it multiple times throughout the application. This reduces
+development time and improves maintainability.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Without React</th>
+
+<th>With React</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Repeated Code</td>
+
+<td>Reusable Components</td>
+
+</tr>
+
+<tr>
+
+<td>Manual DOM Manipulation</td>
+
+<td>Virtual DOM</td>
+
+</tr>
+
+<tr>
+
+<td>Slow Rendering</td>
+
+<td>Fast Rendering</td>
+
+</tr>
+
+<tr>
+
+<td>Difficult Maintenance</td>
+
+<td>Easy Maintenance</td>
+
+</tr>
+
+<tr>
+
+<td>Large Files</td>
+
+<td>Small Components</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="note">
+
+React reduces code duplication and makes large projects easier to manage.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Features of React JS</h2>
+
+<p>
+
+React provides several powerful features that make frontend development
+easy, efficient and scalable.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Feature</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Component Based</td>
+
+<td>Create reusable UI components.</td>
+
+</tr>
+
+<tr>
+
+<td>Virtual DOM</td>
+
+<td>Improves rendering performance.</td>
+
+</tr>
+
+<tr>
+
+<td>JSX</td>
+
+<td>Write HTML inside JavaScript.</td>
+
+</tr>
+
+<tr>
+
+<td>One-Way Data Binding</td>
+
+<td>Predictable flow of data.</td>
+
+</tr>
+
+<tr>
+
+<td>Reusable Code</td>
+
+<td>Write once and reuse multiple times.</td>
+
+</tr>
+
+<tr>
+
+<td>Fast Rendering</td>
+
+<td>Only changed elements are updated.</td>
+
+</tr>
+
+<tr>
+
+<td>SEO Friendly</td>
+
+<td>Supports server-side rendering.</td>
+
+</tr>
+
+<tr>
+
+<td>Rich Ecosystem</td>
+
+<td>Thousands of libraries available.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="output">
+
+React applications are faster because they update only the changed part of the page.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Advantages of React JS</h2>
+
+<ul>
+
+<li>Easy to Learn</li>
+
+<li>Simple Syntax</li>
+
+<li>Reusable Components</li>
+
+<li>Fast Rendering</li>
+
+<li>Virtual DOM Support</li>
+
+<li>Better Performance</li>
+
+<li>Large Community Support</li>
+
+<li>Easy Debugging</li>
+
+<li>SEO Friendly</li>
+
+<li>Highly Scalable</li>
+
+<li>Industry Standard Library</li>
+
+<li>Supports React Native for Mobile App Development</li>
+
+</ul>
+
+<div class="note">
+
+React is one of the most demanded frontend technologies in MERN Stack
+development.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>React Architecture</h2>
+
+<p>
+
+React follows a <b>Component-Based Architecture</b>. Instead of writing the
+entire webpage in a single HTML file, React divides the application into
+multiple reusable components.
+
+Each component performs a specific task and can be reused anywhere in the
+application. This makes development faster, code easier to understand, and
+maintenance much simpler.
+
+</p>
+
+<p>
+
+Every React application starts from the <b>App Component</b>. The App component
+acts as the root component and contains all other components like Header,
+Navbar, Home, Footer, Sidebar, Product Card, etc.
+
+</p>
+
+<pre class="code">
+App
+│
+├── Header
+├── Navbar
+├── Home
+│   ├── Hero
+│   ├── Services
+│   ├── Products
+│   └── Contact
+├── About
+└── Footer
+</pre>
+
+<div class="output">
+
+Every UI element in React is represented as an independent Component.
+
+</div>
+
+<div class="note">
+
+The biggest advantage of React Architecture is Component Reusability.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>What is a Single Page Application (SPA)?</h2>
+
+<p>
+
+SPA stands for <b>Single Page Application</b>. It is a web application that
+loads only a single HTML page when the application starts.
+
+Instead of reloading the entire webpage every time the user clicks on a link,
+React updates only the required part of the page.
+
+This makes the application extremely fast and provides a smooth user experience.
+
+</p>
+
+<div class="note">
+
+React is mainly used for developing Single Page Applications (SPA).
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>How SPA Works?</h2>
+
+<p>
+
+When a user opens a React application, only one HTML page
+(<b>index.html</b>) is loaded.
+
+After that, JavaScript communicates with the server and updates only the
+required components without refreshing the entire webpage.
+
+</p>
+
+<pre class="code">
+
+User Opens Website
+
+        │
+
+        ▼
+
+ index.html Loads
+
+        │
+
+        ▼
+
+ React Application Starts
+
+        │
+
+        ▼
+
+ User Clicks Menu
+
+        │
+
+        ▼
+
+ Only Required Component Updates
+
+        │
+
+        ▼
+
+ No Full Page Refresh
+
+</pre>
+
+<div class="output">
+
+The browser does not reload the complete webpage.
+Only the changed content is rendered.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Advantages of Single Page Application</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Advantage</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Fast Loading</td>
+
+<td>Only one HTML page loads initially.</td>
+
+</tr>
+
+<tr>
+
+<td>Smooth Navigation</td>
+
+<td>No page refresh while navigating.</td>
+
+</tr>
+
+<tr>
+
+<td>Better User Experience</td>
+
+<td>Feels like a desktop application.</td>
+
+</tr>
+
+<tr>
+
+<td>Less Server Load</td>
+
+<td>Only required data is requested.</td>
+
+</tr>
+
+<tr>
+
+<td>High Performance</td>
+
+<td>Only changed components are updated.</td>
+
+</tr>
+
+<tr>
+
+<td>Reduced Bandwidth</td>
+
+<td>Less data transfer between browser and server.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="note">
+
+Examples of SPA Applications include Gmail, Facebook, Instagram,
+WhatsApp Web and Netflix.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Traditional Website vs React SPA</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Traditional Website</th>
+
+<th>React SPA</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Entire page reloads</td>
+
+<td>Only required component updates</td>
+
+</tr>
+
+<tr>
+
+<td>Slow Navigation</td>
+
+<td>Fast Navigation</td>
+
+</tr>
+
+<tr>
+
+<td>Higher Server Requests</td>
+
+<td>Less Server Requests</td>
+
+</tr>
+
+<tr>
+
+<td>Poor User Experience</td>
+
+<td>Excellent User Experience</td>
+
+</tr>
+
+<tr>
+
+<td>More Loading Time</td>
+
+<td>Very Fast Loading</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>What is Virtual DOM?</h2>
+
+<p>
+
+The <b>Virtual DOM (Document Object Model)</b> is one of the most important
+features of React.
+
+It is a lightweight copy of the Real DOM.
+
+Whenever data changes inside a React application, React first updates the
+Virtual DOM instead of directly modifying the Real DOM.
+
+React then compares the old Virtual DOM with the new Virtual DOM using a
+process called <b>Diffing Algorithm</b>. After finding the changes, React updates
+only the affected elements inside the Real DOM.
+
+This process makes React applications much faster.
+
+</p>
+
+<div class="note">
+
+Virtual DOM is one of the most frequently asked React interview topics.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Working of Virtual DOM</h2>
+
+<p>
+
+The following steps explain how Virtual DOM works internally.
+
+</p>
+
+<pre class="code">
+
+User Performs Action
+
+        │
+
+        ▼
+
+State Changes
+
+        │
+
+        ▼
+
+New Virtual DOM Created
+
+        │
+
+        ▼
+
+Compare with Previous Virtual DOM
+
+        │
+
+        ▼
+
+Find Changed Elements
+
+        │
+
+        ▼
+
+Update Only Those Elements
+
+        │
+
+        ▼
+
+Real DOM Updated
+
+</pre>
+
+<div class="output">
+
+Instead of refreshing the complete webpage,
+React updates only the modified elements.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Advantages of Virtual DOM</h2>
+
+<ul>
+
+<li>Improves Performance.</li>
+
+<li>Reduces DOM Manipulation.</li>
+
+<li>Fast Rendering.</li>
+
+<li>Efficient UI Updates.</li>
+
+<li>Smooth User Experience.</li>
+
+<li>Less Memory Consumption.</li>
+
+<li>Better Scalability.</li>
+
+<li>Optimized Rendering Process.</li>
+
+</ul>
+
+<div class="note">
+
+Without Virtual DOM, every UI update would directly manipulate the Real DOM,
+making applications slower.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Real DOM vs Virtual DOM</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Real DOM</th>
+
+<th>Virtual DOM</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Actual Browser DOM</td>
+
+<td>Lightweight Copy of DOM</td>
+
+</tr>
+
+<tr>
+
+<td>Slow Updates</td>
+
+<td>Fast Updates</td>
+
+</tr>
+
+<tr>
+
+<td>Updates Entire Structure</td>
+
+<td>Updates Only Changed Elements</td>
+
+</tr>
+
+<tr>
+
+<td>Consumes More Memory</td>
+
+<td>Consumes Less Memory</td>
+
+</tr>
+
+<tr>
+
+<td>Less Efficient</td>
+
+<td>Highly Efficient</td>
+
+</tr>
+
+<tr>
+
+<td>Direct DOM Manipulation</td>
+
+<td>Diffing Algorithm</td>
+
+</tr>
+
+<tr>
+
+<td>Slower Rendering</td>
+
+<td>Faster Rendering</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="output">
+
+Virtual DOM is the main reason why React applications perform faster than
+traditional JavaScript applications.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Quick Revision</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Topic</th>
+
+<th>Remember</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>React Architecture</td>
+
+<td>Component-Based</td>
+
+</tr>
+
+<tr>
+
+<td>SPA</td>
+
+<td>Loads Single HTML Page</td>
+
+</tr>
+
+<tr>
+
+<td>Virtual DOM</td>
+
+<td>Lightweight Copy of Real DOM</td>
+
+</tr>
+
+<tr>
+
+<td>Real DOM</td>
+
+<td>Actual Browser DOM</td>
+
+</tr>
+
+<tr>
+
+<td>Diffing</td>
+
+<td>Compares Old and New Virtual DOM</td>
+
+</tr>
+
+<tr>
+
+<td>Rendering</td>
+
+<td>Only Changed Elements Update</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- Continue with Part 1C -->
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Prerequisites for Learning React JS</h2>
+
+<p>
+
+Before learning React JS, students should have a basic understanding of
+HTML, CSS and JavaScript. Since React is a JavaScript library, knowledge
+of JavaScript fundamentals is essential for understanding React concepts
+like Components, Props, State and Hooks.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Technology</th>
+
+<th>Why It Is Required</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>HTML</td>
+
+<td>To create webpage structure.</td>
+
+</tr>
+
+<tr>
+
+<td>CSS</td>
+
+<td>To design and style webpages.</td>
+
+</tr>
+
+<tr>
+
+<td>JavaScript</td>
+
+<td>Core language used by React.</td>
+
+</tr>
+
+<tr>
+
+<td>ES6 Features</td>
+
+<td>Arrow Functions, let, const, Modules, Destructuring, etc.</td>
+
+</tr>
+
+<tr>
+
+<td>Node.js</td>
+
+<td>Required to run React applications.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="note">
+
+You do not need to master JavaScript before React, but you should know the
+basics of variables, functions, loops, objects and arrays.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Installing Node.js</h2>
+
+<p>
+
+React applications require <b>Node.js</b> because it provides the runtime
+environment and includes <b>npm (Node Package Manager)</b>, which is used
+to install React and other libraries.
+
+</p>
+
+<h5>Step 1</h5>
+
+<p>
+
+Download Node.js from the official website.
+
+</p>
+
+<h5>Step 2</h5>
+
+<p>
+
+Choose the <b>LTS (Long Term Support)</b> version.
+
+</p>
+
+<h5>Step 3</h5>
+
+<p>
+
+Run the installer and keep clicking <b>Next</b>.
+
+</p>
+
+<h5>Step 4</h5>
+
+<p>
+
+Complete the installation.
+
+</p>
+
+<h5>Step 5</h5>
+
+<p>
+
+Restart Command Prompt or VS Code.
+
+</p>
+
+<div class="note">
+
+Node.js automatically installs <b>npm</b> along with it.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Verify Node.js Installation</h2>
+
+<p>
+
+After installing Node.js, open Command Prompt or Terminal and execute the
+following commands.
+
+</p>
+
+<pre class="code">
+node -v
+</pre>
+
+<p>
+
+Displays the installed Node.js version.
+
+</p>
+
+<pre class="code">
+npm -v
+</pre>
+
+<p>
+
+Displays the installed npm version.
+
+</p>
+
+<pre class="code">
+npx -v
+</pre>
+
+<p>
+
+Displays the installed npx version.
+
+</p>
+
+<div class="output">
+
+If all commands display version numbers, Node.js has been installed
+successfully.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>What is Node.js?</h2>
+
+<p>
+
+<b>Node.js</b> is an open-source JavaScript runtime environment that allows
+developers to execute JavaScript code outside the browser.
+
+React itself runs in the browser, but Node.js is required during development
+to install packages, create projects and run the development server.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Feature</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Runtime Environment</td>
+
+<td>Runs JavaScript outside the browser.</td>
+
+</tr>
+
+<tr>
+
+<td>Open Source</td>
+
+<td>Free to use.</td>
+
+</tr>
+
+<tr>
+
+<td>Cross Platform</td>
+
+<td>Works on Windows, Linux and macOS.</td>
+
+</tr>
+
+<tr>
+
+<td>Fast</td>
+
+<td>Uses Google's V8 JavaScript Engine.</td>
+
+</tr>
+
+<tr>
+
+<td>Package Support</td>
+
+<td>Supports npm packages.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="note">
+
+React development is not possible without installing Node.js.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>What is NPM?</h2>
+
+<p>
+
+<b>NPM (Node Package Manager)</b> is the default package manager of Node.js.
+
+It is used to install, update and remove JavaScript libraries and packages.
+
+Whenever we create a React project, npm downloads all required dependencies.
+
+</p>
+
+<pre class="code">
+npm install
+</pre>
+
+<p>
+
+Installs all dependencies mentioned inside the package.json file.
+
+</p>
+
+<pre class="code">
+npm install react
+</pre>
+
+<p>
+
+Installs the React library.
+
+</p>
+
+<pre class="code">
+npm install axios
+</pre>
+
+<p>
+
+Installs the Axios package.
+
+</p>
+
+<div class="output">
+
+npm saves installed packages inside the <b>node_modules</b> folder.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Common NPM Commands</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Command</th>
+
+<th>Purpose</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>npm install</td>
+
+<td>Install all packages.</td>
+
+</tr>
+
+<tr>
+
+<td>npm install package-name</td>
+
+<td>Install a package.</td>
+
+</tr>
+
+<tr>
+
+<td>npm uninstall package-name</td>
+
+<td>Remove a package.</td>
+
+</tr>
+
+<tr>
+
+<td>npm update</td>
+
+<td>Update installed packages.</td>
+
+</tr>
+
+<tr>
+
+<td>npm start</td>
+
+<td>Start the application.</td>
+
+</tr>
+
+<tr>
+
+<td>npm run dev</td>
+
+<td>Run Vite development server.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>What is NPX?</h2>
+
+<p>
+
+<b>NPX (Node Package Execute)</b> is a package execution tool that comes
+with npm.
+
+Unlike npm, npx executes packages directly without installing them globally.
+
+It is mainly used to create React projects.
+
+</p>
+
+<pre class="code">
+npx create-react-app myapp
+</pre>
+
+<div class="output">
+
+Creates a new React application named <b>myapp</b>.
+
+</div>
+
+<div class="note">
+
+NPX automatically downloads and executes the required package.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>NPM vs NPX</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>NPM</th>
+
+<th>NPX</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Installs packages.</td>
+
+<td>Executes packages.</td>
+
+</tr>
+
+<tr>
+
+<td>Stores packages locally.</td>
+
+<td>No permanent installation required.</td>
+
+</tr>
+
+<tr>
+
+<td>Used frequently.</td>
+
+<td>Mainly used once while creating projects.</td>
+
+</tr>
+
+<tr>
+
+<td>Slower for one-time execution.</td>
+
+<td>Best for one-time execution.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Creating Your First React Project (Create React App)</h2>
+
+<p>
+
+The traditional way to create a React project is by using
+<b>Create React App (CRA)</b>.
+
+</p>
+
+<pre class="code">
+npx create-react-app my-app
+</pre>
+
+<p>
+
+Move inside the project folder.
+
+</p>
+
+<pre class="code">
+cd my-app
+</pre>
+
+<p>
+
+Run the application.
+
+</p>
+
+<pre class="code">
+npm start
+</pre>
+
+<div class="output">
+
+The React application starts on:
+
+http://localhost:3000
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Creating React Project Using Vite (Recommended)</h2>
+
+<p>
+
+Nowadays developers prefer <b>Vite</b> because it is much faster than
+Create React App.
+
+Vite provides lightning-fast startup time and Hot Module Replacement (HMR).
+
+</p>
+
+<pre class="code">
+npm create vite@latest
+</pre>
+
+<p>
+
+Choose the following options:
+
+</p>
+
+<pre class="code">
+Project Name : react-app
+
+Framework : React
+
+Variant : JavaScript
+</pre>
+
+<p>
+
+Move into the project folder.
+
+</p>
+
+<pre class="code">
+cd react-app
+</pre>
+
+<p>
+
+Install dependencies.
+
+</p>
+
+<pre class="code">
+npm install
+</pre>
+
+<p>
+
+Run the Vite server.
+
+</p>
+
+<pre class="code">
+npm run dev
+</pre>
+
+<div class="output">
+
+The application starts at:
+
+http://localhost:5173
+
+</div>
+
+<div class="note">
+
+Vite is the industry-standard way of creating new React projects.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Continue in Part 1D -->
+ <!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>React Project Folder Structure</h2>
+
+<p>
+
+After creating a React project using <b>Vite</b>, several files and folders
+are automatically generated. Each folder has its own purpose and helps in
+organizing the application properly.
+
+Understanding the folder structure is very important because almost every
+React project follows the same structure.
+
+</p>
+
+<pre class="code">
+react-app/
+
+│
+
+├── node_modules/
+
+├── public/
+
+├── src/
+
+│   ├── assets/
+
+│   ├── App.css
+
+│   ├── App.jsx
+
+│   ├── index.css
+
+│   └── main.jsx
+
+│
+
+├── index.html
+
+├── package.json
+
+├── package-lock.json
+
+├── vite.config.js
+
+└── README.md
+</pre>
+
+<div class="note">
+
+Most of the development work is done inside the <b>src</b> folder.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Understanding the src Folder</h2>
+
+<p>
+
+The <b>src</b> folder is the most important folder in every React application.
+
+All React components, CSS files, images, JavaScript files and application
+logic are written inside this folder.
+
+Whenever you create a new component, it is usually placed inside the
+<b>src</b> folder.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>File / Folder</th>
+
+<th>Purpose</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>App.jsx</td>
+
+<td>Main Component of the application.</td>
+
+</tr>
+
+<tr>
+
+<td>main.jsx</td>
+
+<td>Entry Point of React Application.</td>
+
+</tr>
+
+<tr>
+
+<td>assets</td>
+
+<td>Stores Images, Icons, Fonts etc.</td>
+
+</tr>
+
+<tr>
+
+<td>App.css</td>
+
+<td>Styles for App Component.</td>
+
+</tr>
+
+<tr>
+
+<td>index.css</td>
+
+<td>Global CSS.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="output">
+
+Almost every React project starts execution from the <b>main.jsx</b> file.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>main.jsx File</h2>
+
+<p>
+
+The <b>main.jsx</b> file is known as the <b>Entry Point</b> of the React
+application.
+
+It loads the root component (<b>App.jsx</b>) and renders it inside the
+<b>index.html</b> file.
+
+Without this file, the React application cannot start.
+
+</p>
+
+<pre class="code">
+import React from "react";
+
+import ReactDOM from "react-dom/client";
+
+import App from "./App";
+
+import "./index.css";
+
+ReactDOM.createRoot(
+
+document.getElementById("root")
+
+).render(
+
+&lt;App /&gt;
+
+);
+</pre>
+
+<div class="note">
+
+Every React application starts execution from <b>main.jsx</b>.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>App.jsx File</h2>
+
+<p>
+
+<b>App.jsx</b> is the root component of the application.
+
+It contains the UI of the application and acts as the parent component for
+all other components.
+
+As the application grows, Header, Navbar, Home, Footer and many other
+components are imported into App.jsx.
+
+</p>
+
+<pre class="code">
+function App(){
+
+return(
+
+&lt;h1&gt;
+
+Welcome To React JS
+
+&lt;/h1&gt;
+
+);
+
+}
+
+export default App;
+</pre>
+
+<div class="output">
+
+The output of App.jsx is displayed inside the browser.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>index.html File</h2>
+
+<p>
+
+Unlike traditional websites, React applications contain only one HTML file
+called <b>index.html</b>.
+
+This file contains a special container called the <b>root</b> element where
+the complete React application is rendered.
+
+</p>
+
+<pre class="code">
+&lt;body&gt;
+
+&lt;div id="root"&gt;
+
+&lt;/div&gt;
+
+&lt;/body&gt;
+</pre>
+
+<div class="note">
+
+React injects the complete application inside the <b>root</b> element.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>package.json File</h2>
+
+<p>
+
+The <b>package.json</b> file contains information about the project such as
+project name, version, dependencies and scripts.
+
+Whenever a new package is installed using npm, its information is stored
+inside this file.
+
+</p>
+
+<pre class="code">
+{
+
+"name":"react-app",
+
+"version":"1.0.0",
+
+"private":true,
+
+"scripts":{
+
+"dev":"vite",
+
+"build":"vite build"
+
+}
+
+}
+</pre>
+
+<div class="note">
+
+package.json is called the heart of every Node.js and React project.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>node_modules Folder</h2>
+
+<p>
+
+The <b>node_modules</b> folder contains all the installed packages and their
+dependencies.
+
+Whenever you install React, Bootstrap, Axios or any other library using npm,
+the package files are downloaded inside this folder.
+
+</p>
+
+<div class="note">
+
+Never modify files inside <b>node_modules</b> manually.
+
+</div>
+
+<div class="output">
+
+If node_modules is deleted, simply run:
+
+</div>
+
+<pre class="code">
+npm install
+</pre>
+
+<p>
+
+All packages will be installed again automatically.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>public Folder</h2>
+
+<p>
+
+The <b>public</b> folder stores static files that do not require processing
+by React.
+
+Files placed inside this folder can be accessed directly by the browser.
+
+</p>
+
+<ul>
+
+<li>favicon.ico</li>
+
+<li>robots.txt</li>
+
+<li>images</li>
+
+<li>documents</li>
+
+<li>static assets</li>
+
+</ul>
+
+<div class="note">
+
+Large static files are usually stored inside the public folder.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>assets Folder</h2>
+
+<p>
+
+The <b>assets</b> folder is generally created inside the <b>src</b> folder.
+
+It stores project resources such as images, SVG icons, videos, audio files
+and custom fonts.
+
+Keeping these files inside the assets folder helps organize the project.
+
+</p>
+
+<pre class="code">
+src/
+
+│
+
+├── assets/
+
+│   ├── logo.png
+
+│   ├── banner.jpg
+
+│   ├── profile.png
+
+│   └── react.svg
+</pre>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>React Application Flow</h2>
+
+<p>
+
+The execution flow of a React application follows a simple sequence.
+
+Understanding this flow helps in debugging and developing applications.
+
+</p>
+
+<pre class="code">
+Browser
+
+↓
+
+index.html
+
+↓
+
+main.jsx
+
+↓
+
+App.jsx
+
+↓
+
+Components
+
+↓
+
+Browser Output
+</pre>
+
+<div class="output">
+
+Every React application follows this execution flow.
+
+</div>
+
+<div class="note">
+
+Always remember:
+
+<b>index.html → main.jsx → App.jsx → Components</b>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Quick Revision</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>File</th>
+
+<th>Purpose</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>main.jsx</td>
+
+<td>Entry Point</td>
+
+</tr>
+
+<tr>
+
+<td>App.jsx</td>
+
+<td>Root Component</td>
+
+</tr>
+
+<tr>
+
+<td>index.html</td>
+
+<td>Contains Root Div</td>
+
+</tr>
+
+<tr>
+
+<td>package.json</td>
+
+<td>Project Information</td>
+
+</tr>
+
+<tr>
+
+<td>node_modules</td>
+
+<td>Installed Packages</td>
+
+</tr>
+
+<tr>
+
+<td>public</td>
+
+<td>Static Files</td>
+
+</tr>
+
+<tr>
+
+<td>assets</td>
+
+<td>Images & Resources</td>
+
+</tr>
+
+<tr>
+
+<td>src</td>
+
+<td>Main Development Folder</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- Continue in Part 2A (JSX Introduction) -->
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Introduction to JSX</h2>
+
+<p>
+
+<b>JSX</b> stands for <b>JavaScript XML</b>. It is a syntax extension used in React that allows developers to write HTML-like code inside JavaScript.
+
+JSX makes React applications easier to write and understand because developers can create user interfaces using familiar HTML syntax.
+
+Although JSX looks like HTML, it is not HTML. JSX is converted into JavaScript by a tool called <b>Babel</b> before the browser executes it.
+
+</p>
+
+<div class="note">
+
+JSX is one of the most important concepts in React because almost every React component is written using JSX.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Why JSX?</h2>
+
+<p>
+
+Before JSX was introduced, React developers had to create user interface elements using JavaScript functions such as <b>React.createElement()</b>.
+
+Writing large user interfaces using JavaScript functions becomes difficult to read and maintain. JSX solves this problem by allowing developers to write HTML-like code directly inside JavaScript.
+
+This makes React applications cleaner, more readable and easier to maintain.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Without JSX</th>
+
+<th>With JSX</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Long JavaScript Code</td>
+
+<td>HTML-like Syntax</td>
+
+</tr>
+
+<tr>
+
+<td>Difficult to Read</td>
+
+<td>Easy to Read</td>
+
+</tr>
+
+<tr>
+
+<td>Complex UI Structure</td>
+
+<td>Simple UI Structure</td>
+
+</tr>
+
+<tr>
+
+<td>More Boilerplate Code</td>
+
+<td>Less Boilerplate Code</td>
+
+</tr>
+
+<tr>
+
+<td>Difficult Maintenance</td>
+
+<td>Easy Maintenance</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="output">
+
+JSX improves code readability and developer productivity.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>React Without JSX</h2>
+
+<p>
+
+Without JSX, React elements are created using the <b>React.createElement()</b> method.
+
+The syntax is completely JavaScript-based and becomes difficult to understand for large applications.
+
+</p>
+
+<pre class="code">
+const element = React.createElement(
+
+"h1",
+
+null,
+
+"Welcome To React"
+
+);
+</pre>
+
+<div class="output">
+
+Output:
+
+Welcome To React
+
+</div>
+
+<div class="note">
+
+Although this syntax is correct, developers generally prefer JSX because it is much cleaner and easier to understand.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>React With JSX</h2>
+
+<p>
+
+Using JSX, the same React element can be written in a much simpler and readable format.
+
+</p>
+
+<pre class="code">
+const element =
+
+&lt;h1&gt;
+
+Welcome To React
+
+&lt;/h1&gt;;
+</pre>
+
+<div class="output">
+
+Output:
+
+Welcome To React
+
+</div>
+
+<div class="note">
+
+Internally, Babel converts JSX into JavaScript using <b>React.createElement()</b>.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Basic JSX Syntax</h2>
+
+<p>
+
+JSX code is generally written inside the <b>return()</b> statement of a React component.
+
+Whenever a component returns JSX, React renders that JSX on the browser screen.
+
+</p>
+
+<pre class="code">
+function App(){
+
+return(
+
+&lt;h1&gt;
+
+Hello React
+
+&lt;/h1&gt;
+
+);
+
+}
+
+export default App;
+</pre>
+
+<div class="output">
+
+Output:
+
+Hello React
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Rules of JSX</h2>
+
+<p>
+
+React follows several important rules while writing JSX.
+
+Ignoring these rules will generate compilation errors.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Rule</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Single Parent Element</td>
+
+<td>Every JSX must have one root element.</td>
+
+</tr>
+
+<tr>
+
+<td>Proper Closing Tags</td>
+
+<td>Every opening tag must have a closing tag.</td>
+
+</tr>
+
+<tr>
+
+<td>camelCase Attributes</td>
+
+<td>Use className, htmlFor, onClick etc.</td>
+
+</tr>
+
+<tr>
+
+<td>JavaScript Expressions</td>
+
+<td>Write inside { }</td>
+
+</tr>
+
+<tr>
+
+<td>Self Closing Tags</td>
+
+<td>Tags like img, br and input must end with /</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="note">
+
+These JSX rules are among the most frequently asked React interview questions.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Single Parent Element Rule</h2>
+
+<p>
+
+A React component can return only one parent element.
+
+If multiple elements are returned without a common parent, React throws an error.
+
+</p>
+
+<h5>Incorrect Example</h5>
+
+<pre class="code">
+return(
+
+&lt;h1&gt;Hello&lt;/h1&gt;
+
+&lt;p&gt;Welcome&lt;/p&gt;
+
+);
+</pre>
+
+<div class="output">
+
+Error:
+
+Adjacent JSX elements must be wrapped in an enclosing tag.
+
+</div>
+
+<h5>Correct Example</h5>
+
+<pre class="code">
+return(
+
+&lt;div&gt;
+
+&lt;h1&gt;Hello&lt;/h1&gt;
+
+&lt;p&gt;Welcome&lt;/p&gt;
+
+&lt;/div&gt;
+
+);
+</pre>
+
+<div class="note">
+
+The parent element can be a &lt;div&gt;, &lt;section&gt;, &lt;main&gt;, or even a React Fragment.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>React Fragment</h2>
+
+<p>
+
+A <b>React Fragment</b> allows us to group multiple JSX elements without creating an extra HTML element.
+
+Fragments help keep the DOM clean because they do not generate additional tags in the browser.
+
+</p>
+
+<h5>Using Fragment</h5>
+
+<pre class="code">
+import React from "react";
+
+function App(){
+
+return(
+
+&lt;React.Fragment&gt;
+
+&lt;h1&gt;React&lt;/h1&gt;
+
+&lt;p&gt;Learning Fragment&lt;/p&gt;
+
+&lt;/React.Fragment&gt;
+
+);
+
+}
+</pre>
+
+<h5>Using Short Syntax</h5>
+
+<pre class="code">
+function App(){
+
+return(
+
+&lt;&gt;
+
+&lt;h1&gt;React&lt;/h1&gt;
+
+&lt;p&gt;Learning Fragment&lt;/p&gt;
+
+&lt;/&gt;
+
+);
+
+}
+</pre>
+
+<div class="note">
+
+The short syntax (&lt;&gt;&lt;/&gt;) is the most commonly used Fragment syntax.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>JavaScript Expressions in JSX</h2>
+
+<p>
+
+JSX allows JavaScript expressions to be written inside curly braces <b>{ }</b>.
+
+Any valid JavaScript expression can be displayed using JSX.
+
+</p>
+
+<pre class="code">
+function App(){
+
+const name="Awanish";
+
+return(
+
+&lt;h2&gt;
+
+Welcome {name}
+
+&lt;/h2&gt;
+
+);
+
+}
+</pre>
+
+<div class="output">
+
+Output:
+
+Welcome Awanish
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Displaying Variables</h2>
+
+<p>
+
+Variables can easily be displayed inside JSX using curly braces.
+
+</p>
+
+<pre class="code">
+function App(){
+
+const college="RITM";
+
+return(
+
+&lt;h1&gt;
+
+College : {college}
+
+&lt;/h1&gt;
+
+);
+
+}
+</pre>
+
+<div class="output">
+
+Output:
+
+College : RITM
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Performing Arithmetic Operations</h2>
+
+<p>
+
+Arithmetic calculations can also be performed inside JSX.
+
+</p>
+
+<pre class="code">
+function App(){
+
+const a=20;
+
+const b=10;
+
+return(
+
+&lt;div&gt;
+
+&lt;p&gt;Addition : {a+b}&lt;/p&gt;
+
+&lt;p&gt;Subtraction : {a-b}&lt;/p&gt;
+
+&lt;p&gt;Multiplication : {a*b}&lt;/p&gt;
+
+&lt;p&gt;Division : {a/b}&lt;/p&gt;
+
+&lt;/div&gt;
+
+);
+
+}
+</pre>
+
+<div class="output">
+
+Addition : 30
+
+Subtraction : 10
+
+Multiplication : 200
+
+Division : 2
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Calling Functions in JSX</h2>
+
+<p>
+
+Functions can also be called inside JSX.
+
+The returned value of the function is displayed on the screen.
+
+</p>
+
+<pre class="code">
+function message(){
+
+return "Welcome Students";
+
+}
+
+function App(){
+
+return(
+
+&lt;h2&gt;
+
+{message()}
+
+&lt;/h2&gt;
+
+);
+
+}
+</pre>
+
+<div class="output">
+
+Output:
+
+Welcome Students
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Displaying Objects</h2>
+
+<p>
+
+Object properties can be accessed using the dot (.) operator inside JSX.
+
+</p>
+
+<pre class="code">
+function App(){
+
+const student={
+
+name:"Rahul",
+
+course:"B.Tech",
+
+age:22
+
+};
+
+return(
+
+&lt;div&gt;
+
+&lt;p&gt;Name : {student.name}&lt;/p&gt;
+
+&lt;p&gt;Course : {student.course}&lt;/p&gt;
+
+&lt;p&gt;Age : {student.age}&lt;/p&gt;
+
+&lt;/div&gt;
+
+);
+
+}
+</pre>
+
+<div class="output">
+
+Name : Rahul
+
+Course : B.Tech
+
+Age : 22
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Displaying Array Values</h2>
+
+<p>
+
+Individual array elements can be displayed using their index number.
+
+</p>
+
+<pre class="code">
+function App(){
+
+const skills=[
+
+"HTML",
+
+"CSS",
+
+"JavaScript",
+
+"React"
+
+];
+
+return(
+
+&lt;div&gt;
+
+&lt;p&gt;{skills[0]}&lt;/p&gt;
+
+&lt;p&gt;{skills[1]}&lt;/p&gt;
+
+&lt;p&gt;{skills[2]}&lt;/p&gt;
+
+&lt;p&gt;{skills[3]}&lt;/p&gt;
+
+&lt;/div&gt;
+
+);
+
+}
+</pre>
+
+<div class="output">
+
+HTML
+
+CSS
+
+JavaScript
+
+React
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>JSX Attributes</h2>
+
+<p>
+
+JSX attributes are similar to HTML attributes, but React uses camelCase naming conventions.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>HTML</th>
+
+<th>React JSX</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>class</td>
+
+<td>className</td>
+
+</tr>
+
+<tr>
+
+<td>for</td>
+
+<td>htmlFor</td>
+
+</tr>
+
+<tr>
+
+<td>onclick</td>
+
+<td>onClick</td>
+
+</tr>
+
+<tr>
+
+<td>tabindex</td>
+
+<td>tabIndex</td>
+
+</tr>
+
+<tr>
+
+<td>readonly</td>
+
+<td>readOnly</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<pre class="code">
+&lt;div className="container"&gt;
+
+&lt;label htmlFor="name"&gt;
+
+Name
+
+&lt;/label&gt;
+
+&lt;input
+
+type="text"
+
+id="name"
+
+/&gt;
+
+&lt;/div&gt;
+</pre>
+
+<div class="note">
+
+Never use <b>class</b> in JSX.
+
+Always use <b>className</b>.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Self Closing Tags</h2>
+
+<p>
+
+Every self-closing HTML element must end with <b>/</b> in JSX.
+
+</p>
+
+<pre class="code">
+&lt;img src="logo.png" /&gt;
+
+&lt;input type="text" /&gt;
+
+&lt;br /&gt;
+
+&lt;hr /&gt;
+</pre>
+
+<div class="output">
+
+Correct JSX Syntax
+
+</div>
+
+<div class="note">
+
+If you forget the closing slash, React will generate an error.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Continue in Part 2A-3 -->
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>JSX Comments</h2>
+
+<p>
+
+Comments are used to write notes inside the source code.
+
+These comments help developers understand the code but are not displayed in the browser.
+
+Unlike HTML, JSX comments are written inside curly braces.
+
+</p>
+
+<pre class="code">
+function App(){
+
+return(
+
+&lt;div&gt;
+
+{/* This is a JSX Comment */}
+
+&lt;h1&gt;Hello React&lt;/h1&gt;
+
+&lt;/div&gt;
+
+);
+
+}
+</pre>
+
+<div class="output">
+
+Output:
+
+Hello React
+
+</div>
+
+<div class="note">
+
+JSX Comments always use:
+
+<b>{/* Comment */}</b>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Displaying Date and Time in JSX</h2>
+
+<p>
+
+Since JSX allows JavaScript expressions, we can directly display the current
+date and time.
+
+</p>
+
+<pre class="code">
+function App(){
+
+const today = new Date();
+
+return(
+
+&lt;div&gt;
+
+&lt;h3&gt;
+
+{today.toDateString()}
+
+&lt;/h3&gt;
+
+&lt;/div&gt;
+
+);
+
+}
+</pre>
+
+<div class="output">
+
+Example Output:
+
+Mon Jul 14 2026
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Using Ternary Operator in JSX</h2>
+
+<p>
+
+Conditional rendering is commonly performed using the ternary operator.
+
+</p>
+
+<pre class="code">
+function App(){
+
+const isLogin=true;
+
+return(
+
+&lt;div&gt;
+
+{
+
+isLogin ?
+
+&lt;h2&gt;Welcome Student&lt;/h2&gt;
+
+:
+
+&lt;h2&gt;Please Login&lt;/h2&gt;
+
+}
+
+&lt;/div&gt;
+
+);
+
+}
+</pre>
+
+<div class="output">
+
+Output:
+
+Welcome Student
+
+</div>
+
+<div class="note">
+
+Syntax:
+
+condition ? True : False
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Using Logical AND (&&)</h2>
+
+<p>
+
+The AND (&&) operator is used when we want to display something only if the
+condition is true.
+
+</p>
+
+<pre class="code">
+function App(){
+
+const isAdmin=true;
+
+return(
+
+&lt;div&gt;
+
+{
+
+isAdmin &&
+
+&lt;h2&gt;
+
+Admin Panel
+
+&lt;/h2&gt;
+
+}
+
+&lt;/div&gt;
+
+);
+
+}
+</pre>
+
+<div class="output">
+
+Output:
+
+Admin Panel
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Using Inline CSS in JSX</h2>
+
+<p>
+
+Inline CSS in React is written as a JavaScript object.
+
+Property names use camelCase instead of hyphen.
+
+</p>
+
+<pre class="code">
+function App(){
+
+return(
+
+&lt;h1
+
+style={{
+
+color:"blue",
+
+backgroundColor:"yellow",
+
+padding:"20px"
+
+}}
+
+&gt;
+
+Hello React
+
+&lt;/h1&gt;
+
+);
+
+}
+</pre>
+
+<div class="output">
+
+The heading will have a blue text color, yellow background and padding.
+
+</div>
+
+<div class="note">
+
+CSS properties are written in camelCase.
+
+Example:
+
+background-color
+
+becomes
+
+backgroundColor
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>HTML vs JSX</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>HTML</th>
+
+<th>JSX</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>class</td>
+
+<td>className</td>
+
+</tr>
+
+<tr>
+
+<td>for</td>
+
+<td>htmlFor</td>
+
+</tr>
+
+<tr>
+
+<td>onclick</td>
+
+<td>onClick</td>
+
+</tr>
+
+<tr>
+
+<td>style="color:red"</td>
+
+<td>style={{color:"red"}}</td>
+
+</tr>
+
+<tr>
+
+<td>Comments: &lt;!-- --&gt;</td>
+
+<td>Comments: {/* */}</td>
+
+</tr>
+
+<tr>
+
+<td>Multiple Root Elements Allowed</td>
+
+<td>Only One Root Element</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Complete JSX Example</h2>
+
+<p>
+
+The following example combines variables, expressions, attributes and JSX
+syntax together.
+
+</p>
+
+<pre class="code">
+function App(){
+
+const name="Awanish";
+
+const age=22;
+
+const course="B.Tech";
+
+return(
+
+&lt;div className="container"&gt;
+
+&lt;h1&gt;
+
+Student Details
+
+&lt;/h1&gt;
+
+&lt;p&gt;
+
+Name : {name}
+
+&lt;/p&gt;
+
+&lt;p&gt;
+
+Age : {age}
+
+&lt;/p&gt;
+
+&lt;p&gt;
+
+Course : {course}
+
+&lt;/p&gt;
+
+&lt;/div&gt;
+
+);
+
+}
+
+export default App;
+</pre>
+
+<div class="output">
+
+Student Details
+
+Name : Awanish
+
+Age : 22
+
+Course : B.Tech
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Quick Revision</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Topic</th>
+
+<th>Remember</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>JSX</td>
+
+<td>JavaScript XML</td>
+
+</tr>
+
+<tr>
+
+<td>Variables</td>
+
+<td>Use { }</td>
+
+</tr>
+
+<tr>
+
+<td>Comments</td>
+
+<td>{/* */}</td>
+
+</tr>
+
+<tr>
+
+<td>Inline CSS</td>
+
+<td>JavaScript Object</td>
+
+</tr>
+
+<tr>
+
+<td>class</td>
+
+<td>className</td>
+
+</tr>
+
+<tr>
+
+<td>for</td>
+
+<td>htmlFor</td>
+
+</tr>
+
+<tr>
+
+<td>Conditional Rendering</td>
+
+<td>Ternary / &&</td>
+
+</tr>
+
+<tr>
+
+<td>Self Closing Tags</td>
+
+<td>End with /</td>
+
+</tr>
+
+<tr>
+
+<td>Root Element</td>
+
+<td>Only One Parent</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Important Interview Questions</h2>
+
+<ol>
+
+<li>What is JSX?</li>
+
+<li>Why do we use JSX?</li>
+
+<li>Is JSX HTML?</li>
+
+<li>What is Babel?</li>
+
+<li>Difference between HTML and JSX?</li>
+
+<li>Why is class replaced with className?</li>
+
+<li>Why is for replaced with htmlFor?</li>
+
+<li>Can JavaScript be written inside JSX?</li>
+
+<li>How are comments written in JSX?</li>
+
+<li>How do you apply inline CSS in React?</li>
+
+</ol>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Practice Questions</h2>
+
+<ol>
+
+<li>Create a JSX heading displaying your name.</li>
+
+<li>Display your college name using a variable.</li>
+
+<li>Display today's date using JavaScript.</li>
+
+<li>Create an object and display its properties.</li>
+
+<li>Display values from an array.</li>
+
+<li>Use the ternary operator to display Login/Logout.</li>
+
+<li>Apply inline CSS to a heading.</li>
+
+<li>Create a form using className and htmlFor.</li>
+
+<li>Write a JSX comment.</li>
+
+<li>Create a Student Details page using JSX.</li>
+
+</ol>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<!-- Next Topic : React Components -->
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Introduction to Components</h2>
+
+<p>
+
+A <b>Component</b> is one of the most important building blocks of React.
+
+A React application is made up of multiple components. Each component is an independent, reusable piece of UI that performs a specific task.
+
+Instead of writing the entire webpage in one file, React divides the application into small reusable components.
+
+This makes the application easier to understand, maintain and reuse.
+
+</p>
+
+<div class="note">
+
+Think of components like LEGO blocks. Small blocks are combined together to build a complete application.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Why Do We Use Components?</h2>
+
+<p>
+
+Components make application development faster and more organized.
+
+Instead of writing the same HTML multiple times, we can create one component and use it anywhere in the application.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Benefit</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Reusable</td>
+
+<td>Write once and use multiple times.</td>
+
+</tr>
+
+<tr>
+
+<td>Easy Maintenance</td>
+
+<td>Changes are required in only one place.</td>
+
+</tr>
+
+<tr>
+
+<td>Readable Code</td>
+
+<td>Small files are easier to understand.</td>
+
+</tr>
+
+<tr>
+
+<td>Faster Development</td>
+
+<td>Components reduce duplicate code.</td>
+
+</tr>
+
+<tr>
+
+<td>Better Organization</td>
+
+<td>Each file has a specific responsibility.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Real Life Example of Components</h2>
+
+<p>
+
+A website can be divided into several independent components.
+
+Each component performs its own responsibility.
+
+</p>
+
+<pre class="code">
+Website
+
+|
+
+|-- Navbar
+
+|-- Hero Section
+
+|-- About Section
+
+|-- Services
+
+|-- Courses
+
+|-- Testimonials
+
+|-- Contact
+
+|-- Footer
+</pre>
+
+<div class="output">
+
+Each section can be created as a separate React component.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Creating Your First Component</h2>
+
+<p>
+
+A React component is simply a JavaScript function that returns JSX.
+
+The component name must always begin with a capital letter.
+
+</p>
+
+<pre class="code">
+function Welcome(){
+
+return(
+
+&lt;h1&gt;
+
+Welcome To React
+
+&lt;/h1&gt;
+
+);
+
+}
+
+export default Welcome;
+</pre>
+
+<div class="output">
+
+Output:
+
+Welcome To React
+
+</div>
+
+<div class="note">
+
+Component names should always start with an uppercase letter.
+
+Example:
+
+Student ✔
+
+student ✘
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Using a Component</h2>
+
+<p>
+
+After creating a component, it must be imported into another component before it can be used.
+
+</p>
+
+<pre class="code">
+import Welcome from "./Welcome";
+
+function App(){
+
+return(
+
+&lt;div&gt;
+
+&lt;Welcome /&gt;
+
+&lt;/div&gt;
+
+);
+
+}
+
+export default App;
+</pre>
+
+<div class="output">
+
+The Welcome component will be displayed inside the App component.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Component Naming Rules</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Rule</th>
+
+<th>Example</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Start with Capital Letter</td>
+
+<td>Header</td>
+
+</tr>
+
+<tr>
+
+<td>Use Pascal Case</td>
+
+<td>StudentProfile</td>
+
+</tr>
+
+<tr>
+
+<td>Meaningful Name</td>
+
+<td>LoginForm</td>
+
+</tr>
+
+<tr>
+
+<td>One Component Per File</td>
+
+<td>Recommended</td>
+
+</tr>
+
+<tr>
+
+<td>Export Component</td>
+
+<td>export default Header;</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Multiple Components Example</h2>
+
+<p>
+
+A React application usually contains multiple components.
+
+</p>
+
+<pre class="code">
+App
+
+|
+
+|-- Header
+
+|-- Home
+
+|-- About
+
+|-- Footer
+</pre>
+
+<p>
+
+App.jsx
+
+</p>
+
+<pre class="code">
+import Header from "./Header";
+
+import Home from "./Home";
+
+import Footer from "./Footer";
+
+function App(){
+
+return(
+
+&lt;&gt;
+
+&lt;Header /&gt;
+
+&lt;Home /&gt;
+
+&lt;Footer /&gt;
+
+&lt;/&gt;
+
+);
+
+}
+
+export default App;
+</pre>
+
+<div class="output">
+
+All components are rendered one after another.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Component Folder Structure</h2>
+
+<p>
+
+Most React projects create a separate folder for components.
+
+</p>
+
+<pre class="code">
+src/
+
+|
+
+|-- components/
+
+|     |
+
+|     |-- Header.jsx
+
+|     |-- Footer.jsx
+
+|     |-- Home.jsx
+
+|     |-- Navbar.jsx
+
+|
+
+|-- App.jsx
+
+|-- main.jsx
+</pre>
+
+<div class="note">
+
+Keeping components inside a dedicated folder improves project organization.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Continue in Next Part -->
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Importing Components</h2>
+
+<p>
+
+Before using a component inside another component, it must be imported.
+
+The <b>import</b> keyword is used to access components from other files.
+
+React allows developers to organize code into multiple files and then combine them together using import statements.
+
+</p>
+
+<pre class="code">
+import Header from "./Header";
+
+function App(){
+
+return(
+
+&lt;Header /&gt;
+
+);
+
+}
+
+export default App;
+</pre>
+
+<div class="output">
+
+The Header component will be rendered inside App.jsx.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Exporting Components</h2>
+
+<p>
+
+A component cannot be used in another file unless it is exported.
+
+React mainly supports two types of exports.
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Export Type</th>
+
+<th>Syntax</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Default Export</td>
+
+<td>export default Component;</td>
+
+</tr>
+
+<tr>
+
+<td>Named Export</td>
+
+<td>export { Component };</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="note">
+
+Most React projects use <b>Default Export</b>.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Default Export Example</h2>
+
+<p>
+
+A file can contain only one default export.
+
+</p>
+
+<pre class="code">
+function Header(){
+
+return(
+
+&lt;h1&gt;
+
+Welcome
+
+&lt;/h1&gt;
+
+);
+
+}
+
+export default Header;
+</pre>
+
+<p>
+
+Importing the component:
+
+</p>
+
+<pre class="code">
+import Header from "./Header";
+</pre>
+
+<div class="output">
+
+Default export does not require curly braces during import.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Named Export Example</h2>
+
+<p>
+
+Named exports allow multiple values or components to be exported from the same file.
+
+</p>
+
+<pre class="code">
+export function Header(){
+
+return(
+
+&lt;h1&gt;
+
+Header
+
+&lt;/h1&gt;
+
+);
+
+}
+</pre>
+
+<p>
+
+Import Statement
+
+</p>
+
+<pre class="code">
+import { Header }
+
+from "./Header";
+</pre>
+
+<div class="note">
+
+Named exports must always be imported using curly braces.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Default Export vs Named Export</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Default Export</th>
+
+<th>Named Export</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Only One Export</td>
+
+<td>Multiple Exports Allowed</td>
+
+</tr>
+
+<tr>
+
+<td>No Curly Braces</td>
+
+<td>Uses Curly Braces</td>
+
+</tr>
+
+<tr>
+
+<td>Most Common</td>
+
+<td>Less Common</td>
+
+</tr>
+
+<tr>
+
+<td>Any Name Can Be Used During Import</td>
+
+<td>Name Must Match</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Nested Components</h2>
+
+<p>
+
+A component can contain another component.
+
+This concept is known as <b>Nested Components</b>.
+
+Large applications are built by nesting multiple small components together.
+
+</p>
+
+<pre class="code">
+function Header(){
+
+return(
+
+&lt;h2&gt;
+
+Header
+
+&lt;/h2&gt;
+
+);
+
+}
+
+function App(){
+
+return(
+
+&lt;div&gt;
+
+&lt;Header /&gt;
+
+&lt;/div&gt;
+
+);
+
+}
+</pre>
+
+<div class="output">
+
+Header
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Component Reusability</h2>
+
+<p>
+
+One of the biggest advantages of React is component reusability.
+
+A single component can be used multiple times within the same application.
+
+</p>
+
+<pre class="code">
+function Card(){
+
+return(
+
+&lt;div&gt;
+
+&lt;h3&gt;
+
+React Course
+
+&lt;/h3&gt;
+
+&lt;/div&gt;
+
+);
+
+}
+
+function App(){
+
+return(
+
+&lt;&gt;
+
+&lt;Card /&gt;
+
+&lt;Card /&gt;
+
+&lt;Card /&gt;
+
+&lt;/&gt;
+
+);
+
+}
+</pre>
+
+<div class="output">
+
+React Course
+
+React Course
+
+React Course
+
+</div>
+
+<div class="note">
+
+Write Once, Use Anywhere.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Advantages of Components</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Advantage</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Reusable</td>
+
+<td>Same component can be reused.</td>
+
+</tr>
+
+<tr>
+
+<td>Easy Maintenance</td>
+
+<td>Update one file only.</td>
+
+</tr>
+
+<tr>
+
+<td>Clean Code</td>
+
+<td>Project remains organized.</td>
+
+</tr>
+
+<tr>
+
+<td>Independent</td>
+
+<td>Each component works independently.</td>
+
+</tr>
+
+<tr>
+
+<td>Scalable</td>
+
+<td>Suitable for large projects.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Best Practices</h2>
+
+<ul>
+
+<li>Use meaningful component names.</li>
+
+<li>Always begin component names with a capital letter.</li>
+
+<li>Create one component per file.</li>
+
+<li>Store components inside a components folder.</li>
+
+<li>Keep components small and reusable.</li>
+
+<li>Export every component properly.</li>
+
+<li>Import components only where required.</li>
+
+<li>Avoid writing very large components.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Quick Revision</h2>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Topic</th>
+
+<th>Remember</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Component</td>
+
+<td>Reusable UI Block</td>
+
+</tr>
+
+<tr>
+
+<td>Import</td>
+
+<td>Used to access another file</td>
+
+</tr>
+
+<tr>
+
+<td>Export</td>
+
+<td>Makes component available</td>
+
+</tr>
+
+<tr>
+
+<td>Default Export</td>
+
+<td>No Curly Braces</td>
+
+</tr>
+
+<tr>
+
+<td>Named Export</td>
+
+<td>Uses Curly Braces</td>
+
+</tr>
+
+<tr>
+
+<td>Nested Components</td>
+
+<td>Component inside Component</td>
+
+</tr>
+
+<tr>
+
+<td>Reusable Components</td>
+
+<td>Write Once, Use Multiple Times</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Interview Questions</h2>
+
+<ol>
+
+<li>What is a React Component?</li>
+
+<li>Why are components used in React?</li>
+
+<li>What is the difference between Default Export and Named Export?</li>
+
+<li>What is Component Reusability?</li>
+
+<li>What are Nested Components?</li>
+
+<li>Can one component use another component?</li>
+
+<li>Why should component names start with a capital letter?</li>
+
+<li>What is the purpose of the import statement?</li>
+
+<li>What is the purpose of export?</li>
+
+<li>Where are components generally stored in a React project?</li>
+
+</ol>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Practice Questions</h2>
+
+<ol>
+
+<li>Create a Header component.</li>
+
+<li>Create a Footer component.</li>
+
+<li>Import Header inside App.jsx.</li>
+
+<li>Create three reusable Card components.</li>
+
+<li>Create a Navbar component.</li>
+
+<li>Use Header, Navbar, Home and Footer inside App.jsx.</li>
+
+<li>Create a Student component and display student details.</li>
+
+<li>Create a Product component and reuse it four times.</li>
+
+<li>Create two components using Named Export.</li>
+
+<li>Explain Default Export and Named Export with examples.</li>
+
+</ol>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<div class="card section-card">
+
+<div class="card-body">
+
+<h2>Summary</h2>
+
+<ul>
+
+<li>Components are reusable building blocks of React applications.</li>
+
+<li>Every React application is made by combining multiple components.</li>
+
+<li>Components improve readability, maintainability and code reusability.</li>
+
+<li>Components should always start with a capital letter.</li>
+
+<li>Components must be exported before they can be imported into another file.</li>
+
+<li>Default Export is the most commonly used export method.</li>
+
+<li>Nested components help build large applications using smaller UI blocks.</li>
+
+<li>Reusable components reduce duplicate code and improve development speed.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+    
+</body>
+
+</html>
