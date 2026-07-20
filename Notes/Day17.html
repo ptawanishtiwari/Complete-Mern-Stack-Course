@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 17 – React: Props, useState, useEffect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f4f7fb;
+        }
+        .hero {
+            background: linear-gradient(135deg, #16a34a, #14532d);
+            color: white;
+            padding: 70px 0;
+        }
+        .sidebar {
+            position: sticky;
+            top: 20px;
+        }
+        .section-card {
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+        .code {
+            background: #111827;
+            color: #22c55e;
+            padding: 15px;
+            border-radius: 10px;
+            overflow: auto;
+        }
+        .note {
+            background: #fff8dc;
+            border-left: 5px solid orange;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .output {
+            background: #eef2ff;
+            padding: 12px;
+            border-left: 4px solid green;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        h2 {
+            color: #15803d;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .table th {
+            background: #e6f7e6;
+        }
+        .badge-react {
+            background: #61dafb;
+            color: #000;
+            font-weight: 600;
+        }
+        .mini-demo {
+            background: #f0f9f0;
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px solid #b7d7b7;
+        }
+        .hook-demo {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="container">
+        <h1>Day 17 – React: Props · useState · useEffect</h1>
+        <p class="lead">
+            Deep dive into React core hooks: props, state management with useState, and side effects with useEffect.
+        </p>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card sidebar">
+                <div class="card-body">
+                    <h5>Topics</h5>
+                    <ul class="list-unstyled">
+                        <li>✔ Props (Properties)</li>
+                        <li>✔ Passing &amp; using props</li>
+                        <li>✔ Children prop</li>
+                        <li>✔ useState hook</li>
+                        <li>✔ Updating state</li>
+                        <li>✔ Functional updates</li>
+                        <li>✔ useEffect hook</li>
+                        <li>✔ Dependency array</li>
+                        <li>✔ Cleanup function</li>
+                        <li>✔ Real-world examples</li>
+                        <li>✔ Interview Q&amp;A</li>
+                        <li>✔ Practice tasks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+
+            <!-- ============ PROPS ============ -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Props (Properties) in React</h2>
+                    <p>
+                        <b>Props</b> (short for <b>properties</b>) are read-only inputs that allow data to be passed from a parent component to a child component. 
+                        They make components dynamic and reusable.
+                    </p>
+                    <div class="note">
+                        Props are <b>immutable</b> – a child component cannot modify the props it receives.
+                    </div>
+                    <div class="code">
+                        // Parent component
+                        function App() {<br>
+                        &nbsp;&nbsp;const userName = "Aisha";<br>
+                        &nbsp;&nbsp;return &lt;Greeting name={userName} role="Admin" /&gt;;<br>
+                        }<br><br>
+                        // Child component<br>
+                        function Greeting(props) {<br>
+                        &nbsp;&nbsp;return &lt;h3&gt;Hello {props.name} – {props.role}&lt;/h3&gt;;<br>
+                        }
+                    </div>
+                    <div class="output">
+                        ✅ Output: <strong>Hello Aisha – Admin</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ DESTRUCTURING PROPS ============ -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Destructuring Props</h2>
+                    <p>
+                        Instead of using <code>props.name</code>, we can destructure props directly in the function signature for cleaner code.
+                    </p>
+                    <div class="code">
+                        function Greeting({ name, role }) {<br>
+                        &nbsp;&nbsp;return &lt;h3&gt;Hello {name} – {role}&lt;/h3&gt;;<br>
+                        }
+                    </div>
+                    <div class="output">
+                        ✅ Cleaner, more readable.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ CHILDREN PROP ============ -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>The <code>children</code> Prop</h2>
+                    <p>
+                        <b>children</b> is a special prop that lets you pass elements/components between the opening and closing tags of a component.
+                    </p>
+                    <div class="code">
+                        function Card({ children, title }) {<br>
+                        &nbsp;&nbsp;return (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div className="card p-3"&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h5&gt;{title}&lt;/h5&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;{children}&lt;/div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        // Usage<br>
+                        &lt;Card title="Welcome"&gt;<br>
+                        &nbsp;&nbsp;&lt;p&gt;This is the content inside the card.&lt;/p&gt;<br>
+                        &lt;/Card&gt;
+                    </div>
+                    <div class="output">
+                        🧩 children make components highly flexible (layout components, wrappers, etc.)
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ useState HOOK ============ -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>useState Hook</h2>
+                    <p>
+                        <b>useState</b> is a React Hook that lets you add state to functional components. 
+                        It returns an array with two values: the current state and a function to update it.
+                    </p>
+                    <div class="code">
+                        import { useState } from "react";<br><br>
+                        function Counter() {<br>
+                        &nbsp;&nbsp;const [count, setCount] = useState(0); // initial value 0<br>
+                        &nbsp;&nbsp;return (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Count: {count}&lt;/p&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() =&gt; setCount(count + 1)}&gt;Increment&lt;/button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </div>
+                    <div class="output">
+                        🔄 Each click updates the state and re‑renders the component.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ FUNCTIONAL UPDATE ============ -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Functional Updates (useState)</h2>
+                    <p>
+                        When the new state depends on the previous state, it's safer to use the <b>functional update</b> form.
+                    </p>
+                    <div class="code">
+                        setCount(prev =&gt; prev + 1);
+                    </div>
+                    <div class="note">
+                        ⚡ Prevents race conditions when multiple updates are batched.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ useEffect HOOK ============ -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>useEffect Hook</h2>
+                    <p>
+                        <b>useEffect</b> lets you perform side effects in function components: data fetching, subscriptions, timers, DOM manipulations, etc.
+                    </p>
+                    <div class="code">
+                        import { useEffect, useState } from "react";<br><br>
+                        function Timer() {<br>
+                        &nbsp;&nbsp;const [seconds, setSeconds] = useState(0);<br><br>
+                        &nbsp;&nbsp;useEffect(() =&gt; {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const interval = setInterval(() =&gt; {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setSeconds(s =&gt; s + 1);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}, 1000);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return () =&gt; clearInterval(interval); // cleanup<br>
+                        &nbsp;&nbsp;}, []); // empty dependency array → runs once<br><br>
+                        &nbsp;&nbsp;return &lt;p&gt;Timer: {seconds}s&lt;/p&gt;;<br>
+                        }
+                    </div>
+                    <div class="output">
+                        ⏱️ The timer increments every second. Cleanup prevents memory leaks.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ DEPENDENCY ARRAY ============ -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>useEffect – Dependency Array</h2>
+                    <table class="table table-bordered">
+                        <thead class="table-success">
+                            <tr><th>Dependency array</th><th>Effect runs</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>useEffect(fn, [])</code></td><td>Once after initial render (mount)</td></tr>
+                            <tr><td><code>useEffect(fn)</code> (no array)</td><td>After every render</td></tr>
+                            <tr><td><code>useEffect(fn, [dep1, dep2])</code></td><td>When dep1 or dep2 changes</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="note">
+                        🧠 Always specify dependencies to avoid infinite loops or unnecessary re‑runs.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ CLEANUP FUNCTION ============ -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Cleanup Function in useEffect</h2>
+                    <p>
+                        The function returned from <code>useEffect</code> is executed when the component unmounts or before the next effect runs.
+                        Used for cleaning up subscriptions, timers, event listeners, etc.
+                    </p>
+                    <div class="code">
+                        useEffect(() =&gt; {<br>
+                        &nbsp;&nbsp;const handleResize = () =&gt; console.log("resized");<br>
+                        &nbsp;&nbsp;window.addEventListener("resize", handleResize);<br>
+                        &nbsp;&nbsp;return () =&gt; {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;window.removeEventListener("resize", handleResize);<br>
+                        &nbsp;&nbsp;};<br>
+                        }, []);
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ REAL-WORLD COMBINED EXAMPLE ============ -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Combined Example: Props + useState + useEffect</h2>
+                    <p>This mini‑app demonstrates all three concepts together.</p>
+                    <div class="mini-demo">
+                        <div class="hook-demo">
+                            <h5>📦 User Profile (with fetch)</h5>
+                            <div id="demo-root" class="mb-2">
+                                <!-- Static simulation of React component -->
+                                <div class="d-flex flex-wrap gap-3">
+                                    <div class="p-3 border rounded bg-white">
+                                        <p><strong>👤 User:</strong> <span id="userName">Alex</span></p>
+                                        <p><strong>📧 Email:</strong> <span id="userEmail">alex@dev.com</span></p>
+                                        <button class="btn btn-sm btn-success" id="updateUserBtn">Update User</button>
+                                    </div>
+                                    <div class="p-3 border rounded bg-light">
+                                        <p><strong>⏳ Timer (useEffect):</strong> <span id="timerDisplay">0</span>s</p>
+                                        <button class="btn btn-sm btn-outline-secondary" id="resetTimerBtn">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-muted small">(Simulated React behaviour – click buttons to see state updates)</p>
+                        </div>
+                    </div>
+
+                    <!-- code snippet -->
+                    <div class="code mt-3">
+                        function UserProfile({ userId }) {<br>
+                        &nbsp;&nbsp;const [user, setUser] = useState(null);<br>
+                        &nbsp;&nbsp;const [timer, setTimer] = useState(0);<br><br>
+                        &nbsp;&nbsp;useEffect(() =&gt; {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;fetch(`/api/user/${userId}`)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(res =&gt; res.json())<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(data =&gt; setUser(data));<br>
+                        &nbsp;&nbsp;}, [userId]);<br><br>
+                        &nbsp;&nbsp;useEffect(() =&gt; {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const interval = setInterval(() =&gt; {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setTimer(t =&gt; t + 1);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}, 1000);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return () =&gt; clearInterval(interval);<br>
+                        &nbsp;&nbsp;}, []);<br><br>
+                        &nbsp;&nbsp;if (!user) return &lt;p&gt;Loading...&lt;/p&gt;;<br>
+                        &nbsp;&nbsp;return (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h5&gt;{user.name}&lt;/h5&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;{user.email}&lt;/p&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Timer: {timer}s&lt;/p&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ INTERVIEW QUESTIONS ============ -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Top Interview Questions</h2>
+                    <ol>
+                        <li>What are props in React? How do you pass them?</li>
+                        <li>What is the difference between props and state?</li>
+                        <li>Explain the <code>children</code> prop with an example.</li>
+                        <li>What is the <code>useState</code> hook? When do you use it?</li>
+                        <li>What is the purpose of the dependency array in <code>useEffect</code>?</li>
+                        <li>How do you clean up side effects in <code>useEffect</code>?</li>
+                        <li>Why should you use the functional update form in <code>setState</code>?</li>
+                        <li>Can you use <code>useEffect</code> for data fetching? How?</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- ============ PRACTICE ASSIGNMENT ============ -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Practice Assignment</h2>
+                    <ul>
+                        <li>Create a <code>UserCard</code> component that receives <code>name</code>, <code>age</code> and <code>country</code> as props.</li>
+                        <li>Build a <code>Counter</code> with increment, decrement and reset buttons using <code>useState</code>.</li>
+                        <li>Use <code>useEffect</code> to update the document title with the counter value.</li>
+                        <li>Build a simple <code>TodoList</code> where you can add and remove items using <code>useState</code>.</li>
+                        <li>Simulate a data fetch with <code>useEffect</code> (e.g., fetch from a public API or mock data).</li>
+                    </ul>
+                    <div class="note">
+                        💡 Practice makes perfect – these tasks cover the most common React patterns.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ SUMMARY ============ -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Quick Revision Table</h2>
+                    <table class="table table-bordered">
+                        <thead class="table-success">
+                            <tr><th>Concept</th><th>Key takeaway</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Props</td><td>Read‑only data passed from parent → child</td></tr>
+                            <tr><td>useState</td><td>Adds reactive state to functional components</td></tr>
+                            <tr><td>useEffect</td><td>Handles side effects (fetch, timers, subscriptions)</td></tr>
+                            <tr><td>Dependencies</td><td>Control when the effect re‑runs</td></tr>
+                            <tr><td>Cleanup</td><td>Prevents memory leaks and stale side effects</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="output">
+                        🚀 Mastery of props, useState and useEffect is essential for every React developer.
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- /col-lg-9 -->
+    </div> <!-- /row -->
+</div> <!-- /container -->
+
+<!-- Bootstrap JS + small interactive demo (simulated React behaviour) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    (function() {
+        // ---------- simulate useState + useEffect ----------
+        // User state
+        let user = { name: 'Alex', email: 'alex@dev.com' };
+        let timer = 0;
+        let intervalId = null;
+
+        const userNameEl = document.getElementById('userName');
+        const userEmailEl = document.getElementById('userEmail');
+        const timerDisplay = document.getElementById('timerDisplay');
+
+        // update UI
+        function render() {
+            if (userNameEl) userNameEl.textContent = user.name;
+            if (userEmailEl) userEmailEl.textContent = user.email;
+            if (timerDisplay) timerDisplay.textContent = timer;
+        }
+
+        // useEffect for timer (mount + cleanup)
+        function startTimer() {
+            if (intervalId) clearInterval(intervalId);
+            intervalId = setInterval(() => {
+                timer = timer + 1;
+                render();
+            }, 1000);
+        }
+        function stopTimer() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+            }
+        }
+
+        // initial render
+        render();
+        startTimer();
+
+        // Update user button (simulate setUser)
+        document.getElementById('updateUserBtn')?.addEventListener('click', function() {
+            user = { name: 'Samira', email: 'samira@react.dev' };
+            render();
+        });
+
+        // Reset timer (simulate setTimer(0))
+        document.getElementById('resetTimerBtn')?.addEventListener('click', function() {
+            timer = 0;
+            render();
+            // restart timer to keep it running (optional)
+            stopTimer();
+            startTimer();
+        });
+
+        // cleanup on page unload
+        window.addEventListener('beforeunload', function() {
+            stopTimer();
+        });
+    })();
+</script>
+
+</body>
+</html>
