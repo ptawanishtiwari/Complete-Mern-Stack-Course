@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 19 –  Backend: Node.js, NPM & Nodemon</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f4f7fb;
+        }
+        .hero {
+            background: linear-gradient(135deg, #7B2FBE, #4A148C);
+            color: white;
+            padding: 70px 0;
+        }
+        .sidebar {
+            position: sticky;
+            top: 20px;
+        }
+        .section-card {
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+        .code {
+            background: #111827;
+            color: #22c55e;
+            padding: 15px;
+            border-radius: 10px;
+            overflow: auto;
+            font-size: 0.9rem;
+        }
+        .note {
+            background: #f3e5f5;
+            border-left: 5px solid #7B2FBE;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .output {
+            background: #ede7f6;
+            padding: 12px;
+            border-left: 4px solid #7B2FBE;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        h2 {
+            color: #6A1B9A;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .table th {
+            background: #e1bee7;
+        }
+        .badge-react {
+            background: #7B2FBE;
+            color: white;
+            font-weight: 600;
+        }
+        .demo-box {
+            background: #f3e5f5;
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px solid #ce93d8;
+        }
+        .terminal {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+        .terminal .prompt {
+            color: #7B2FBE;
+        }
+        .terminal .command {
+            color: #4fc3f7;
+        }
+        .terminal .output-text {
+            color: #a5d6a7;
+        }
+        .purple-badge {
+            background: #7B2FBE;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="container">
+        <h1>Day 20 – Backend : · Node.js · NPM · Nodemon</h1>
+        <p class="lead">
+            Complete guide to backend development with Node.js, NPM, and using Nodemon for development.
+        </p>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card sidebar">
+                <div class="card-body">
+                    <h5>Topics</h5>
+                    <ul class="list-unstyled">
+                        <li>✔ Backend Development Intro</li>
+                        <li>✔ What is Node.js?</li>
+                        <li>✔ NPM (Node Package Manager)</li>
+                        <li>✔ First Node.js Program</li>
+                        <li>✔ Running Node.js Scripts</li>
+                        <li>✔ Nodemon Installation</li>
+                        <li>✔ Using Nodemon</li>
+                        <li>✔ Nodemon vs Node</li>
+                        <li>✔ package.json Scripts</li>
+                        <li>✔ Best Practices</li>
+                        <li>✔ Interview Q&amp;A</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+
+            <!-- ========== BACKEND INTRO ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Introduction to Backend Development</h2>
+                    <p>
+                        <b>Backend Development</b> refers to the server-side logic, database interactions, authentication, and API development that powers web applications. While the frontend handles what users see, the backend handles data processing, storage, and business logic.
+                    </p>
+                    <div class="note">
+                        🎯 Backend technologies include Node.js, Python (Django/Flask), Java (Spring Boot), PHP, Ruby on Rails, etc.
+                    </div>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Frontend</th><th>Backend</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>UI/UX, user interaction</td><td>Server logic, databases</td></tr>
+                            <tr><td>Runs in browser</td><td>Runs on server</td></tr>
+                            <tr><td>HTML, CSS, JavaScript, React</td><td>Node.js, Python, Java, etc.</td></tr>
+                            <tr><td>Handles presentation</td><td>Handles data &amp; business logic</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="output">
+                        ✅ In the MERN stack, <b>Node.js</b> serves as the backend runtime environment.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== NODE.JS INTRO ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Introduction to Node.js</h2>
+                    <p>
+                        <b>Node.js</b> is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code outside a web browser. It's built on Chrome's V8 JavaScript engine and is widely used for building scalable network applications.
+                    </p>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Feature</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Runtime Environment</td><td>Executes JavaScript on the server</td></tr>
+                            <tr><td>Event-Driven</td><td>Non-blocking, asynchronous I/O</td></tr>
+                            <tr><td>NPM</td><td>Largest ecosystem of open-source libraries</td></tr>
+                            <tr><td>Single-Threaded</td><td>Uses event loop for concurrency</td></tr>
+                            <tr><td>Cross-Platform</td><td>Works on Windows, Linux, macOS</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="note">
+                        📌 Node.js is <b>not</b> a programming language; it's a runtime for JavaScript.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== NPM ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>NPM – Node Package Manager</h2>
+                    <p>
+                        <b>NPM</b> is the default package manager for Node.js. It allows developers to install, share, and manage dependencies (libraries, frameworks, tools) for their projects.
+                    </p>
+                    <div class="code">
+                        // Install a package globally<br>
+                        npm install -g nodemon<br><br>
+                        // Install a package locally (project)<br>
+                        npm install express<br><br>
+                        // Install as development dependency<br>
+                        npm install --save-dev nodemon<br><br>
+                        // Uninstall a package<br>
+                        npm uninstall express
+                    </div>
+                    <div class="output">
+                        📦 <b>package.json</b> tracks all dependencies and scripts for your project.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== FIRST NODE PROGRAM ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Writing Your First Node.js Program</h2>
+                    <p>Let's create a simple Node.js script that prints a message to the console.</p>
+                    <div class="code">
+                        // app.js<br>
+                        console.log("Hello, Node.js!");<br><br>
+                        // Simple function<br>
+                        const greeting = (name) => {<br>
+                        &nbsp;&nbsp;return `Welcome, ${name}!`;<br>
+                        };<br><br>
+                        console.log(greeting("Developer"));<br><br>
+                        // Using built-in modules<br>
+                        const os = require('os');<br>
+                        console.log("Platform:", os.platform());<br>
+                        console.log("CPU Cores:", os.cpus().length);
+                    </div>
+                    <div class="note">
+                        💻 Run the program using: <code>node app.js</code>
+                    </div>
+                    <div class="terminal mt-3">
+                        <div><span class="prompt">$</span> <span class="command">node app.js</span></div>
+                        <div><span class="output-text">Hello, Node.js!</span></div>
+                        <div><span class="output-text">Welcome, Developer!</span></div>
+                        <div><span class="output-text">Platform: win32</span></div>
+                        <div><span class="output-text">CPU Cores: 8</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== RUNNING NODE SCRIPTS ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Running Node.js Scripts</h2>
+                    <p>There are multiple ways to run Node.js scripts:</p>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Method</th><th>Command</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Direct</td><td><code>node filename.js</code></td><td>Runs the script once</td></tr>
+                            <tr><td>With arguments</td><td><code>node app.js --port=3000</code></td><td>Pass command-line arguments</td></tr>
+                            <tr><td>Using npm scripts</td><td><code>npm start</code></td><td>Runs script defined in package.json</td></tr>
+                            <tr><td>With Nodemon</td><td><code>nodemon app.js</code></td><td>Auto-restarts on file changes</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========== NODEMON ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Installing Nodemon</h2>
+                    <p>
+                        <b>Nodemon</b> is a utility that monitors changes in your source code and automatically restarts the Node.js server. It's an essential tool for development.
+                    </p>
+                    <div class="note" style="border-left-color: #7B2FBE; background: #f3e5f5;">
+                        🟣 <b>Purple Theme:</b> Nodemon makes development faster by eliminating the need to manually restart the server.
+                    </div>
+                    <div class="code">
+                        // Install globally (recommended)<br>
+                        npm install -g nodemon<br><br>
+                        // Install as dev dependency<br>
+                        npm install --save-dev nodemon
+                    </div>
+                    <div class="output" style="border-left-color: #7B2FBE; background: #ede7f6;">
+                        ✅ After installation, you can use <code>nodemon</code> instead of <code>node</code>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== USING NODEMON ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Using Nodemon</h2>
+                    <div class="code">
+                        // Instead of:<br>
+                        node app.js<br><br>
+                        // Use:<br>
+                        nodemon app.js<br><br>
+                        // If you have a script in package.json<br>
+                        "scripts": {<br>
+                        &nbsp;&nbsp;"start": "node app.js",<br>
+                        &nbsp;&nbsp;"dev": "nodemon app.js"<br>
+                        }<br><br>
+                        // Then run:<br>
+                        npm run dev
+                    </div>
+                    <div class="terminal mt-3">
+                        <div><span class="prompt">$</span> <span class="command">nodemon app.js</span></div>
+                        <div><span class="output-text">[nodemon] 3.0.1</span></div>
+                        <div><span class="output-text">[nodemon] to restart at any time, enter `rs`</span></div>
+                        <div><span class="output-text">[nodemon] watching path(s): *.*</span></div>
+                        <div><span class="output-text">[nodemon] watching extensions: js,mjs,cjs,json</span></div>
+                        <div><span class="output-text">[nodemon] starting `node app.js`</span></div>
+                        <div><span class="output-text">Hello, Node.js!</span></div>
+                        <div><span class="output-text">[nodemon] clean exit - waiting for changes before restart</span></div>
+                    </div>
+                    <div class="note" style="border-left-color: #7B2FBE; background: #f3e5f5;">
+                        🟣 Nodemon watches all files in the project and restarts when changes are detected.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== NODEMON VS NODE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Node vs Nodemon</h2>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Node</th><th>Nodemon</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Runs script once</td><td>Watches files and restarts</td></tr>
+                            <tr><td>Manual restart required</td><td>Auto-restart on changes</td></tr>
+                            <tr><td>Built into Node.js</td><td>Third-party package</td></tr>
+                            <tr><td>Used in production</td><td>Used in development</td></tr>
+                            <tr><td>No file watching</td><td>File watching with chokidar</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="output" style="border-left-color: #7B2FBE; background: #ede7f6;">
+                        🟣 <b>Best Practice:</b> Use <code>node</code> in production, <code>nodemon</code> in development.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== PACKAGE.JSON SCRIPTS ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>package.json Scripts</h2>
+                    <p>You can define custom scripts in <code>package.json</code> to simplify running commands.</p>
+                    <div class="code">
+                        {<br>
+                        &nbsp;&nbsp;"name": "node-backend",<br>
+                        &nbsp;&nbsp;"version": "1.0.0",<br>
+                        &nbsp;&nbsp;"scripts": {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"start": "node app.js",<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"dev": "nodemon app.js",<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"test": "echo 'No tests specified'",<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"lint": "eslint ."<br>
+                        &nbsp;&nbsp;},<br>
+                        &nbsp;&nbsp;"devDependencies": {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"nodemon": "^3.0.1"<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                    <div class="note" style="border-left-color: #7B2FBE; background: #f3e5f5;">
+                        🟣 Run scripts with <code>npm run script-name</code> (e.g., <code>npm run dev</code>)
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== CREATING A SIMPLE SERVER ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Creating a Simple HTTP Server</h2>
+                    <p>Node.js comes with a built-in <code>http</code> module to create web servers.</p>
+                    <div class="code">
+                        // server.js<br>
+                        const http = require('http');<br><br>
+                        const server = http.createServer((req, res) => {<br>
+                        &nbsp;&nbsp;res.writeHead(200, { 'Content-Type': 'text/plain' });<br>
+                        &nbsp;&nbsp;res.end('Hello from Node.js Server!');<br>
+                        });<br><br>
+                        const PORT = 3000;<br>
+                        server.listen(PORT, () => {<br>
+                        &nbsp;&nbsp;console.log(`Server running on http://localhost:${PORT}`);<br>
+                        });
+                    </div>
+                    <div class="terminal mt-3">
+                        <div><span class="prompt">$</span> <span class="command">nodemon server.js</span></div>
+                        <div><span class="output-text">[nodemon] starting `node server.js`</span></div>
+                        <div><span class="output-text">Server running on http://localhost:3000</span></div>
+                        <div><span class="output-text">[nodemon] clean exit - waiting for changes before restart</span></div>
+                    </div>
+                    <div class="output" style="border-left-color: #7B2FBE; background: #ede7f6;">
+                        🟣 Visit <code>http://localhost:3000</code> in your browser to see the response.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== BEST PRACTICES ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Best Practices</h2>
+                    <ul>
+                        <li>Use <b>Nodemon</b> only in development (install with <code>--save-dev</code>).</li>
+                        <li>Always include a <code>start</code> script in <code>package.json</code>.</li>
+                        <li>Use environment variables for configuration (e.g., <code>PORT</code>).</li>
+                        <li>Ignore <code>node_modules</code> in version control (add to <code>.gitignore</code>).</li>
+                        <li>Keep dependencies updated using <code>npm update</code>.</li>
+                        <li>Use <code>npm init</code> to create a <code>package.json</code> file.</li>
+                        <li>Use <code>--save-dev</code> for development-only packages.</li>
+                    </ul>
+                    <div class="note" style="border-left-color: #7B2FBE; background: #f3e5f5;">
+                        🟣 <b>Pro Tip:</b> Add <code>"type": "module"</code> in package.json to use ES Modules.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== COMMON NPM COMMANDS ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Common NPM Commands Reference</h2>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Command</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>npm init</code></td><td>Creates a package.json file</td></tr>
+                            <tr><td><code>npm init -y</code></td><td>Creates package.json with defaults</td></tr>
+                            <tr><td><code>npm install</code></td><td>Installs all dependencies</td></tr>
+                            <tr><td><code>npm install express</code></td><td>Installs Express locally</td></tr>
+                            <tr><td><code>npm install -g nodemon</code></td><td>Installs Nodemon globally</td></tr>
+                            <tr><td><code>npm install --save-dev nodemon</code></td><td>Installs as dev dependency</td></tr>
+                            <tr><td><code>npm uninstall express</code></td><td>Removes a package</td></tr>
+                            <tr><td><code>npm update</code></td><td>Updates all packages</td></tr>
+                            <tr><td><code>npm run script-name</code></td><td>Runs a custom script</td></tr>
+                            <tr><td><code>npm list</code></td><td>Lists installed packages</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========== INTERVIEW QUESTIONS ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Top Interview Questions</h2>
+                    <ol>
+                        <li>What is backend development?</li>
+                        <li>What is Node.js and why is it used?</li>
+                        <li>What is NPM and what is its purpose?</li>
+                        <li>How do you create a package.json file?</li>
+                        <li>What is the difference between <code>npm install</code> and <code>npm install --save-dev</code>?</li>
+                        <li>What is Nodemon and why is it useful?</li>
+                        <li>How do you install Nodemon globally?</li>
+                        <li>What is the difference between Node and Nodemon?</li>
+                        <li>How do you define scripts in package.json?</li>
+                        <li>What is the difference between dependencies and devDependencies?</li>
+                        <li>How do you run a Node.js script?</li>
+                        <li>What is the <code>http</code> module in Node.js?</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- ========== PRACTICE ASSIGNMENT ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Practice Assignment</h2>
+                    <ul>
+                        <li>Install Node.js on your system (if not already installed).</li>
+                        <li>Create a new folder and run <code>npm init -y</code>.</li>
+                        <li>Write a Node.js script that prints your name and current date.</li>
+                        <li>Install Nodemon globally.</li>
+                        <li>Create a <code>server.js</code> file with a simple HTTP server.</li>
+                        <li>Add a <code>dev</code> script in package.json to run with Nodemon.</li>
+                        <li>Run the server using <code>npm run dev</code>.</li>
+                        <li>Make changes to the server file and see Nodemon auto-restart.</li>
+                        <li>Create a simple API endpoint that returns JSON data.</li>
+                        <li>Use <code>console.log</code> to debug your Node.js application.</li>
+                    </ul>
+                    <div class="note" style="border-left-color: #7B2FBE; background: #f3e5f5;">
+                        🟣 Complete all tasks to get hands-on experience with Node.js and Nodemon!
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== SUMMARY ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Quick Revision Table</h2>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Concept</th><th>Key Point</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Backend</td><td>Server-side logic, APIs, databases</td></tr>
+                            <tr><td>Node.js</td><td>JavaScript runtime on the server</td></tr>
+                            <tr><td>NPM</td><td>Package manager for Node.js</td></tr>
+                            <tr><td>package.json</td><td>Tracks dependencies and scripts</td></tr>
+                            <tr><td>Nodemon</td><td>Auto-restarts server on changes</td></tr>
+                            <tr><td><code>node</code></td><td>Runs script once</td></tr>
+                            <tr><td><code>nodemon</code></td><td>Runs script with auto-restart</td></tr>
+                            <tr><td>dependencies</td><td>Production packages</td></tr>
+                            <tr><td>devDependencies</td><td>Development-only packages</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="output" style="border-left-color: #7B2FBE; background: #ede7f6;">
+                        🟣 <b>Purple Theme:</b> Node.js + Nodemon = efficient backend development!
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- /col-lg-9 -->
+    </div> <!-- /row -->
+</div> <!-- /container -->
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

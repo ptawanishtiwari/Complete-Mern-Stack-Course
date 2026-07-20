@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 16 – React: Node.js Modules, HTTP Server, Express.js Routing</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f4f7fb;
+        }
+        .hero {
+            background: linear-gradient(135deg, #7B2FBE, #4A148C);
+            color: white;
+            padding: 70px 0;
+        }
+        .sidebar {
+            position: sticky;
+            top: 20px;
+        }
+        .section-card {
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+        .code {
+            background: #111827;
+            color: #22c55e;
+            padding: 15px;
+            border-radius: 10px;
+            overflow: auto;
+            font-size: 0.9rem;
+        }
+        .note {
+            background: #f3e5f5;
+            border-left: 5px solid #7B2FBE;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .output {
+            background: #ede7f6;
+            padding: 12px;
+            border-left: 4px solid #7B2FBE;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        h2 {
+            color: #6A1B9A;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .table th {
+            background: #e1bee7;
+        }
+        .purple-badge {
+            background: #7B2FBE;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+        .terminal {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+        .terminal .prompt {
+            color: #7B2FBE;
+        }
+        .terminal .command {
+            color: #4fc3f7;
+        }
+        .terminal .output-text {
+            color: #a5d6a7;
+        }
+        .demo-box {
+            background: #f3e5f5;
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px solid #ce93d8;
+        }
+        .route-demo {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #7B2FBE;
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="container">
+        <h1>Day 21 -  Node.js Modules · HTTP Server · Express.js Routing</h1>
+        <p class="lead">
+            Deep dive into Node.js modules, creating HTTP servers, and mastering Express.js routing with route parameters, request &amp; response.
+        </p>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card sidebar">
+                <div class="card-body">
+                    <h5>Topics</h5>
+                    <ul class="list-unstyled">
+                        <li>✔ Node.js Modules (<code>require</code>)</li>
+                        <li>✔ Creating Custom Modules</li>
+                        <li>✔ Built-in Modules (fs, path, os)</li>
+                        <li>✔ First HTTP Server</li>
+                        <li>✔ Handling Requests &amp; Responses</li>
+                        <li>✔ Express.js Introduction</li>
+                        <li>✔ Express Installation</li>
+                        <li>✔ Express Routing</li>
+                        <li>✔ Route Parameters</li>
+                        <li>✔ Request Object</li>
+                        <li>✔ Response Object</li>
+                        <li>✔ Interview Q&amp;A</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+
+            <!-- ========== MODULES INTRO ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Understanding Modules in Node.js (<code>require</code>)</h2>
+                    <p>
+                        <b>Modules</b> are reusable blocks of code that can be exported from one file and imported into another. Node.js uses the <b>CommonJS</b> module system with <code>require()</code> to import modules and <code>module.exports</code> or <code>exports</code> to export them.
+                    </p>
+                    <div class="note">
+                        🟣 <b>Purple Theme:</b> Modules help organize code, promote reusability, and maintain separation of concerns.
+                    </div>
+                    <div class="code">
+                        // math.js – exporting a module<br>
+                        const add = (a, b) => a + b;<br>
+                        const subtract = (a, b) => a - b;<br><br>
+                        module.exports = { add, subtract };<br><br>
+                        // app.js – importing the module<br>
+                        const math = require('./math');<br>
+                        console.log(math.add(5, 3)); // 8<br>
+                        console.log(math.subtract(10, 4)); // 6
+                    </div>
+                    <div class="output">
+                        ✅ Node.js resolves modules using the <b>module resolution algorithm</b> (checks core modules, file paths, and node_modules).
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== CUSTOM MODULES ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Creating Custom Modules</h2>
+                    <p>You can create your own modules to encapsulate related functionality.</p>
+                    <div class="code">
+                        // user.js<br>
+                        class User {<br>
+                        &nbsp;&nbsp;constructor(name, email) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;this.name = name;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;this.email = email;<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;greet() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return `Hello, ${this.name}!`;<br>
+                        &nbsp;&nbsp;}<br>
+                        }<br><br>
+                        function createUser(name, email) {<br>
+                        &nbsp;&nbsp;return new User(name, email);<br>
+                        }<br><br>
+                        module.exports = { User, createUser };<br><br>
+                        // app.js<br>
+                        const { User, createUser } = require('./user');<br>
+                        const user = createUser('Alice', 'alice@example.com');<br>
+                        console.log(user.greet()); // Hello, Alice!
+                    </div>
+                    <div class="note">
+                        🟣 You can export functions, objects, classes, or any JavaScript value.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== BUILT-IN MODULES ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Built-in Modules in Node.js</h2>
+                    <p>Node.js comes with several built-in modules that provide core functionality.</p>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Module</th><th>Purpose</th><th>Example</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>fs</code></td><td>File system operations</td><td><code>fs.readFileSync()</code></td></tr>
+                            <tr><td><code>path</code></td><td>Path manipulation</td><td><code>path.join()</code></td></tr>
+                            <tr><td><code>os</code></td><td>Operating system info</td><td><code>os.platform()</code></td></tr>
+                            <tr><td><code>http</code></td><td>HTTP server and client</td><td><code>http.createServer()</code></td></tr>
+                            <tr><td><code>url</code></td><td>URL parsing</td><td><code>url.parse()</code></td></tr>
+                            <tr><td><code>crypto</code></td><td>Cryptographic functions</td><td><code>crypto.randomBytes()</code></td></tr>
+                        </tbody>
+                    </table>
+                    <div class="code">
+                        const fs = require('fs');<br>
+                        const path = require('path');<br>
+                        const os = require('os');<br><br>
+                        // Read a file<br>
+                        const data = fs.readFileSync('./data.txt', 'utf8');<br>
+                        console.log(data);<br><br>
+                        // Get system info<br>
+                        console.log('Home dir:', os.homedir());<br>
+                        console.log('Platform:', os.platform());
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== FIRST HTTP SERVER ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Creating Your First HTTP Server in Node.js</h2>
+                    <p>Node.js has a built-in <code>http</code> module to create web servers without any external libraries.</p>
+                    <div class="code">
+                        const http = require('http');<br><br>
+                        const server = http.createServer((req, res) => {<br>
+                        &nbsp;&nbsp;// Handle different URLs<br>
+                        &nbsp;&nbsp;if (req.url === '/') {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;res.writeHead(200, { 'Content-Type': 'text/html' });<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;res.end('&lt;h1&gt;Home Page&lt;/h1&gt;');<br>
+                        &nbsp;&nbsp;} else if (req.url === '/about') {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;res.writeHead(200, { 'Content-Type': 'text/html' });<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;res.end('&lt;h1&gt;About Page&lt;/h1&gt;');<br>
+                        &nbsp;&nbsp;} else {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;res.writeHead(404, { 'Content-Type': 'text/html' });<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;res.end('&lt;h1&gt;404 Not Found&lt;/h1&gt;');<br>
+                        &nbsp;&nbsp;}<br>
+                        });<br><br>
+                        const PORT = 3000;<br>
+                        server.listen(PORT, () => {<br>
+                        &nbsp;&nbsp;console.log(`Server running on http://localhost:${PORT}`);<br>
+                        });
+                    </div>
+                    <div class="terminal mt-3">
+                        <div><span class="prompt">$</span> <span class="command">node server.js</span></div>
+                        <div><span class="output-text">Server running on http://localhost:3000</span></div>
+                    </div>
+                    <div class="output">
+                        ✅ Visit <code>http://localhost:3000</code> to see the home page, and <code>/about</code> for the about page.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== REQUEST & RESPONSE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Understanding Request &amp; Response</h2>
+                    <p>The <code>req</code> (request) and <code>res</code> (response) objects provide information about the incoming request and methods to send the response.</p>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Object</th><th>Property/Method</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td rowspan="4"><b>Request (req)</b></td><td><code>req.url</code></td><td>The requested URL</td></tr>
+                            <tr><td><code>req.method</code></td><td>HTTP method (GET, POST, etc.)</td></tr>
+                            <tr><td><code>req.headers</code></td><td>Request headers</td></tr>
+                            <tr><td><code>req.query</code></td><td>Query parameters (with URL module)</td></tr>
+                            <tr><td rowspan="4"><b>Response (res)</b></td><td><code>res.writeHead()</code></td><td>Sets status code and headers</td></tr>
+                            <tr><td><code>res.write()</code></td><td>Writes response body</td></tr>
+                            <tr><td><code>res.end()</code></td><td>Ends the response</td></tr>
+                            <tr><td><code>res.setHeader()</code></td><td>Sets a header</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="code">
+                        const server = http.createServer((req, res) => {<br>
+                        &nbsp;&nbsp;console.log('Method:', req.method);<br>
+                        &nbsp;&nbsp;console.log('URL:', req.url);<br>
+                        &nbsp;&nbsp;console.log('Headers:', req.headers);<br><br>
+                        &nbsp;&nbsp;res.writeHead(200, { 'Content-Type': 'application/json' });<br>
+                        &nbsp;&nbsp;res.end(JSON.stringify({ message: 'Hello World!' }));<br>
+                        });
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== EXPRESS INTRO ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Introduction to Express.js</h2>
+                    <p>
+                        <b>Express.js</b> is a minimal and flexible Node.js web application framework that provides a robust set of features for building web and mobile applications. It simplifies the process of handling HTTP requests, routing, middleware, and responses.
+                    </p>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Feature</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Routing</td><td>Define routes for different HTTP methods</td></tr>
+                            <tr><td>Middleware</td><td>Functions that process requests before they reach routes</td></tr>
+                            <tr><td>Template Engines</td><td>Support for EJS, Pug, Handlebars, etc.</td></tr>
+                            <tr><td>Static Files</td><td>Serve static assets like CSS, images</td></tr>
+                            <tr><td>JSON Support</td><td>Automatic JSON parsing</td></tr>
+                            <tr><td>Error Handling</td><td>Built-in error handling middleware</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="note">
+                        🟣 Express is the most popular Node.js framework and is a core part of the MERN stack.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== EXPRESS INSTALLATION ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Express.js Installation</h2>
+                    <p>Installing Express is straightforward using NPM.</p>
+                    <div class="code">
+                        // Create a new project<br>
+                        mkdir express-app<br>
+                        cd express-app<br>
+                        npm init -y<br><br>
+                        // Install Express<br>
+                        npm install express<br><br>
+                        // Install Nodemon as dev dependency<br>
+                        npm install --save-dev nodemon
+                    </div>
+                    <div class="code">
+                        // package.json scripts<br>
+                        "scripts": {<br>
+                        &nbsp;&nbsp;"start": "node app.js",<br>
+                        &nbsp;&nbsp;"dev": "nodemon app.js"<br>
+                        }
+                    </div>
+                    <div class="output">
+                        ✅ After installation, you can create your first Express application.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== EXPRESS ROUTING ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Express.js Routing</h2>
+                    <p>
+                        <b>Routing</b> refers to how an application responds to client requests for specific endpoints (URIs) and HTTP methods.
+                    </p>
+                    <div class="code">
+                        const express = require('express');<br>
+                        const app = express();<br><br>
+                        // GET route<br>
+                        app.get('/', (req, res) => {<br>
+                        &nbsp;&nbsp;res.send('Home Page');<br>
+                        });<br><br>
+                        // POST route<br>
+                        app.post('/users', (req, res) => {<br>
+                        &nbsp;&nbsp;res.send('User created');<br>
+                        });<br><br>
+                        // PUT route<br>
+                        app.put('/users/:id', (req, res) => {<br>
+                        &nbsp;&nbsp;res.send(`User ${req.params.id} updated`);<br>
+                        });<br><br>
+                        // DELETE route<br>
+                        app.delete('/users/:id', (req, res) => {<br>
+                        &nbsp;&nbsp;res.send(`User ${req.params.id} deleted`);<br>
+                        });<br><br>
+                        app.listen(3000, () => {<br>
+                        &nbsp;&nbsp;console.log('Server running on port 3000');<br>
+                        });
+                    </div>
+                    <div class="demo-box mt-3">
+                        <div class="route-demo">
+                            <p><strong>🟣 Express Route Examples:</strong></p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-success">GET /</span>
+                                <span class="badge bg-primary">POST /users</span>
+                                <span class="badge bg-warning">PUT /users/:id</span>
+                                <span class="badge bg-danger">DELETE /users/:id</span>
+                                <span class="badge bg-info">GET /users/:id</span>
+                            </div>
+                            <p class="small text-muted mt-2">Express supports all HTTP methods: GET, POST, PUT, DELETE, PATCH, etc.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== ROUTE PARAMETERS ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Route Parameters</h2>
+                    <p>
+                        <b>Route parameters</b> are named segments in the URL that capture values at specific positions. They are accessed via <code>req.params</code>.
+                    </p>
+                    <div class="code">
+                        // Route with parameters<br>
+                        app.get('/users/:userId/books/:bookId', (req, res) => {<br>
+                        &nbsp;&nbsp;const { userId, bookId } = req.params;<br>
+                        &nbsp;&nbsp;res.send(`User: ${userId}, Book: ${bookId}`);<br>
+                        });<br><br>
+                        // Route with optional parameter<br>
+                        app.get('/products/:category?/:id?', (req, res) => {<br>
+                        &nbsp;&nbsp;const { category, id } = req.params;<br>
+                        &nbsp;&nbsp;res.send(`Category: ${category || 'all'}, ID: ${id || 'none'}`);<br>
+                        });<br><br>
+                        // Example: /users/123/books/456 → User: 123, Book: 456
+                    </div>
+                    <div class="terminal mt-3">
+                        <div><span class="prompt">$</span> <span class="command">GET /users/42/books/7</span></div>
+                        <div><span class="output-text">User: 42, Book: 7</span></div>
+                    </div>
+                    <div class="note">
+                        🟣 Route parameters are always strings – you'll need to parse them (e.g., <code>parseInt()</code>) if you need numbers.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== REQUEST OBJECT DETAILS ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Request Object (<code>req</code>) in Express</h2>
+                    <p>The Express <code>req</code> object extends Node.js's built-in request object with additional properties and methods.</p>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Property/Method</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>req.params</code></td><td>Route parameters</td></tr>
+                            <tr><td><code>req.query</code></td><td>Query string parameters</td></tr>
+                            <tr><td><code>req.body</code></td><td>Request body (needs body-parser or express.json())</td></tr>
+                            <tr><td><code>req.headers</code></td><td>Request headers</td></tr>
+                            <tr><td><code>req.method</code></td><td>HTTP method</td></tr>
+                            <tr><td><code>req.url</code></td><td>Request URL</td></tr>
+                            <tr><td><code>req.ip</code></td><td>Client IP address</td></tr>
+                            <tr><td><code>req.get()</code></td><td>Get specific header</td></tr>
+                            <tr><td><code>req.is()</code></td><td>Check Content-Type</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="code">
+                        app.get('/search', (req, res) => {<br>
+                        &nbsp;&nbsp;const { q, limit = 10 } = req.query;<br>
+                        &nbsp;&nbsp;console.log('Query:', req.query);<br>
+                        &nbsp;&nbsp;console.log('User-Agent:', req.get('User-Agent'));<br>
+                        &nbsp;&nbsp;res.send(`Searching for "${q}" with limit ${limit}`);<br>
+                        });<br><br>
+                        // Example: GET /search?q=react&limit=5
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== RESPONSE OBJECT DETAILS ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Response Object (<code>res</code>) in Express</h2>
+                    <p>The Express <code>res</code> object extends Node.js's built-in response object with many useful methods.</p>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Method</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>res.send()</code></td><td>Sends HTML, JSON, or text</td></tr>
+                            <tr><td><code>res.json()</code></td><td>Sends JSON response</td></tr>
+                            <tr><td><code>res.status()</code></td><td>Sets HTTP status code</td></tr>
+                            <tr><td><code>res.sendFile()</code></td><td>Sends a file</td></tr>
+                            <tr><td><code>res.redirect()</code></td><td>Redirects to another URL</td></tr>
+                            <tr><td><code>res.render()</code></td><td>Renders a template</td></tr>
+                            <tr><td><code>res.set()</code></td><td>Sets a header</td></tr>
+                            <tr><td><code>res.cookie()</code></td><td>Sets a cookie</td></tr>
+                            <tr><td><code>res.clearCookie()</code></td><td>Clears a cookie</td></tr>
+                            <tr><td><code>res.end()</code></td><td>Ends the response</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="code">
+                        app.get('/api/users', (req, res) => {<br>
+                        &nbsp;&nbsp;const users = [{ id: 1, name: 'John' }, { id: 2, name: 'Jane' }];<br>
+                        &nbsp;&nbsp;res.status(200).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;data: users,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;count: users.length<br>
+                        &nbsp;&nbsp;});<br>
+                        });<br><br>
+                        app.post('/api/users', (req, res) => {<br>
+                        &nbsp;&nbsp;// ... create user<br>
+                        &nbsp;&nbsp;res.status(201).json({ message: 'User created' });<br>
+                        });
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== COMPLETE EXPRESS EXAMPLE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Complete Express Application Example</h2>
+                    <p>A full Express application with multiple routes, parameters, and request/response handling.</p>
+                    <div class="code">
+                        const express = require('express');<br>
+                        const app = express();<br><br>
+                        // Middleware<br>
+                        app.use(express.json()); // Parse JSON bodies<br>
+                        app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies<br><br>
+                        // Sample data<br>
+                        let books = [<br>
+                        &nbsp;&nbsp;{ id: 1, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald' },<br>
+                        &nbsp;&nbsp;{ id: 2, title: 'To Kill a Mockingbird', author: 'Harper Lee' }<br>
+                        ];<br><br>
+                        // GET all books<br>
+                        app.get('/api/books', (req, res) => {<br>
+                        &nbsp;&nbsp;res.json({ books });<br>
+                        });<br><br>
+                        // GET a single book by ID<br>
+                        app.get('/api/books/:id', (req, res) => {<br>
+                        &nbsp;&nbsp;const id = parseInt(req.params.id);<br>
+                        &nbsp;&nbsp;const book = books.find(b => b.id === id);<br>
+                        &nbsp;&nbsp;if (!book) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return res.status(404).json({ error: 'Book not found' });<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;res.json({ book });<br>
+                        });<br><br>
+                        // POST a new book<br>
+                        app.post('/api/books', (req, res) => {<br>
+                        &nbsp;&nbsp;const { title, author } = req.body;<br>
+                        &nbsp;&nbsp;if (!title || !author) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return res.status(400).json({ error: 'Title and author are required' });<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;const newBook = {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;id: books.length + 1,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;title,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;author<br>
+                        &nbsp;&nbsp;};<br>
+                        &nbsp;&nbsp;books.push(newBook);<br>
+                        &nbsp;&nbsp;res.status(201).json({ book: newBook });<br>
+                        });<br><br>
+                        // PUT update a book<br>
+                        app.put('/api/books/:id', (req, res) => {<br>
+                        &nbsp;&nbsp;const id = parseInt(req.params.id);<br>
+                        &nbsp;&nbsp;const { title, author } = req.body;<br>
+                        &nbsp;&nbsp;const bookIndex = books.findIndex(b => b.id === id);<br>
+                        &nbsp;&nbsp;if (bookIndex === -1) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return res.status(404).json({ error: 'Book not found' });<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;books[bookIndex] = { ...books[bookIndex], title, author };<br>
+                        &nbsp;&nbsp;res.json({ book: books[bookIndex] });<br>
+                        });<br><br>
+                        // DELETE a book<br>
+                        app.delete('/api/books/:id', (req, res) => {<br>
+                        &nbsp;&nbsp;const id = parseInt(req.params.id);<br>
+                        &nbsp;&nbsp;const bookIndex = books.findIndex(b => b.id === id);<br>
+                        &nbsp;&nbsp;if (bookIndex === -1) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return res.status(404).json({ error: 'Book not found' });<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;books.splice(bookIndex, 1);<br>
+                        &nbsp;&nbsp;res.status(204).send();<br>
+                        });<br><br>
+                        // Query parameters example<br>
+                        app.get('/api/books/search', (req, res) => {<br>
+                        &nbsp;&nbsp;const { q } = req.query;<br>
+                        &nbsp;&nbsp;if (!q) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return res.json({ books });<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;const filtered = books.filter(b =><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;b.title.toLowerCase().includes(q.toLowerCase()) ||<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;b.author.toLowerCase().includes(q.toLowerCase())<br>
+                        &nbsp;&nbsp;);<br>
+                        &nbsp;&nbsp;res.json({ books: filtered, query: q });<br>
+                        });<br><br>
+                        const PORT = 3000;<br>
+                        app.listen(PORT, () => {<br>
+                        &nbsp;&nbsp;console.log(`Server running on http://localhost:${PORT}`);<br>
+                        });
+                    </div>
+                    <div class="output">
+                        🟣 This is a complete CRUD API with Express! Test it using Postman or browser for GET requests.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== INTERVIEW QUESTIONS ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Top Interview Questions</h2>
+                    <ol>
+                        <li>What are modules in Node.js? How do you use <code>require</code>?</li>
+                        <li>What is the difference between <code>module.exports</code> and <code>exports</code>?</li>
+                        <li>Name some built-in Node.js modules and their purposes.</li>
+                        <li>How do you create an HTTP server in Node.js?</li>
+                        <li>What is the difference between Node.js's <code>http</code> module and Express?</li>
+                        <li>What is Express.js and why is it popular?</li>
+                        <li>How do you install Express in a project?</li>
+                        <li>What are route parameters in Express? How do you access them?</li>
+                        <li>What is the difference between <code>req.params</code>, <code>req.query</code>, and <code>req.body</code>?</li>
+                        <li>How do you send a JSON response in Express?</li>
+                        <li>What is the purpose of <code>express.json()</code> middleware?</li>
+                        <li>How do you handle 404 errors in Express?</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- ========== PRACTICE ASSIGNMENT ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Practice Assignment</h2>
+                    <ul>
+                        <li>Create a custom module called <code>calculator.js</code> that exports add, subtract, multiply, and divide functions.</li>
+                        <li>Write a program that uses the <code>fs</code> module to read a text file and log its content.</li>
+                        <li>Create an HTTP server using the built-in <code>http</code> module that serves different pages based on the URL.</li>
+                        <li>Install Express and Nodemon in a new project.</li>
+                        <li>Create an Express application with routes for a TODO list (GET all, POST new, PUT update, DELETE).</li>
+                        <li>Use route parameters to fetch a specific TODO by ID.</li>
+                        <li>Implement query parameters for filtering TODOs (e.g., <code>/todos?completed=true</code>).</li>
+                        <li>Add proper error handling and appropriate HTTP status codes.</li>
+                        <li>Test all endpoints using Postman or Insomnia.</li>
+                    </ul>
+                    <div class="note">
+                        🟣 Completing this assignment will give you a solid foundation in Node.js and Express!
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== SUMMARY ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Quick Revision Table</h2>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Concept</th><th>Key Point</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>require()</code></td><td>Imports modules in Node.js</td></tr>
+                            <tr><td><code>module.exports</code></td><td>Exports values from a module</td></tr>
+                            <tr><td><code>http</code> module</td><td>Built-in HTTP server</td></tr>
+                            <tr><td>Express</td><td>Web framework for Node.js</td></tr>
+                            <tr><td><code>app.get()</code></td><td>Defines GET route</td></tr>
+                            <tr><td><code>req.params</code></td><td>URL parameters</td></tr>
+                            <tr><td><code>req.query</code></td><td>Query string parameters</td></tr>
+                            <tr><td><code>req.body</code></td><td>Request body (with middleware)</td></tr>
+                            <tr><td><code>res.json()</code></td><td>Sends JSON response</td></tr>
+                            <tr><td><code>res.status()</code></td><td>Sets HTTP status code</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="output">
+                        🟣 <b>Purple Theme:</b> Master these concepts to build robust backend applications with Node.js and Express!
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- /col-lg-9 -->
+    </div> <!-- /row -->
+</div> <!-- /container -->
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

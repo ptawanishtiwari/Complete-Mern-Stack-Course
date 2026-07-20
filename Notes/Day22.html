@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 16 – React: Express Middleware, Route-Level Middleware & Environment Variables</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f4f7fb;
+        }
+        .hero {
+            background: linear-gradient(135deg, #7B2FBE, #4A148C);
+            color: white;
+            padding: 70px 0;
+        }
+        .sidebar {
+            position: sticky;
+            top: 20px;
+        }
+        .section-card {
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+        .code {
+            background: #111827;
+            color: #22c55e;
+            padding: 15px;
+            border-radius: 10px;
+            overflow: auto;
+            font-size: 0.9rem;
+        }
+        .note {
+            background: #f3e5f5;
+            border-left: 5px solid #7B2FBE;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .output {
+            background: #ede7f6;
+            padding: 12px;
+            border-left: 4px solid #7B2FBE;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        h2 {
+            color: #6A1B9A;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .table th {
+            background: #e1bee7;
+        }
+        .purple-badge {
+            background: #7B2FBE;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+        .terminal {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+        .terminal .prompt {
+            color: #7B2FBE;
+        }
+        .terminal .command {
+            color: #4fc3f7;
+        }
+        .terminal .output-text {
+            color: #a5d6a7;
+        }
+        .demo-box {
+            background: #f3e5f5;
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px solid #ce93d8;
+        }
+        .middleware-flow {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #7B2FBE;
+            margin: 10px 0;
+        }
+        .env-demo {
+            background: #1a1a2e;
+            color: #a5d6a7;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="container">
+        <h1>Day 22 - Express Middleware · Route-Level Middleware · Environment Variables</h1>
+        <p class="lead">
+            Comprehensive guide to understanding Express middleware, route-level middleware, and managing environment variables with .env files.
+        </p>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card sidebar">
+                <div class="card-body">
+                    <h5>Topics</h5>
+                    <ul class="list-unstyled">
+                        <li>✔ Middleware Concept</li>
+                        <li>✔ Application-Level Middleware</li>
+                        <li>✔ Built-in Middleware</li>
+                        <li>✔ Custom Middleware</li>
+                        <li>✔ Route-Level Middleware</li>
+                        <li>✔ Middleware Chaining</li>
+                        <li>✔ Error Handling Middleware</li>
+                        <li>✔ Environment Variables</li>
+                        <li>✔ dotenv Package</li>
+                        <li>✔ .env Configuration</li>
+                        <li>✔ Best Practices</li>
+                        <li>✔ Interview Q&amp;A</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+
+            <!-- ========== MIDDLEWARE INTRO ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Understanding Middleware in Express.js</h2>
+                    <p>
+                        <b>Middleware</b> functions are functions that have access to the request object (<code>req</code>), the response object (<code>res</code>), and the next middleware function in the application's request-response cycle. They can execute code, modify the request/response objects, end the request-response cycle, or call the next middleware.
+                    </p>
+                    <div class="note">
+                        🟣 <b>Purple Theme:</b> Middleware is the backbone of Express applications – it powers everything from authentication to logging to error handling.
+                    </div>
+                    <div class="middleware-flow">
+                        <p><strong>🔄 Middleware Flow:</strong></p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-secondary">Request</span>
+                            <span class="badge bg-primary">→ Middleware 1</span>
+                            <span class="badge bg-primary">→ Middleware 2</span>
+                            <span class="badge bg-primary">→ Middleware 3</span>
+                            <span class="badge bg-success">→ Route Handler</span>
+                            <span class="badge bg-secondary">→ Response</span>
+                        </div>
+                        <p class="small text-muted mt-2">Each middleware can process the request, then call <code>next()</code> to pass control to the next middleware.</p>
+                    </div>
+                    <div class="code">
+                        const express = require('express');<br>
+                        const app = express();<br><br>
+                        // Simple middleware example<br>
+                        app.use((req, res, next) => {<br>
+                        &nbsp;&nbsp;console.log('Time:', Date.now());<br>
+                        &nbsp;&nbsp;next(); // Pass control to the next middleware<br>
+                        });<br><br>
+                        app.get('/', (req, res) => {<br>
+                        &nbsp;&nbsp;res.send('Hello World!');<br>
+                        });<br><br>
+                        app.listen(3000);
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== APPLICATION-LEVEL MIDDLEWARE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Application-Level Middleware</h2>
+                    <p>
+                        <b>Application-level middleware</b> are bound to an instance of <code>app</code> using <code>app.use()</code> or <code>app.METHOD()</code>. They run for every request or for specific routes.
+                    </p>
+                    <div class="code">
+                        const app = express();<br><br>
+                        // Logger middleware - runs for every request<br>
+                        app.use((req, res, next) => {<br>
+                        &nbsp;&nbsp;console.log(`${req.method} ${req.url}`);<br>
+                        &nbsp;&nbsp;next();<br>
+                        });<br><br>
+                        // Middleware for specific path<br>
+                        app.use('/api', (req, res, next) => {<br>
+                        &nbsp;&nbsp;console.log('API request received');<br>
+                        &nbsp;&nbsp;next();<br>
+                        });<br><br>
+                        // Middleware for specific HTTP method and path<br>
+                        app.get('/protected', (req, res, next) => {<br>
+                        &nbsp;&nbsp;console.log('Protected route accessed');<br>
+                        &nbsp;&nbsp;next();<br>
+                        }, (req, res) => {<br>
+                        &nbsp;&nbsp;res.send('Protected data');<br>
+                        });
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== BUILT-IN MIDDLEWARE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Built-in Middleware in Express</h2>
+                    <p>Express comes with several built-in middleware functions that handle common tasks.</p>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Middleware</th><th>Purpose</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>express.json()</code></td><td>Parses JSON request bodies</td></tr>
+                            <tr><td><code>express.urlencoded({ extended: true })</code></td><td>Parses URL-encoded form data</td></tr>
+                            <tr><td><code>express.static()</code></td><td>Serves static files (CSS, images, etc.)</td></tr>
+                            <tr><td><code>express.Router()</code></td><td>Creates modular route handlers</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="code">
+                        const express = require('express');<br>
+                        const app = express();<br><br>
+                        // Parse JSON bodies<br>
+                        app.use(express.json());<br><br>
+                        // Parse URL-encoded bodies<br>
+                        app.use(express.urlencoded({ extended: true }));<br><br>
+                        // Serve static files from 'public' folder<br>
+                        app.use(express.static('public'));<br><br>
+                        app.post('/api/data', (req, res) => {<br>
+                        &nbsp;&nbsp;console.log(req.body); // Access parsed data<br>
+                        &nbsp;&nbsp;res.json({ received: req.body });<br>
+                        });
+                    </div>
+                    <div class="output">
+                        ✅ Without <code>express.json()</code>, <code>req.body</code> would be <code>undefined</code>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== CUSTOM MIDDLEWARE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Custom Middleware</h2>
+                    <p>You can create your own middleware functions to handle specific tasks like authentication, logging, validation, etc.</p>
+                    <div class="code">
+                        // Authentication middleware<br>
+                        const authenticate = (req, res, next) => {<br>
+                        &nbsp;&nbsp;const token = req.headers['authorization'];<br>
+                        &nbsp;&nbsp;if (!token) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return res.status(401).json({ error: 'Unauthorized' });<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;// Verify token logic here<br>
+                        &nbsp;&nbsp;req.user = { id: 1, name: 'John' }; // Attach user to request<br>
+                        &nbsp;&nbsp;next();<br>
+                        };<br><br>
+                        // Logging middleware<br>
+                        const logger = (req, res, next) => {<br>
+                        &nbsp;&nbsp;const start = Date.now();<br>
+                        &nbsp;&nbsp;res.on('finish', () => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const duration = Date.now() - start;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.log(`${req.method} ${req.url} - ${res.statusCode} - ${duration}ms`);<br>
+                        &nbsp;&nbsp;});<br>
+                        &nbsp;&nbsp;next();<br>
+                        };<br><br>
+                        // Rate limiting middleware<br>
+                        const rateLimiter = (req, res, next) => {<br>
+                        &nbsp;&nbsp;const ip = req.ip;<br>
+                        &nbsp;&nbsp;// Implementation would track requests per IP<br>
+                        &nbsp;&nbsp;next();<br>
+                        };<br><br>
+                        app.use(logger);<br>
+                        app.use(rateLimiter);<br>
+                        app.use('/api/admin', authenticate); // Only apply to admin routes<br>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== ROUTE-LEVEL MIDDLEWARE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Route-Level Middleware in Express.js</h2>
+                    <p>
+                        <b>Route-level middleware</b> is applied to specific routes or route groups. It can be used for route-specific validation, authentication, or data processing.
+                    </p>
+                    <div class="note">
+                        🟣 Route-level middleware is more granular than application-level middleware and is ideal for route-specific logic.
+                    </div>
+                    <div class="code">
+                        const express = require('express');<br>
+                        const app = express();<br><br>
+                        // Middleware function<br>
+                        const validateUser = (req, res, next) => {<br>
+                        &nbsp;&nbsp;const { id } = req.params;<br>
+                        &nbsp;&nbsp;if (!id || isNaN(id)) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return res.status(400).json({ error: 'Invalid user ID' });<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;next();<br>
+                        };<br><br>
+                        // Apply to specific route<br>
+                        app.get('/users/:id', validateUser, (req, res) => {<br>
+                        &nbsp;&nbsp;res.json({ userId: req.params.id });<br>
+                        });<br><br>
+                        // Apply to multiple routes using array<br>
+                        const checkAuth = (req, res, next) => {<br>
+                        &nbsp;&nbsp;const token = req.headers.authorization;<br>
+                        &nbsp;&nbsp;if (!token) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return res.status(401).json({ error: 'Authentication required' });<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;next();<br>
+                        };<br><br>
+                        const checkRole = (req, res, next) => {<br>
+                        &nbsp;&nbsp;// Check if user has admin role<br>
+                        &nbsp;&nbsp;req.userRole = 'admin';<br>
+                        &nbsp;&nbsp;next();<br>
+                        };<br><br>
+                        // Chain multiple middleware<br>
+                        app.put('/admin/users/:id', [checkAuth, checkRole, validateUser], (req, res) => {<br>
+                        &nbsp;&nbsp;res.json({ message: 'User updated by admin' });<br>
+                        });
+                    </div>
+                    <div class="demo-box mt-3">
+                        <div class="middleware-flow">
+                            <p><strong>🟣 Route-Level Middleware Flow:</strong></p>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-secondary">Request</span>
+                                <span class="badge bg-primary">→ checkAuth</span>
+                                <span class="badge bg-primary">→ checkRole</span>
+                                <span class="badge bg-primary">→ validateUser</span>
+                                <span class="badge bg-success">→ Route Handler</span>
+                                <span class="badge bg-secondary">→ Response</span>
+                            </div>
+                            <p class="small text-muted mt-2">Each middleware can modify the request or end the response early.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== MIDDLEWARE CHAINING ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Middleware Chaining</h2>
+                    <p>Express allows you to chain multiple middleware functions together for a single route.</p>
+                    <div class="code">
+                        // Middleware functions<br>
+                        const middleware1 = (req, res, next) => {<br>
+                        &nbsp;&nbsp;console.log('Middleware 1');<br>
+                        &nbsp;&nbsp;req.data = { step: 1 };<br>
+                        &nbsp;&nbsp;next();<br>
+                        };<br><br>
+                        const middleware2 = (req, res, next) => {<br>
+                        &nbsp;&nbsp;console.log('Middleware 2');<br>
+                        &nbsp;&nbsp;req.data.step = 2;<br>
+                        &nbsp;&nbsp;next();<br>
+                        };<br><br>
+                        const middleware3 = (req, res, next) => {<br>
+                        &nbsp;&nbsp;console.log('Middleware 3');<br>
+                        &nbsp;&nbsp;req.data.step = 3;<br>
+                        &nbsp;&nbsp;next();<br>
+                        };<br><br>
+                        app.get('/chain', middleware1, middleware2, middleware3, (req, res) => {<br>
+                        &nbsp;&nbsp;console.log('Final handler');<br>
+                        &nbsp;&nbsp;res.json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;message: 'Middleware chain complete',<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;data: req.data<br>
+                        &nbsp;&nbsp;});<br>
+                        });<br><br>
+                        // Output in console:<br>
+                        // Middleware 1<br>
+                        // Middleware 2<br>
+                        // Middleware 3<br>
+                        // Final handler
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== ERROR HANDLING MIDDLEWARE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Error Handling Middleware</h2>
+                    <p>
+                        Express has a special type of middleware for error handling. Error-handling middleware takes four parameters: <code>(err, req, res, next)</code>.
+                    </p>
+                    <div class="note">
+                        🟣 Error-handling middleware should be placed after all other <code>app.use()</code> and route definitions.
+                    </div>
+                    <div class="code">
+                        const app = express();<br><br>
+                        // Route that throws an error<br>
+                        app.get('/error', (req, res, next) => {<br>
+                        &nbsp;&nbsp;const error = new Error('Something went wrong!');<br>
+                        &nbsp;&nbsp;error.status = 500;<br>
+                        &nbsp;&nbsp;next(error); // Pass error to error handler<br>
+                        });<br><br>
+                        // Route that triggers a validation error<br>
+                        app.post('/users', (req, res, next) => {<br>
+                        &nbsp;&nbsp;if (!req.body.name) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const error = new Error('Name is required');<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;error.status = 400;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return next(error);<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;res.json({ message: 'User created' });<br>
+                        });<br><br>
+                        // Error handling middleware<br>
+                        app.use((err, req, res, next) => {<br>
+                        &nbsp;&nbsp;console.error('Error:', err.message);<br>
+                        &nbsp;&nbsp;console.error('Stack:', err.stack);<br>
+                        &nbsp;&nbsp;const status = err.status || 500;<br>
+                        &nbsp;&nbsp;res.status(status).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;error: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message: err.message,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status: status<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;});<br>
+                        });<br><br>
+                        // 404 handler (catch-all)<br>
+                        app.use((req, res) => {<br>
+                        &nbsp;&nbsp;res.status(404).json({ error: 'Route not found' });<br>
+                        });
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== ENVIRONMENT VARIABLES ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Environment Variables in Node.js</h2>
+                    <p>
+                        <b>Environment variables</b> are key-value pairs that allow you to configure your application without hardcoding sensitive information like API keys, database passwords, or port numbers.
+                    </p>
+                    <div class="note">
+                        🟣 Environment variables are essential for keeping sensitive data secure and making your application configurable across different environments (development, staging, production).
+                    </div>
+                    <div class="code">
+                        // Accessing environment variables<br>
+                        const port = process.env.PORT || 3000;<br>
+                        const dbUrl = process.env.DATABASE_URL;<br>
+                        const apiKey = process.env.API_KEY;<br><br>
+                        console.log(`Server running on port ${port}`);<br>
+                        console.log(`Database URL: ${dbUrl}`);
+                    </div>
+                    <div class="terminal mt-3">
+                        <div><span class="prompt">$</span> <span class="command">PORT=5000 node app.js</span></div>
+                        <div><span class="output-text">Server running on port 5000</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== DOTENV PACKAGE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>dotenv Package – Managing .env Files</h2>
+                    <p>
+                        <b>dotenv</b> is a zero-dependency module that loads environment variables from a <code>.env</code> file into <code>process.env</code>. This makes it easy to manage configuration in development.
+                    </p>
+                    <div class="code">
+                        // Install dotenv<br>
+                        npm install dotenv<br><br>
+                        // Create .env file<br>
+                        // .env<br>
+                        PORT=5000<br>
+                        DB_HOST=localhost<br>
+                        DB_USER=admin<br>
+                        DB_PASSWORD=secret123<br>
+                        JWT_SECRET=mySuperSecretKey<br>
+                        NODE_ENV=development<br><br>
+                        // app.js<br>
+                        require('dotenv').config();<br><br>
+                        console.log('Port:', process.env.PORT); // 5000<br>
+                        console.log('DB Host:', process.env.DB_HOST); // localhost<br>
+                        console.log('Environment:', process.env.NODE_ENV); // development
+                    </div>
+                    <div class="env-demo">
+                        <div>📄 <strong>.env file example</strong></div>
+                        <div style="color: #4fc3f7;">PORT=5000</div>
+                        <div style="color: #4fc3f7;">DB_HOST=localhost</div>
+                        <div style="color: #4fc3f7;">DB_USER=root</div>
+                        <div style="color: #4fc3f7;">DB_PASSWORD=********</div>
+                        <div style="color: #4fc3f7;">JWT_SECRET=mySecretKey123</div>
+                        <div style="color: #4fc3f7;">NODE_ENV=development</div>
+                    </div>
+                    <div class="output">
+                        ✅ Always add <code>.env</code> to <code>.gitignore</code> to keep sensitive data out of version control.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== .ENV CONFIGURATION BEST PRACTICES ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>.env Configuration Best Practices</h2>
+                    <p>Follow these best practices when working with environment variables:</p>
+                    <ul>
+                        <li><b>Never commit .env files</b> – add <code>.env</code> to <code>.gitignore</code>.</li>
+                        <li><b>Use .env.example</b> – create a sample file with placeholder values for other developers.</li>
+                        <li><b>Validate required variables</b> – check if all required environment variables are set.</li>
+                        <li><b>Use different .env files</b> – <code>.env.development</code>, <code>.env.production</code>, etc.</li>
+                        <li><b>Keep sensitive data out</b> – never hardcode secrets in your source code.</li>
+                        <li><b>Use environment-specific config</b> – load different config based on <code>NODE_ENV</code>.</li>
+                    </ul>
+                    <div class="code">
+                        // .env.example<br>
+                        PORT=3000<br>
+                        DB_HOST=localhost<br>
+                        DB_USER=username<br>
+                        DB_PASSWORD=password<br>
+                        JWT_SECRET=your-secret-key<br>
+                        NODE_ENV=development<br><br>
+                        // .gitignore<br>
+                        node_modules/<br>
+                        .env<br>
+                        .env.*<br><br>
+                        // app.js - validation<br>
+                        const requiredEnv = ['PORT', 'DB_HOST', 'JWT_SECRET'];<br>
+                        requiredEnv.forEach(key => {<br>
+                        &nbsp;&nbsp;if (!process.env[key]) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.error(`Error: ${key} is not defined in environment variables`);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;process.exit(1);<br>
+                        &nbsp;&nbsp;}<br>
+                        });
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== COMPLETE EXAMPLE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Complete Example: Middleware + Environment Variables</h2>
+                    <p>A full Express application combining all the concepts covered.</p>
+                    <div class="code">
+                        require('dotenv').config();<br>
+                        const express = require('express');<br>
+                        const app = express();<br><br>
+                        // --- Application-Level Middleware ---<br>
+                        app.use(express.json());<br>
+                        app.use(express.urlencoded({ extended: true }));<br><br>
+                        // Logger middleware<br>
+                        app.use((req, res, next) => {<br>
+                        &nbsp;&nbsp;console.log(`${req.method} ${req.url} - ${new Date().toISOString()}`);<br>
+                        &nbsp;&nbsp;next();<br>
+                        });<br><br>
+                        // --- Custom Middleware ---<br>
+                        const validateApiKey = (req, res, next) => {<br>
+                        &nbsp;&nbsp;const apiKey = req.headers['x-api-key'];<br>
+                        &nbsp;&nbsp;if (!apiKey || apiKey !== process.env.API_KEY) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return res.status(401).json({ error: 'Invalid API key' });<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;next();<br>
+                        };<br><br>
+                        const rateLimiter = (req, res, next) => {<br>
+                        &nbsp;&nbsp;// Simple rate limiting - track requests per IP<br>
+                        &nbsp;&nbsp;const ip = req.ip;<br>
+                        &nbsp;&nbsp;if (!global.rateLimits) global.rateLimits = {};<br>
+                        &nbsp;&nbsp;if (!global.rateLimits[ip]) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;global.rateLimits[ip] = { count: 1, resetTime: Date.now() + 60000 };<br>
+                        &nbsp;&nbsp;} else {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const data = global.rateLimits[ip];<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if (Date.now() > data.resetTime) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data.count = 1;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data.resetTime = Date.now() + 60000;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;} else if (data.count > 10) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return res.status(429).json({ error: 'Too many requests' });<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data.count++;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;next();<br>
+                        };<br><br>
+                        // --- Route-Level Middleware ---<br>
+                        const checkAuth = (req, res, next) => {<br>
+                        &nbsp;&nbsp;const token = req.headers.authorization;<br>
+                        &nbsp;&nbsp;if (!token) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return res.status(401).json({ error: 'No token provided' });<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;// Simulate token verification<br>
+                        &nbsp;&nbsp;if (token !== 'Bearer ' + process.env.JWT_SECRET) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return res.status(403).json({ error: 'Invalid token' });<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;req.user = { id: 1, role: 'admin' };<br>
+                        &nbsp;&nbsp;next();<br>
+                        };<br><br>
+                        // --- Routes ---<br>
+                        app.get('/', (req, res) => {<br>
+                        &nbsp;&nbsp;res.json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;message: 'Hello World!',<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;environment: process.env.NODE_ENV<br>
+                        &nbsp;&nbsp;});<br>
+                        });<br><br>
+                        // Public route<br>
+                        app.get('/api/public', rateLimiter, (req, res) => {<br>
+                        &nbsp;&nbsp;res.json({ message: 'Public data' });<br>
+                        });<br><br>
+                        // Protected route with middleware chain<br>
+                        app.get('/api/protected', rateLimiter, validateApiKey, checkAuth, (req, res) => {<br>
+                        &nbsp;&nbsp;res.json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;message: 'Protected data',<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;user: req.user<br>
+                        &nbsp;&nbsp;});<br>
+                        });<br><br>
+                        // Route with parameters<br>
+                        app.get('/api/users/:id', rateLimiter, (req, res, next) => {<br>
+                        &nbsp;&nbsp;const id = parseInt(req.params.id);<br>
+                        &nbsp;&nbsp;if (isNaN(id)) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const error = new Error('Invalid user ID');<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;error.status = 400;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return next(error);<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;res.json({ userId: id, name: `User ${id}` });<br>
+                        });<br><br>
+                        // --- Error Handling ---<br>
+                        app.use((err, req, res, next) => {<br>
+                        &nbsp;&nbsp;console.error('Error:', err.message);<br>
+                        &nbsp;&nbsp;const status = err.status || 500;<br>
+                        &nbsp;&nbsp;res.status(status).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;error: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message: err.message,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status: status<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;});<br>
+                        });<br><br>
+                        // 404 handler<br>
+                        app.use((req, res) => {<br>
+                        &nbsp;&nbsp;res.status(404).json({ error: 'Route not found' });<br>
+                        });<br><br>
+                        // --- Start Server ---<br>
+                        const PORT = process.env.PORT || 3000;<br>
+                        app.listen(PORT, () => {<br>
+                        &nbsp;&nbsp;console.log(`🚀 Server running on port ${PORT}`);<br>
+                        &nbsp;&nbsp;console.log(`📦 Environment: ${process.env.NODE_ENV || 'development'}`);<br>
+                        });
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== INTERVIEW QUESTIONS ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Top Interview Questions</h2>
+                    <ol>
+                        <li>What is middleware in Express.js?</li>
+                        <li>What is the difference between application-level and route-level middleware?</li>
+                        <li>What is the purpose of <code>next()</code> in middleware?</li>
+                        <li>What happens if you don't call <code>next()</code> in middleware?</li>
+                        <li>What is the difference between <code>express.json()</code> and <code>express.urlencoded()</code>?</li>
+                        <li>How do you create custom middleware?</li>
+                        <li>What is error-handling middleware and how is it different from regular middleware?</li>
+                        <li>How do you chain multiple middleware functions?</li>
+                        <li>What are environment variables and why are they important?</li>
+                        <li>What is the <code>dotenv</code> package and how do you use it?</li>
+                        <li>Why should you keep <code>.env</code> files out of version control?</li>
+                        <li>How do you validate required environment variables?</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- ========== PRACTICE ASSIGNMENT ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Practice Assignment</h2>
+                    <ul>
+                        <li>Create an Express application with the following middleware:</li>
+                        <ul>
+                            <li>Request logger that logs method, URL, and timestamp</li>
+                            <li>Authentication middleware that validates a JWT token from headers</li>
+                            <li>Rate limiter that allows 5 requests per minute per IP</li>
+                            <li>Request validator that checks if required fields are present</li>
+                        </ul>
+                        <li>Use route-level middleware to protect specific routes.</li>
+                        <li>Create a <code>.env</code> file with the following variables: <code>PORT</code>, <code>JWT_SECRET</code>, <code>API_KEY</code>, <code>NODE_ENV</code>.</li>
+                        <li>Set up <code>dotenv</code> to load environment variables.</li>
+                        <li>Implement error handling middleware for both operational and programming errors.</li>
+                        <li>Create routes that demonstrate:
+                            <ul>
+                                <li>Public route (no middleware)</li>
+                                <li>Protected route (authentication required)</li>
+                                <li>Admin route (authentication + role check)</li>
+                                <li>Route with validation middleware</li>
+                            </ul>
+                        </li>
+                        <li>Test your API using Postman or curl.</li>
+                        <li>Create a <code>.env.example</code> file with placeholder values.</li>
+                    </ul>
+                    <div class="note">
+                        🟣 This assignment will give you hands-on experience with all the core middleware concepts in Express!
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== SUMMARY ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Quick Revision Table</h2>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Concept</th><th>Key Point</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Middleware</td><td>Functions that process requests before route handlers</td></tr>
+                            <tr><td><code>app.use()</code></td><td>Application-level middleware</td></tr>
+                            <tr><td><code>express.json()</code></td><td>Parses JSON request bodies</td></tr>
+                            <tr><td><code>express.urlencoded()</code></td><td>Parses URL-encoded form data</td></tr>
+                            <tr><td><code>next()</code></td><td>Passes control to the next middleware</td></tr>
+                            <tr><td>Route-Level Middleware</td><td>Middleware applied to specific routes</td></tr>
+                            <tr><td>Error-Handling</td><td>Middleware with 4 parameters <code>(err, req, res, next)</code></td></tr>
+                            <tr><td>Environment Variables</td><td>Configuration values stored outside code</td></tr>
+                            <tr><td><code>dotenv</code></td><td>Loads .env files into <code>process.env</code></td></tr>
+                            <tr><td><code>process.env</code></td><td>Access environment variables</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="output">
+                        🟣 <b>Purple Theme:</b> Mastering middleware and environment variables is essential for building professional, secure, and configurable Express applications!
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- /col-lg-9 -->
+    </div> <!-- /row -->
+</div> <!-- /container -->
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

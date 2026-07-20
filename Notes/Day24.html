@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 16 – React: MVC-R Architecture (Model, View, Controller, Routing)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f4f7fb;
+        }
+        .hero {
+            background: linear-gradient(135deg, #7B2FBE, #4A148C);
+            color: white;
+            padding: 70px 0;
+        }
+        .sidebar {
+            position: sticky;
+            top: 20px;
+        }
+        .section-card {
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+        .code {
+            background: #111827;
+            color: #22c55e;
+            padding: 15px;
+            border-radius: 10px;
+            overflow: auto;
+            font-size: 0.9rem;
+        }
+        .note {
+            background: #f3e5f5;
+            border-left: 5px solid #7B2FBE;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .output {
+            background: #ede7f6;
+            padding: 12px;
+            border-left: 4px solid #7B2FBE;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        h2 {
+            color: #6A1B9A;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .table th {
+            background: #e1bee7;
+        }
+        .purple-badge {
+            background: #7B2FBE;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+        .terminal {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+        .terminal .prompt {
+            color: #7B2FBE;
+        }
+        .terminal .command {
+            color: #4fc3f7;
+        }
+        .terminal .output-text {
+            color: #a5d6a7;
+        }
+        .demo-box {
+            background: #f3e5f5;
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px solid #ce93d8;
+        }
+        .mvc-flow {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #7B2FBE;
+            margin: 10px 0;
+        }
+        .mvc-component {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 4px;
+        }
+        .mvc-model {
+            background: #e1bee7;
+            color: #4A148C;
+        }
+        .mvc-view {
+            background: #b3d9ff;
+            color: #004080;
+        }
+        .mvc-controller {
+            background: #ffcc80;
+            color: #663300;
+        }
+        .mvc-router {
+            background: #a5d6a7;
+            color: #1b5e20;
+        }
+        .folder-structure {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+        .folder-structure .folder {
+            color: #4fc3f7;
+        }
+        .folder-structure .file {
+            color: #a5d6a7;
+        }
+        .folder-structure .highlight {
+            color: #ffcc80;
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="container">
+        <h1>Day 24 – Node.js: MVC-R Architecture</h1>
+        <p class="lead">
+            Comprehensive guide to understanding Model-View-Controller-Routing architecture for building scalable Node.js applications.
+        </p>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card sidebar">
+                <div class="card-body">
+                    <h5>Topics</h5>
+                    <ul class="list-unstyled">
+                        <li>✔ MVC-R Introduction</li>
+                        <li>✔ What is MVC?</li>
+                        <li>✔ Model Layer</li>
+                        <li>✔ View Layer</li>
+                        <li>✔ Controller Layer</li>
+                        <li>✔ Routing Layer</li>
+                        <li>✔ MVC-R Flow</li>
+                        <li>✔ Folder Structure</li>
+                        <li>✔ Building MVC-R App</li>
+                        <li>✔ Complete Example</li>
+                        <li>✔ Best Practices</li>
+                        <li>✔ Interview Q&amp;A</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+
+            <!-- ========== MVC-R INTRODUCTION ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Understanding the MVC-R Architecture</h2>
+                    <p>
+                        <b>MVC-R</b> stands for <b>Model-View-Controller-Routing</b>. It's a software architectural pattern that separates an application into four interconnected components, each with a specific responsibility. This separation helps manage complexity, promotes code reusability, and makes applications easier to maintain and scale.
+                    </p>
+                    <div class="note">
+                        🟣 <b>Purple Theme:</b> MVC-R is the standard architecture for building scalable web applications with Node.js and Express.
+                    </div>
+                    <div class="mvc-flow">
+                        <div class="text-center">
+                            <div class="d-flex flex-wrap justify-content-center gap-3">
+                                <span class="mvc-component mvc-router">🔄 Router</span>
+                                <span style="font-size: 1.5rem;">→</span>
+                                <span class="mvc-component mvc-controller">⚙️ Controller</span>
+                                <span style="font-size: 1.5rem;">↔</span>
+                                <span class="mvc-component mvc-model">📊 Model</span>
+                                <span style="font-size: 1.5rem;">→</span>
+                                <span class="mvc-component mvc-view">🎨 View</span>
+                            </div>
+                            <p class="mt-3 text-muted">Each component has a specific responsibility in the application.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== WHAT IS MVC ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>What is MVC?</h2>
+                    <p>
+                        <b>MVC</b> (Model-View-Controller) is a design pattern that divides an application into three interconnected components:
+                    </p>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Component</th><th>Responsibility</th><th>Example</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="mvc-component mvc-model" style="padding: 4px 10px;">Model</span></td>
+                                <td>Manages data, business logic, and database operations</td>
+                                <td>User model, Product model, Database queries</td>
+                            </tr>
+                            <tr>
+                                <td><span class="mvc-component mvc-view" style="padding: 4px 10px;">View</span></td>
+                                <td>Handles presentation and user interface</td>
+                                <td>HTML pages, JSON responses, EJS templates</td>
+                            </tr>
+                            <tr>
+                                <td><span class="mvc-component mvc-controller" style="padding: 4px 10px;">Controller</span></td>
+                                <td>Processes user input, orchestrates Model and View</td>
+                                <td>Route handlers, business logic, validation</td>
+                            </tr>
+                            <tr>
+                                <td><span class="mvc-component mvc-router" style="padding: 4px 10px;">Routing</span></td>
+                                <td>Maps URLs to specific Controller actions</td>
+                                <td>Express routes, API endpoints</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="output">
+                        ✅ MVC-R adds <b>Routing</b> as a separate layer to handle URL mapping and request distribution.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== MODEL LAYER ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Model Layer – Data Management</h2>
+                    <p>
+                        The <b>Model</b> represents the data structure and business logic of the application. It interacts with the database, handles data validation, and implements business rules.
+                    </p>
+                    <div class="code">
+                        // models/User.js<br>
+                        const mongoose = require('mongoose');<br><br>
+                        const userSchema = new mongoose.Schema({<br>
+                        &nbsp;&nbsp;name: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;type: String,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;required: [true, 'Name is required'],<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;trim: true<br>
+                        &nbsp;&nbsp;},<br>
+                        &nbsp;&nbsp;email: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;type: String,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;required: [true, 'Email is required'],<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;unique: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;lowercase: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email']<br>
+                        &nbsp;&nbsp;},<br>
+                        &nbsp;&nbsp;age: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;type: Number,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;min: [18, 'Age must be at least 18']<br>
+                        &nbsp;&nbsp;},<br>
+                        &nbsp;&nbsp;role: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;type: String,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;enum: ['user', 'admin', 'moderator'],<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;default: 'user'<br>
+                        &nbsp;&nbsp;},<br>
+                        &nbsp;&nbsp;isActive: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;type: Boolean,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;default: true<br>
+                        &nbsp;&nbsp;}<br>
+                        }, { timestamps: true });<br><br>
+                        // Instance method<br>
+                        userSchema.methods.getFullInfo = function() {<br>
+                        &nbsp;&nbsp;return `${this.name} (${this.email}) - ${this.role}`;<br>
+                        };<br><br>
+                        // Static method<br>
+                        userSchema.statics.findByRole = function(role) {<br>
+                        &nbsp;&nbsp;return this.find({ role });<br>
+                        };<br><br>
+                        module.exports = mongoose.model('User', userSchema);
+                    </div>
+                    <div class="note">
+                        🟣 Models should contain only data-related logic – no request/response handling.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== VIEW LAYER ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>View Layer – Presentation</h2>
+                    <p>
+                        The <b>View</b> is responsible for presenting data to the user. In modern web applications, views can be JSON responses (for APIs), HTML pages (with template engines), or even static files.
+                    </p>
+                    <div class="code">
+                        // For API applications (JSON responses)<br>
+                        // controllers/userController.js<br>
+                        res.status(200).json({<br>
+                        &nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;data: users,<br>
+                        &nbsp;&nbsp;message: 'Users fetched successfully'<br>
+                        });<br><br>
+                        // For server-side rendering (using EJS template)<br>
+                        // Set up EJS<br>
+                        app.set('view engine', 'ejs');<br>
+                        app.set('views', './views');<br><br>
+                        // views/users.ejs<br>
+                        &lt;!DOCTYPE html&gt;<br>
+                        &lt;html&gt;<br>
+                        &lt;head&gt;&lt;title&gt;Users&lt;/title&gt;&lt;/head&gt;<br>
+                        &lt;body&gt;<br>
+                        &nbsp;&nbsp;&lt;h1&gt;User List&lt;/h1&gt;<br>
+                        &nbsp;&nbsp;&lt;ul&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;% users.forEach(user => { %&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;%= user.name %&gt; - &lt;%= user.email %&gt;&lt;/li&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;% }) %&gt;<br>
+                        &nbsp;&nbsp;&lt;/ul&gt;<br>
+                        &lt;/body&gt;<br>
+                        &lt;/html&gt;<br><br>
+                        // Controller rendering view<br>
+                        res.render('users', { users });
+                    </div>
+                    <div class="output">
+                        ✅ In a REST API, the View layer is simply the JSON response sent to the client.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== CONTROLLER LAYER ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Controller Layer – Business Logic</h2>
+                    <p>
+                        The <b>Controller</b> acts as the intermediary between the Model and the View. It receives input from the user (via routes), processes it using the Model, and returns the appropriate View.
+                    </p>
+                    <div class="code">
+                        // controllers/userController.js<br>
+                        const User = require('../models/User');<br><br>
+                        // Get all users<br>
+                        exports.getUsers = async (req, res, next) => {<br>
+                        &nbsp;&nbsp;try {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const { page = 1, limit = 10, sortBy = 'createdAt', sortOrder = 'desc' } = req.query;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const skip = (parseInt(page) - 1) * parseInt(limit);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const sort = {};<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;sort[sortBy] = sortOrder === 'desc' ? -1 : 1;<br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const users = await User.find()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.sort(sort)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.skip(skip)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.limit(parseInt(limit));<br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const total = await User.countDocuments();<br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;res.status(200).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data: users,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pagination: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;page: parseInt(page),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit: parseInt(limit),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pages: Math.ceil(total / parseInt(limit))<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                        &nbsp;&nbsp;} catch (error) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;next(error);<br>
+                        &nbsp;&nbsp;}<br>
+                        };<br><br>
+                        // Get single user<br>
+                        exports.getUserById = async (req, res, next) => {<br>
+                        &nbsp;&nbsp;try {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const user = await User.findById(req.params.id);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if (!user) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return res.status(404).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: false,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error: 'User not found'<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;res.status(200).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data: user<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                        &nbsp;&nbsp;} catch (error) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;next(error);<br>
+                        &nbsp;&nbsp;}<br>
+                        };<br><br>
+                        // Create user<br>
+                        exports.createUser = async (req, res, next) => {<br>
+                        &nbsp;&nbsp;try {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const { name, email, age, role } = req.body;<br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;// Business logic: Check if user exists<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const existingUser = await User.findOne({ email });<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if (existingUser) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return res.status(409).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: false,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error: 'User with this email already exists'<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const user = await User.create({ name, email, age, role });<br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;res.status(201).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data: user,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message: 'User created successfully'<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                        &nbsp;&nbsp;} catch (error) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;next(error);<br>
+                        &nbsp;&nbsp;}<br>
+                        };<br><br>
+                        // Update user<br>
+                        exports.updateUser = async (req, res, next) => {<br>
+                        &nbsp;&nbsp;try {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const { name, email, age, role, isActive } = req.body;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const user = await User.findByIdAndUpdate(<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;req.params.id,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ name, email, age, role, isActive },<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ new: true, runValidators: true }<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if (!user) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return res.status(404).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: false,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error: 'User not found'<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;res.status(200).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data: user,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message: 'User updated successfully'<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                        &nbsp;&nbsp;} catch (error) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;next(error);<br>
+                        &nbsp;&nbsp;}<br>
+                        };<br><br>
+                        // Delete user<br>
+                        exports.deleteUser = async (req, res, next) => {<br>
+                        &nbsp;&nbsp;try {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const user = await User.findByIdAndDelete(req.params.id);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if (!user) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return res.status(404).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: false,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error: 'User not found'<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;res.status(200).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message: 'User deleted successfully'<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                        &nbsp;&nbsp;} catch (error) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;next(error);<br>
+                        &nbsp;&nbsp;}<br>
+                        };
+                    </div>
+                    <div class="note">
+                        🟣 Controllers should handle request/response, validation, and orchestrate Model operations.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== ROUTING LAYER ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Routing Layer – URL Mapping</h2>
+                    <p>
+                        The <b>Routing</b> layer maps incoming HTTP requests to specific Controller functions based on the URL and HTTP method.
+                    </p>
+                    <div class="code">
+                        // routes/userRoutes.js<br>
+                        const express = require('express');<br>
+                        const router = express.Router();<br>
+                        const userController = require('../controllers/userController');<br>
+                        const { protect, authorize } = require('../middleware/auth');<br><br>
+                        // Public routes<br>
+                        router.get('/', userController.getUsers);<br>
+                        router.get('/:id', userController.getUserById);<br><br>
+                        // Protected routes (authentication required)<br>
+                        router.post('/', protect, userController.createUser);<br>
+                        router.put('/:id', protect, userController.updateUser);<br>
+                        router.delete('/:id', protect, authorize('admin'), userController.deleteUser);<br><br>
+                        // Advanced routes<br>
+                        router.get('/search', userController.searchUsers);<br>
+                        router.get('/role/:role', userController.getUsersByRole);<br><br>
+                        module.exports = router;
+                    </div>
+                    <div class="code">
+                        // server.js - Main application<br>
+                        const express = require('express');<br>
+                        const app = express();<br>
+                        const userRoutes = require('./routes/userRoutes');<br>
+                        const productRoutes = require('./routes/productRoutes');<br><br>
+                        // Register routes<br>
+                        app.use('/api/users', userRoutes);<br>
+                        app.use('/api/products', productRoutes);<br><br>
+                        // API versioning<br>
+                        app.use('/api/v1/users', userRoutes);<br>
+                        app.use('/api/v2/users', userRoutes); // Different version
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== MVC-R FLOW ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>MVC-R Request Flow</h2>
+                    <p>Understanding how a request flows through the MVC-R architecture.</p>
+                    <div class="mvc-flow">
+                        <div class="text-center">
+                            <div class="d-flex flex-wrap justify-content-center align-items-center gap-2">
+                                <span class="badge bg-secondary">1. Request</span>
+                                <span style="font-size: 1.2rem;">→</span>
+                                <span class="mvc-component mvc-router" style="padding: 6px 14px;">Router</span>
+                                <span style="font-size: 1.2rem;">→</span>
+                                <span class="mvc-component mvc-controller" style="padding: 6px 14px;">Controller</span>
+                                <span style="font-size: 1.2rem;">↔</span>
+                                <span class="mvc-component mvc-model" style="padding: 6px 14px;">Model</span>
+                                <span style="font-size: 1.2rem;">→</span>
+                                <span class="mvc-component mvc-view" style="padding: 6px 14px;">View</span>
+                                <span style="font-size: 1.2rem;">→</span>
+                                <span class="badge bg-success">2. Response</span>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <ol>
+                                <li><strong>Request</strong> – Client sends HTTP request to server</li>
+                                <li><strong>Router</strong> – Matches URL to appropriate Controller action</li>
+                                <li><strong>Controller</strong> – Processes request, validates input, calls Model</li>
+                                <li><strong>Model</strong> – Interacts with database, applies business logic</li>
+                                <li><strong>Controller</strong> – Receives Model data, prepares response</li>
+                                <li><strong>View</strong> – Formats data (JSON/HTML) and sends response</li>
+                                <li><strong>Response</strong> – Client receives formatted response</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="terminal mt-3">
+                        <div><span class="prompt">GET</span> <span class="command">/api/users</span></div>
+                        <div><span class="output-text">1. Router matches GET /api/users → userController.getUsers</span></div>
+                        <div><span class="output-text">2. Controller calls User.find() → Model</span></div>
+                        <div><span class="output-text">3. Model returns user data from database</span></div>
+                        <div><span class="output-text">4. Controller sends JSON response → View</span></div>
+                        <div><span class="output-text">5. Client receives response</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== FOLDER STRUCTURE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>MVC-R Folder Structure</h2>
+                    <p>A well-organized folder structure is crucial for maintainable MVC-R applications.</p>
+                    <div class="folder-structure">
+                        <div class="folder">📁 my-app/</div>
+                        <div style="padding-left: 24px;">
+                            <div class="folder">📁 config/</div>
+                            <div style="padding-left: 24px;">
+                                <div class="file">├── database.js</div>
+                                <div class="file">├── env.js</div>
+                                <div class="file">└── passport.js</div>
+                            </div>
+                            <div class="folder">📁 controllers/</div>
+                            <div style="padding-left: 24px;">
+                                <div class="file">├── userController.js</div>
+                                <div class="file">├── productController.js</div>
+                                <div class="file">├── authController.js</div>
+                                <div class="file">└── orderController.js</div>
+                            </div>
+                            <div class="folder">📁 models/</div>
+                            <div style="padding-left: 24px;">
+                                <div class="file">├── User.js</div>
+                                <div class="file">├── Product.js</div>
+                                <div class="file">├── Order.js</div>
+                                <div class="file">└── Category.js</div>
+                            </div>
+                            <div class="folder">📁 routes/</div>
+                            <div style="padding-left: 24px;">
+                                <div class="file">├── userRoutes.js</div>
+                                <div class="file">├── productRoutes.js</div>
+                                <div class="file">├── authRoutes.js</div>
+                                <div class="file">├── apiRoutes.js</div>
+                                <div class="file">└── index.js</div>
+                            </div>
+                            <div class="folder">📁 middleware/</div>
+                            <div style="padding-left: 24px;">
+                                <div class="file">├── auth.js</div>
+                                <div class="file">├── errorHandler.js</div>
+                                <div class="file">├── rateLimiter.js</div>
+                                <div class="file">└── validation.js</div>
+                            </div>
+                            <div class="folder">📁 views/</div>
+                            <div style="padding-left: 24px;">
+                                <div class="file">├── partials/</div>
+                                <div class="file">├── layouts/</div>
+                                <div class="file">├── users/</div>
+                                <div class="file">└── products/</div>
+                            </div>
+                            <div class="folder">📁 utils/</div>
+                            <div style="padding-left: 24px;">
+                                <div class="file">├── AppError.js</div>
+                                <div class="file">├── catchAsync.js</div>
+                                <div class="file">├── email.js</div>
+                                <div class="file">└── helpers.js</div>
+                            </div>
+                            <div class="folder">📁 services/</div>
+                            <div style="padding-left: 24px;">
+                                <div class="file">├── emailService.js</div>
+                                <div class="file">└── paymentService.js</div>
+                            </div>
+                            <div class="folder">📁 tests/</div>
+                            <div style="padding-left: 24px;">
+                                <div class="file">├── unit/</div>
+                                <div class="file">└── integration/</div>
+                            </div>
+                            <div class="file">├── .env</div>
+                            <div class="file">├── .gitignore</div>
+                            <div class="file">├── package.json</div>
+                            <div class="file">├── server.js</div>
+                            <div class="file">└── app.js</div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        🟣 This structure separates concerns and makes it easy to locate specific files.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== COMPLETE APPLICATION ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Complete MVC-R Application Example</h2>
+                    <p>Here's a complete working example of an MVC-R application.</p>
+                    <div class="code">
+                        // app.js<br>
+                        const express = require('express');<br>
+                        const mongoose = require('mongoose');<br>
+                        const cors = require('cors');<br>
+                        const morgan = require('morgan');<br>
+                        const routes = require('./routes');<br>
+                        const errorHandler = require('./middleware/errorHandler');<br>
+                        const AppError = require('./utils/AppError');<br>
+                        require('dotenv').config();<br><br>
+                        const app = express();<br><br>
+                        // Middleware<br>
+                        app.use(cors());<br>
+                        app.use(express.json());<br>
+                        app.use(express.urlencoded({ extended: true }));<br>
+                        app.use(morgan('dev'));<br><br>
+                        // Database connection<br>
+                        mongoose.connect(process.env.MONGODB_URI)<br>
+                        &nbsp;&nbsp;.then(() => console.log('✅ MongoDB connected'))<br>
+                        &nbsp;&nbsp;.catch(err => console.error('❌ DB connection error:', err));<br><br>
+                        // Routes<br>
+                        app.use('/api/v1', routes);<br><br>
+                        // 404 handler<br>
+                        app.all('*', (req, res, next) => {<br>
+                        &nbsp;&nbsp;next(new AppError(`Cannot find ${req.originalUrl} on this server`, 404));<br>
+                        });<br><br>
+                        // Global error handler<br>
+                        app.use(errorHandler);<br><br>
+                        module.exports = app;<br><br>
+                        // server.js<br>
+                        const app = require('./app');<br>
+                        const PORT = process.env.PORT || 3000;<br><br>
+                        app.listen(PORT, () => {<br>
+                        &nbsp;&nbsp;console.log(`🚀 Server running on port ${PORT}`);<br>
+                        &nbsp;&nbsp;console.log(`📚 Environment: ${process.env.NODE_ENV}`);<br>
+                        });
+                    </div>
+                    <div class="code">
+                        // routes/index.js<br>
+                        const express = require('express');<br>
+                        const router = express.Router();<br>
+                        const userRoutes = require('./userRoutes');<br>
+                        const productRoutes = require('./productRoutes');<br>
+                        const authRoutes = require('./authRoutes');<br><br>
+                        router.use('/users', userRoutes);<br>
+                        router.use('/products', productRoutes);<br>
+                        router.use('/auth', authRoutes);<br><br>
+                        // Health check<br>
+                        router.get('/health', (req, res) => {<br>
+                        &nbsp;&nbsp;res.json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;status: 'OK',<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;timestamp: new Date().toISOString(),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;uptime: process.uptime()<br>
+                        &nbsp;&nbsp;});<br>
+                        });<br><br>
+                        module.exports = router;
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== COMPLETE ROUTES FILE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Complete Routes File with Middleware</h2>
+                    <div class="code">
+                        // routes/userRoutes.js<br>
+                        const express = require('express');<br>
+                        const router = express.Router();<br>
+                        const userController = require('../controllers/userController');<br>
+                        const { protect, authorize } = require('../middleware/auth');<br>
+                        const { validateUser, validateUserUpdate } = require('../middleware/validation');<br>
+                        const { rateLimiter } = require('../middleware/rateLimiter');<br><br>
+                        // Public routes<br>
+                        router.get('/', userController.getUsers);<br>
+                        router.get('/search', userController.searchUsers);<br>
+                        router.get('/:id', userController.getUserById);<br><br>
+                        // Protected routes<br>
+                        router.post('/',<br>
+                        &nbsp;&nbsp;rateLimiter,<br>
+                        &nbsp;&nbsp;protect,<br>
+                        &nbsp;&nbsp;validateUser,<br>
+                        &nbsp;&nbsp;userController.createUser<br>
+                        );<br><br>
+                        router.put('/:id',<br>
+                        &nbsp;&nbsp;protect,<br>
+                        &nbsp;&nbsp;validateUserUpdate,<br>
+                        &nbsp;&nbsp;userController.updateUser<br>
+                        );<br><br>
+                        router.delete('/:id',<br>
+                        &nbsp;&nbsp;protect,<br>
+                        &nbsp;&nbsp;authorize('admin'),<br>
+                        &nbsp;&nbsp;userController.deleteUser<br>
+                        );<br><br>
+                        // Advanced routes<br>
+                        router.get('/role/:role', userController.getUsersByRole);<br>
+                        router.patch('/:id/status',<br>
+                        &nbsp;&nbsp;protect,<br>
+                        &nbsp;&nbsp;authorize('admin'),<br>
+                        &nbsp;&nbsp;userController.toggleUserStatus<br>
+                        );<br><br>
+                        module.exports = router;
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== COMPLETE CONTROLLER ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Complete Controller with Services</h2>
+                    <div class="code">
+                        // controllers/userController.js<br>
+                        const User = require('../models/User');<br>
+                        const AppError = require('../utils/AppError');<br>
+                        const catchAsync = require('../utils/catchAsync');<br>
+                        const EmailService = require('../services/emailService');<br><br>
+                        // Get all users with pagination<br>
+                        exports.getUsers = catchAsync(async (req, res) => {<br>
+                        &nbsp;&nbsp;const { page = 1, limit = 10, sortBy = 'createdAt', sortOrder = 'desc' } = req.query;<br>
+                        &nbsp;&nbsp;const skip = (parseInt(page) - 1) * parseInt(limit);<br>
+                        &nbsp;&nbsp;const sort = {};<br>
+                        &nbsp;&nbsp;sort[sortBy] = sortOrder === 'desc' ? -1 : 1;<br><br>
+                        &nbsp;&nbsp;const [users, total] = await Promise.all([<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;User.find()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.sort(sort)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.skip(skip)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.limit(parseInt(limit))<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.select('-__v'),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;User.countDocuments()<br>
+                        &nbsp;&nbsp;]);<br><br>
+                        &nbsp;&nbsp;res.status(200).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;data: users,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;pagination: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;page: parseInt(page),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit: parseInt(limit),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pages: Math.ceil(total / parseInt(limit))<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;});<br>
+                        });<br><br>
+                        // Get user by ID<br>
+                        exports.getUserById = catchAsync(async (req, res) => {<br>
+                        &nbsp;&nbsp;const user = await User.findById(req.params.id).select('-__v');<br>
+                        &nbsp;&nbsp;if (!user) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;throw new AppError('User not found', 404);<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;res.status(200).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;data: user<br>
+                        &nbsp;&nbsp;});<br>
+                        });<br><br>
+                        // Create user<br>
+                        exports.createUser = catchAsync(async (req, res) => {<br>
+                        &nbsp;&nbsp;const { name, email, age, role } = req.body;<br><br>
+                        &nbsp;&nbsp;// Check for duplicate email<br>
+                        &nbsp;&nbsp;const existingUser = await User.findOne({ email });<br>
+                        &nbsp;&nbsp;if (existingUser) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;throw new AppError('User with this email already exists', 409);<br>
+                        &nbsp;&nbsp;}<br><br>
+                        &nbsp;&nbsp;const user = await User.create({ name, email, age, role });<br><br>
+                        &nbsp;&nbsp;// Send welcome email (async, don't wait)<br>
+                        &nbsp;&nbsp;EmailService.sendWelcomeEmail(user.email, user.name).catch(console.error);<br><br>
+                        &nbsp;&nbsp;res.status(201).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;data: user,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;message: 'User created successfully'<br>
+                        &nbsp;&nbsp;});<br>
+                        });<br><br>
+                        // Update user<br>
+                        exports.updateUser = catchAsync(async (req, res) => {<br>
+                        &nbsp;&nbsp;const { name, email, age, role, isActive } = req.body;<br>
+                        &nbsp;&nbsp;const user = await User.findByIdAndUpdate(<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;req.params.id,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;{ name, email, age, role, isActive },<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;{ new: true, runValidators: true }<br>
+                        &nbsp;&nbsp;).select('-__v');<br><br>
+                        &nbsp;&nbsp;if (!user) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;throw new AppError('User not found', 404);<br>
+                        &nbsp;&nbsp;}<br><br>
+                        &nbsp;&nbsp;res.status(200).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;data: user,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;message: 'User updated successfully'<br>
+                        &nbsp;&nbsp;});<br>
+                        });<br><br>
+                        // Delete user<br>
+                        exports.deleteUser = catchAsync(async (req, res) => {<br>
+                        &nbsp;&nbsp;const user = await User.findByIdAndDelete(req.params.id);<br>
+                        &nbsp;&nbsp;if (!user) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;throw new AppError('User not found', 404);<br>
+                        &nbsp;&nbsp;}<br><br>
+                        &nbsp;&nbsp;res.status(200).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;message: 'User deleted successfully'<br>
+                        &nbsp;&nbsp;});<br>
+                        });<br><br>
+                        // Search users<br>
+                        exports.searchUsers = catchAsync(async (req, res) => {<br>
+                        &nbsp;&nbsp;const { q, role, isActive } = req.query;<br>
+                        &nbsp;&nbsp;const filter = {};<br><br>
+                        &nbsp;&nbsp;if (q) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;filter.$or = [<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ name: { $regex: q, $options: 'i' } },<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ email: { $regex: q, $options: 'i' } }<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;];<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;if (role) filter.role = role;<br>
+                        &nbsp;&nbsp;if (isActive !== undefined) filter.isActive = isActive === 'true';<br><br>
+                        &nbsp;&nbsp;const users = await User.find(filter).select('-__v');<br><br>
+                        &nbsp;&nbsp;res.status(200).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;data: users,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;count: users.length<br>
+                        &nbsp;&nbsp;});<br>
+                        });<br><br>
+                        // Get users by role<br>
+                        exports.getUsersByRole = catchAsync(async (req, res) => {<br>
+                        &nbsp;&nbsp;const { role } = req.params;<br>
+                        &nbsp;&nbsp;const users = await User.findByRole(role).select('-__v');<br><br>
+                        &nbsp;&nbsp;res.status(200).json({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;success: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;data: users,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;count: users.length<br>
+                        &nbsp;&nbsp;});<br>
+                        });
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== BEST PRACTICES ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>MVC-R Best Practices</h2>
+                    <ul>
+                        <li><strong>Keep Controllers Thin</strong> – Controllers should only handle request/response, not business logic.</li>
+                        <li><strong>Use Services</strong> – Extract complex business logic into separate service files.</li>
+                        <li><strong>Validate Input</strong> – Always validate user input using middleware or validation libraries.</li>
+                        <li><strong>Handle Errors</strong> – Use a centralized error handling middleware.</li>
+                        <li><strong>Use Async/Await</strong> – Prefer async/await over callbacks for better readability.</li>
+                        <li><strong>Organize Routes</strong> – Group related routes in separate files.</li>
+                        <li><strong>Use Constants</strong> – Avoid magic strings; use constants for status codes, messages, etc.</li>
+                        <li><strong>Implement Logging</strong> – Use logging middleware for debugging and monitoring.</li>
+                        <li><strong>Separate Configuration</strong> – Keep configuration in separate files.</li>
+                        <li><strong>Write Tests</strong> – Write unit and integration tests for each layer.</li>
+                    </ul>
+                    <div class="code">
+                        // utils/catchAsync.js - Error handling wrapper<br>
+                        const catchAsync = (fn) => {<br>
+                        &nbsp;&nbsp;return (req, res, next) => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;fn(req, res, next).catch(next);<br>
+                        &nbsp;&nbsp;};<br>
+                        };<br><br>
+                        module.exports = catchAsync;<br><br>
+                        // utils/AppError.js - Custom error class<br>
+                        class AppError extends Error {<br>
+                        &nbsp;&nbsp;constructor(message, statusCode) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;super(message);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;this.statusCode = statusCode;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;this.isOperational = true;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Error.captureStackTrace(this, this.constructor);<br>
+                        &nbsp;&nbsp;}<br>
+                        }<br><br>
+                        module.exports = AppError;
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== INTERVIEW QUESTIONS ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Top Interview Questions</h2>
+                    <ol>
+                        <li>What is MVC-R architecture?</li>
+                        <li>What are the components of MVC-R?</li>
+                        <li>What is the role of the Model in MVC-R?</li>
+                        <li>What is the role of the Controller in MVC-R?</li>
+                        <li>What is the role of the View in MVC-R?</li>
+                        <li>What is the role of Routing in MVC-R?</li>
+                        <li>How does a request flow through MVC-R?</li>
+                        <li>Why should Controllers be kept thin?</li>
+                        <li>What are the benefits of using MVC-R architecture?</li>
+                        <li>How do you handle errors in MVC-R?</li>
+                        <li>What is the difference between MVC and MVC-R?</li>
+                        <li>How do you organize files in an MVC-R application?</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- ========== PRACTICE ASSIGNMENT ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Practice Assignment</h2>
+                    <ul>
+                        <li>Create a complete MVC-R application with the following features:</li>
+                        <ul>
+                            <li>User Management (CRUD operations)</li>
+                            <li>Product Management (CRUD operations)</li>
+                            <li>Order Management with relationships</li>
+                        </ul>
+                        <li>Implement proper folder structure as shown above.</li>
+                        <li>Create separate Controllers, Models, Routes for each entity.</li>
+                        <li>Add validation middleware for all routes.</li>
+                        <li>Implement authentication and authorization.</li>
+                        <li>Add error handling middleware.</li>
+                        <li>Create a service layer for complex business logic.</li>
+                        <li>Add logging and request tracking.</li>
+                        <li>Implement pagination, sorting, and filtering.</li>
+                        <li>Write unit tests for Models and Controllers.</li>
+                    </ul>
+                    <div class="note">
+                        🟣 Building a complete MVC-R application with all these features will solidify your understanding of the architecture!
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== SUMMARY ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Quick Revision Table</h2>
+                    <table class="table table-bordered">
+                        <thead class="table" style="background: #e1bee7;">
+                            <tr><th>Component</th><th>Key Point</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Model</td><td>Data structure, business logic, database operations</td></tr>
+                            <tr><td>View</td><td>Presentation layer (JSON/HTML responses)</td></tr>
+                            <tr><td>Controller</td><td>Request processing, orchestrates Model and View</td></tr>
+                            <tr><td>Routing</td><td>URL mapping to Controller actions</td></tr>
+                            <tr><td>Middleware</td><td>Cross-cutting concerns (auth, validation, logging)</td></tr>
+                            <tr><td>Services</td><td>Complex business logic extraction</td></tr>
+                            <tr><td>Error Handling</td><td>Centralized error management</td></tr>
+                            <tr><td>Validation</td><td>Input validation middleware</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="output">
+                        🟣 <b>Purple Theme:</b> MVC-R architecture is the foundation of scalable, maintainable, and organized Node.js applications!
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- /col-lg-9 -->
+    </div> <!-- /row -->
+</div> <!-- /container -->
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

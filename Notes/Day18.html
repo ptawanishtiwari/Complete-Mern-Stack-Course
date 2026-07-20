@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 16 – React: Routing, Axios & API Calls</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f4f7fb;
+        }
+        .hero {
+            background: linear-gradient(135deg, #16a34a, #14532d);
+            color: white;
+            padding: 70px 0;
+        }
+        .sidebar {
+            position: sticky;
+            top: 20px;
+        }
+        .section-card {
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+        .code {
+            background: #111827;
+            color: #22c55e;
+            padding: 15px;
+            border-radius: 10px;
+            overflow: auto;
+            font-size: 0.9rem;
+        }
+        .note {
+            background: #fff8dc;
+            border-left: 5px solid orange;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .output {
+            background: #eef2ff;
+            padding: 12px;
+            border-left: 4px solid green;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        h2 {
+            color: #15803d;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .table th {
+            background: #e6f7e6;
+        }
+        .badge-react {
+            background: #61dafb;
+            color: #000;
+            font-weight: 600;
+        }
+        .demo-box {
+            background: #f0f9f0;
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px solid #b7d7b7;
+        }
+        .route-indicator {
+            display: inline-block;
+            background: #2d6a4f;
+            color: white;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="container">
+        <h1>Day 16 – React: Routing · Axios · API Calls</h1>
+        <p class="lead">
+            Complete guide to React Router v6, Axios for HTTP requests, and consuming REST APIs with best practices.
+        </p>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card sidebar">
+                <div class="card-body">
+                    <h5>Topics</h5>
+                    <ul class="list-unstyled">
+                        <li>✔ React Router v6</li>
+                        <li>✔ BrowserRouter</li>
+                        <li>✔ Routes &amp; Route</li>
+                        <li>✔ Link &amp; NavLink</li>
+                        <li>✔ useNavigate</li>
+                        <li>✔ useParams</li>
+                        <li>✔ Nested Routes</li>
+                        <li>✔ Axios library</li>
+                        <li>✔ GET / POST / PUT / DELETE</li>
+                        <li>✔ Async/Await</li>
+                        <li>✔ Error handling</li>
+                        <li>✔ Loading states</li>
+                        <li>✔ Interview Q&amp;A</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+
+            <!-- ========== ROUTER INTRO ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>React Router v6 – Introduction</h2>
+                    <p>
+                        <b>React Router</b> is the standard routing library for React. It enables navigation between different views/components in a Single Page Application (SPA) without refreshing the page.
+                    </p>
+                    <div class="note">
+                        📌 Install: <code>npm install react-router-dom</code>
+                    </div>
+                    <div class="code">
+                        import { BrowserRouter, Routes, Route } from "react-router-dom";<br><br>
+                        function App() {<br>
+                        &nbsp;&nbsp;return (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;BrowserRouter&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Routes&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path="/" element={&lt;Home /&gt;} /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path="/about" element={&lt;About /&gt;} /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Routes&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/BrowserRouter&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== BROWSER ROUTER ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>BrowserRouter</h2>
+                    <p>
+                        <b>BrowserRouter</b> is the recommended router for web applications. It uses the HTML5 history API to keep the UI in sync with the URL.
+                    </p>
+                    <div class="output">
+                        ✅ Wraps the entire app – usually placed in <code>main.jsx</code> or <code>App.jsx</code>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== ROUTES & ROUTE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Routes &amp; Route</h2>
+                    <p>
+                        <b>Routes</b> is a container for multiple <b>Route</b> components. Each <b>Route</b> defines a path and the component to render when the path matches.
+                    </p>
+                    <div class="code">
+                        &lt;Routes&gt;<br>
+                        &nbsp;&nbsp;&lt;Route path="/" element={&lt;Home /&gt;} /&gt;<br>
+                        &nbsp;&nbsp;&lt;Route path="/products" element={&lt;Products /&gt;} /&gt;<br>
+                        &nbsp;&nbsp;&lt;Route path="/contact" element={&lt;Contact /&gt;} /&gt;<br>
+                        &lt;/Routes&gt;
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== LINK & NAVLINK ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Link &amp; NavLink</h2>
+                    <p>
+                        <b>Link</b> is used for navigation between routes without refreshing the page. <b>NavLink</b> extends <code>Link</code> and adds styling attributes when the route is active.
+                    </p>
+                    <div class="code">
+                        import { Link, NavLink } from "react-router-dom";<br><br>
+                        &lt;Link to="/"&gt;Home&lt;/Link&gt;<br>
+                        &lt;NavLink to="/about" className={({ isActive }) => isActive ? "active-link" : ""}&gt;About&lt;/NavLink&gt;
+                    </div>
+                    <div class="output">
+                        🧭 NavLink automatically applies <code>active</code> class when the route matches.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== useNavigate ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>useNavigate Hook</h2>
+                    <p>
+                        <b>useNavigate</b> provides programmatic navigation – useful after form submissions, login, or button clicks.
+                    </p>
+                    <div class="code">
+                        import { useNavigate } from "react-router-dom";<br><br>
+                        function Login() {<br>
+                        &nbsp;&nbsp;const navigate = useNavigate();<br>
+                        &nbsp;&nbsp;const handleLogin = () => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;// ... auth logic<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;navigate("/dashboard");<br>
+                        &nbsp;&nbsp;};<br>
+                        &nbsp;&nbsp;return &lt;button onClick={handleLogin}&gt;Login&lt;/button&gt;;<br>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== useParams ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>useParams – Dynamic Routes</h2>
+                    <p>
+                        <b>useParams</b> returns an object of key/value pairs from the URL parameters. Ideal for detail pages (e.g., <code>/product/:id</code>).
+                    </p>
+                    <div class="code">
+                        // Route definition<br>
+                        &lt;Route path="/product/:id" element={&lt;ProductDetail /&gt;} /&gt;<br><br>
+                        // In ProductDetail component<br>
+                        import { useParams } from "react-router-dom";<br><br>
+                        function ProductDetail() {<br>
+                        &nbsp;&nbsp;const { id } = useParams();<br>
+                        &nbsp;&nbsp;return &lt;h3&gt;Product ID: {id}&lt;/h3&gt;;<br>
+                        }
+                    </div>
+                    <div class="output">
+                        🆔 Visiting <code>/product/42</code> renders "Product ID: 42"
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== NESTED ROUTES ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Nested Routes</h2>
+                    <p>
+                        Nested routes allow you to compose layouts where a parent component renders child routes using <b>Outlet</b>.
+                    </p>
+                    <div class="code">
+                        &lt;Route path="/dashboard" element={&lt;Dashboard /&gt;}&gt;<br>
+                        &nbsp;&nbsp;&lt;Route path="profile" element={&lt;Profile /&gt;} /&gt;<br>
+                        &nbsp;&nbsp;&lt;Route path="settings" element={&lt;Settings /&gt;} /&gt;<br>
+                        &lt;/Route&gt;<br><br>
+                        // In Dashboard.jsx<br>
+                        import { Outlet } from "react-router-dom";<br>
+                        function Dashboard() {<br>
+                        &nbsp;&nbsp;return (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Dashboard&lt;/h2&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Outlet /&gt;  {/* child routes render here */}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== AXIOS INTRODUCTION ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Axios – HTTP Client</h2>
+                    <p>
+                        <b>Axios</b> is a promise-based HTTP client that works in the browser and Node.js. It simplifies making API calls with features like interceptors, automatic JSON transformation, and request cancellation.
+                    </p>
+                    <div class="note">
+                        📦 Install: <code>npm install axios</code>
+                    </div>
+                    <div class="code">
+                        import axios from "axios";<br><br>
+                        // GET request<br>
+                        axios.get("https://api.example.com/users")<br>
+                        &nbsp;&nbsp;.then(response => console.log(response.data))<br>
+                        &nbsp;&nbsp;.catch(error => console.error(error));
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== AXIOS GET ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Axios – GET Request</h2>
+                    <div class="code">
+                        async function fetchUsers() {<br>
+                        &nbsp;&nbsp;try {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const response = await axios.get("https://jsonplaceholder.typicode.com/users");<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.log(response.data);<br>
+                        &nbsp;&nbsp;} catch (error) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.error("Error fetching users:", error);<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                    <div class="output">
+                        ✅ response.data contains the actual data from the API.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== AXIOS POST ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Axios – POST Request</h2>
+                    <div class="code">
+                        async function createUser(userData) {<br>
+                        &nbsp;&nbsp;try {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const response = await axios.post("https://api.example.com/users", userData);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.log("User created:", response.data);<br>
+                        &nbsp;&nbsp;} catch (error) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.error("Error creating user:", error);<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== AXIOS PUT / DELETE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Axios – PUT &amp; DELETE</h2>
+                    <div class="code">
+                        // PUT – update existing resource<br>
+                        await axios.put(`https://api.example.com/users/${id}`, updatedData);<br><br>
+                        // DELETE – remove resource<br>
+                        await axios.delete(`https://api.example.com/users/${id}`);
+                    </div>
+                    <div class="note">
+                        🔄 Always use <code>try/catch</code> or <code>.catch()</code> to handle errors gracefully.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== ASYNC/AWAIT & ERROR HANDLING ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Async/Await &amp; Error Handling</h2>
+                    <p>
+                        Using <b>async/await</b> makes asynchronous code more readable. Combine with <b>try/catch</b> for robust error handling.
+                    </p>
+                    <div class="code">
+                        async function fetchData() {<br>
+                        &nbsp;&nbsp;try {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const res = await axios.get("/api/data");<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;setData(res.data);<br>
+                        &nbsp;&nbsp;} catch (err) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if (err.response) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// server responded with a status other than 2xx<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setError(`Server error: ${err.response.status}`);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;} else if (err.request) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// request was made but no response<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setError("No response from server");<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setError("Request failed");<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== LOADING & ERROR STATES ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Loading &amp; Error States</h2>
+                    <p>
+                        Always manage <b>loading</b>, <b>error</b> and <b>data</b> states when making API calls to improve user experience.
+                    </p>
+                    <div class="code">
+                        function UsersList() {<br>
+                        &nbsp;&nbsp;const [users, setUsers] = useState([]);<br>
+                        &nbsp;&nbsp;const [loading, setLoading] = useState(true);<br>
+                        &nbsp;&nbsp;const [error, setError] = useState(null);<br><br>
+                        &nbsp;&nbsp;useEffect(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;axios.get("/api/users")<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(res => { setUsers(res.data); setLoading(false); })<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.catch(err => { setError(err.message); setLoading(false); });<br>
+                        &nbsp;&nbsp;}, []);<br><br>
+                        &nbsp;&nbsp;if (loading) return &lt;p&gt;Loading...&lt;/p&gt;;<br>
+                        &nbsp;&nbsp;if (error) return &lt;p className="text-danger"&gt;Error: {error}&lt;/p&gt;;<br>
+                        &nbsp;&nbsp;return &lt;ul&gt;{users.map(u => &lt;li key={u.id}&gt;{u.name}&lt;/li&gt;)}&lt;/ul&gt;;<br>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== COMPLETE EXAMPLE ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Complete Example: Routing + Axios + API</h2>
+                    <p>This example combines routing, dynamic parameters and API calls with loading/error states.</p>
+                    <div class="demo-box">
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            <span class="route-indicator">🏠 Home</span>
+                            <span class="route-indicator">📦 Products</span>
+                            <span class="route-indicator">🔍 Product/1</span>
+                        </div>
+                        <p class="small text-muted">(Simulated navigation &amp; API fetch)</p>
+                        <div class="bg-white p-3 rounded border">
+                            <div id="api-demo-content">
+                                <p><strong>📋 Users (from JSONPlaceholder)</strong></p>
+                                <div id="user-list" class="small">
+                                    <span class="text-secondary">Loading users...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- code snippet -->
+                    <div class="code mt-3">
+                        // App.jsx – with routing<br>
+                        function App() {<br>
+                        &nbsp;&nbsp;return (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;BrowserRouter&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;nav&gt;...&lt;/nav&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Routes&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path="/" element={&lt;Home /&gt;} /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path="/users" element={&lt;Users /&gt;} /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path="/user/:id" element={&lt;UserDetail /&gt;} /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Routes&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/BrowserRouter&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        // Users.jsx – fetches data with Axios<br>
+                        function Users() {<br>
+                        &nbsp;&nbsp;const [users, setUsers] = useState([]);<br>
+                        &nbsp;&nbsp;const [loading, setLoading] = useState(true);<br>
+                        &nbsp;&nbsp;useEffect(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;axios.get("https://jsonplaceholder.typicode.com/users")<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(res => { setUsers(res.data); setLoading(false); })<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.catch(() => setLoading(false));<br>
+                        &nbsp;&nbsp;}, []);<br>
+                        &nbsp;&nbsp;if (loading) return &lt;p&gt;Loading...&lt;/p&gt;;<br>
+                        &nbsp;&nbsp;return &lt;ul&gt;{users.map(u => &lt;li key={u.id}&gt;{u.name}&lt;/li&gt;)}&lt;/ul&gt;;<br>
+                        }<br><br>
+                        // UserDetail.jsx – uses useParams<br>
+                        function UserDetail() {<br>
+                        &nbsp;&nbsp;const { id } = useParams();<br>
+                        &nbsp;&nbsp;// fetch user by id ...<br>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== INTERVIEW QUESTIONS ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Top Interview Questions</h2>
+                    <ol>
+                        <li>What is React Router and why is it used?</li>
+                        <li>What is the difference between <code>BrowserRouter</code> and <code>HashRouter</code>?</li>
+                        <li>How do you pass parameters in a route?</li>
+                        <li>What is the <code>useNavigate</code> hook used for?</li>
+                        <li>What is the <code>Outlet</code> component in nested routes?</li>
+                        <li>What is Axios? How is it different from fetch?</li>
+                        <li>How do you handle errors in Axios?</li>
+                        <li>Explain how to manage loading states during API calls.</li>
+                        <li>How would you cancel a request in Axios?</li>
+                        <li>How do you set global headers (like Authorization) in Axios?</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- ========== PRACTICE ASSIGNMENT ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Practice Assignment</h2>
+                    <ul>
+                        <li>Create a React app with routes: Home, About, Products, ProductDetail (with dynamic id).</li>
+                        <li>Use <code>NavLink</code> with active styling for navigation.</li>
+                        <li>Use <code>useNavigate</code> to redirect after a simulated login.</li>
+                        <li>Fetch a list of posts from <code>https://jsonplaceholder.typicode.com/posts</code> using Axios.</li>
+                        <li>Display loading and error states properly.</li>
+                        <li>Implement a "Delete" button that sends a DELETE request and updates the UI.</li>
+                        <li>Add a form to create a new post using POST request.</li>
+                    </ul>
+                    <div class="note">
+                        💡 Build a mini blog or dashboard – it covers all essential topics!
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== SUMMARY ========== -->
+            <div class="card section-card">
+                <div class="card-body">
+                    <h2>Quick Revision Table</h2>
+                    <table class="table table-bordered">
+                        <thead class="table-success">
+                            <tr><th>Concept</th><th>Key point</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>React Router</td><td>Handles navigation in SPA</td></tr>
+                            <tr><td>BrowserRouter</td><td>Uses HTML5 history API</td></tr>
+                            <tr><td>Route</td><td>Maps URL path to component</td></tr>
+                            <tr><td>Link / NavLink</td><td>Client‑side navigation</td></tr>
+                            <tr><td>useParams</td><td>Read dynamic URL parameters</td></tr>
+                            <tr><td>useNavigate</td><td>Programmatic navigation</td></tr>
+                            <tr><td>Axios</td><td>Promise‑based HTTP client</td></tr>
+                            <tr><td>GET / POST</td><td>Fetch / send data</td></tr>
+                            <tr><td>try/catch</td><td>Error handling for async calls</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="output">
+                        🚀 Routing + API calls are the backbone of most React applications – master them!
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- /col-lg-9 -->
+    </div> <!-- /row -->
+</div> <!-- /container -->
+
+<!-- Bootstrap JS + simulated API demo -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    (function() {
+        // Simulate Axios GET request with JSONPlaceholder
+        const userListEl = document.getElementById('user-list');
+        if (userListEl) {
+            // show loading
+            userListEl.innerHTML = '<span class="text-secondary">⏳ Loading users...</span>';
+
+            // mock fetch with delay
+            setTimeout(() => {
+                // simulate API response
+                const mockUsers = [
+                    { id: 1, name: 'Leanne Graham' },
+                    { id: 2, name: 'Ervin Howell' },
+                    { id: 3, name: 'Clementine Bauch' },
+                    { id: 4, name: 'Patricia Lebsack' },
+                    { id: 5, name: 'Chelsey Dietrich' },
+                ];
+                userListEl.innerHTML = mockUsers.map(u =>
+                    `<div class="d-flex justify-content-between border-bottom py-1">
+                        <span>${u.name}</span>
+                        <span class="badge bg-secondary">ID: ${u.id}</span>
+                    </div>`
+                ).join('');
+            }, 800);
+        }
+    })();
+</script>
+
+</body>
+</html>
