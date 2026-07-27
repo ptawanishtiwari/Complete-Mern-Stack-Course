@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard · MERN LMS</title>
+  <!-- Bootstrap + Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    /* ----- global styles ----- */
+    * { box-sizing: border-box; }
+    body { 
+      background: #f1f5f9; 
+      font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .wrapper { display: flex; min-height: calc(100vh - 70px); }
+    
+    /* sidebar */
+    .sidebar {
+      width: 270px;
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 28px 18px;
+      transition: 0.3s;
+      flex-shrink: 0;
+      overflow-y: auto;
+      height: calc(100vh - 70px);
+      position: sticky;
+      top: 70px;
+    }
+    .sidebar h5 { border-bottom: 1px solid #334155; padding-bottom: 14px; font-weight: 600; }
+    .sidebar ul { list-style: none; padding: 0; }
+    .sidebar ul li {
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 500;
+      transition: 0.15s;
+    }
+    .sidebar ul li i { width: 24px; color: #60a5fa; }
+    .sidebar ul li.active { background: #1e293b; color: white; }
+    .sidebar ul li.active i { color: #34d399; }
+    .sidebar ul li:hover { background: #1e293b; color: white; }
+
+    .content { flex: 1; padding: 28px 32px; background: #f8fafc; }
+
+    /* welcome banner */
+    .welcome-banner {
+      background: linear-gradient(135deg, #1e1b2e, #2d1f3a);
+      padding: 24px 30px;
+      border-radius: 28px;
+      color: white;
+      margin-bottom: 30px;
+    }
+    .welcome-banner h2 { font-weight: 600; }
+    .welcome-banner p { opacity: 0.8; }
+
+    /* admin panel */
+    .admin-panel-card {
+      background: white;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+      border: 1px solid #e2e8f0;
+      margin-top: 20px;
+    }
+    .admin-panel-card h4 { font-weight: 700; }
+    
+    .admin-lecture-list {
+      max-height: 300px;
+      overflow-y: auto;
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 8px 12px;
+    }
+    .admin-lecture-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: white;
+      border-radius: 40px;
+      margin-bottom: 6px;
+      border: 1px solid #f1f5f9;
+      font-size: 0.9rem;
+    }
+    .admin-lecture-item .remove-btn {
+      color: #dc2626;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 30px;
+      transition: 0.2s;
+    }
+    .admin-lecture-item .remove-btn:hover { background: #fee2e2; }
+
+    .stats-card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid #e9edf2;
+      transition: 0.2s;
+    }
+    .stats-card h3 { font-weight: 700; color: #0f172a; }
+    .stats-card p { color: #64748b; margin-bottom: 0; }
+
+    #loggedUser { background: #2d3b4f; padding: 4px 16px; border-radius: 40px; font-size: 0.85rem; }
+
+    @media (max-width: 768px) {
+      .sidebar { width: 200px; position: fixed; height: 100%; z-index: 999; left: -260px; top: 70px; }
+      .sidebar.show { left: 0; }
+      .content { padding: 20px 15px; }
+    }
+  </style>
+</head>
+<body onload="protectPage(); showUser(); loadAdminData();">
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
+  <div class="container-fluid">
+    <button class="btn btn-dark d-lg-none me-2" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
+    <a class="navbar-brand fw-bold" href="#"><i class="fa-solid fa-graduation-cap"></i> MERN LMS</a>
+    <form class="d-none d-md-flex mx-auto w-50">
+      <input type="search" class="form-control" placeholder="Search...">
+    </form>
+    <div class="d-flex align-items-center gap-2">
+      <span id="loggedUser" class="text-white me-1"></span>
+      <span class="badge bg-warning text-dark me-2">Admin</span>
+      <button class="btn btn-outline-light btn-sm" onclick="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= MAIN ================= -->
+<div class="wrapper">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <h5 class="text-success mb-4"><i class="fa-regular fa-rectangle-list me-2"></i>Admin Menu</h5>
+    <ul>
+      <li class="active"><i class="fa-solid fa-gauge-high"></i> Dashboard</li>
+      <li><i class="fa-solid fa-video"></i> Manage Videos</li>
+      <li><i class="fa-solid fa-users"></i> Students</li>
+      <li><i class="fa-solid fa-gear"></i> Settings</li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+    <!-- Welcome -->
+    <section class="welcome-banner">
+      <h2><i class="fa-regular fa-user-gear me-2"></i>Admin Dashboard</h2>
+      <p>Manage courses, lectures & videos (files in ./videos/)</p>
+    </section>
+
+    <!-- Stats -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-3">
+        <div class="stats-card">
+          <h3 id="totalVideos">0</h3>
+          <p>Total Lectures</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stats-card">
+          <h3 id="projectCount">0</h3>
+          <p>Project Videos</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stats-card">
+          <h3 id="jsCount">0</h3>
+          <p>JavaScript Videos</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stats-card">
+          <h3><i class="fa-regular fa-folder-open text-success"></i></h3>
+          <p>./videos/ folder</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Panel: Add & Manage -->
+    <div class="admin-panel-card">
+      <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <h4><i class="fa-regular fa-plus me-2"></i>Add New Lecture</h4>
+        <span class="badge bg-dark">File must exist in ./videos/</span>
+      </div>
+      <div class="row g-3 align-items-end mt-3">
+        <div class="col-md-3">
+          <label class="form-label">Title</label>
+          <input type="text" class="form-control" id="newTitle" placeholder="Lecture title" value="Day 7 - Advanced">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Filename (./videos/)</label>
+          <input type="text" class="form-control" id="newFile" placeholder="day7.mp4" value="day7.mp4">
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Category</label>
+          <select class="form-select" id="newCategory">
+            <option value="Project">Project</option>
+            <option value="JavaScript" selected>JavaScript</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Duration</label>
+          <input type="text" class="form-control" id="newDuration" placeholder="50min" value="50min">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-success w-100" onclick="addVideo()"><i class="fa-regular fa-plus"></i> Add</button>
+        </div>
+      </div>
+
+      <hr class="my-4">
+      <div class="d-flex justify-content-between align-items-center">
+        <h5 class="fw-bold"><i class="fa-regular fa-list me-2"></i>All Lectures</h5>
+        <span class="badge bg-secondary" id="lectureCount">0</span>
+      </div>
+      <div class="admin-lecture-list" id="adminLectureList">
+        <!-- dynamically rendered -->
+      </div>
+      <p class="text-muted small mt-3"><i class="fa-regular fa-circle-info"></i> Videos are stored in ./videos/ folder. Admin adds metadata only.</p>
+    </div>
+  </main>
+</div>
+
+<!-- ================= SCRIPTS ================= -->
+<script>
+  // ---------- data management ----------
+  function getVideos() {
+    return JSON.parse(localStorage.getItem('lms_videos')) || [];
+  }
+
+  function saveVideos(videos) {
+    localStorage.setItem('lms_videos', JSON.stringify(videos));
+  }
+
+  // ---------- load admin data ----------
+  function loadAdminData() {
+    const videos = getVideos();
+    updateStats(videos);
+    renderAdminList(videos);
+  }
+
+  function updateStats(videos) {
+    document.getElementById('totalVideos').textContent = videos.length;
+    document.getElementById('projectCount').textContent = videos.filter(v => v.category === 'Project').length;
+    document.getElementById('jsCount').textContent = videos.filter(v => v.category === 'JavaScript').length;
+    document.getElementById('lectureCount').textContent = videos.length;
+  }
+
+  function renderAdminList(videos) {
+    const list = document.getElementById('adminLectureList');
+    if (!list) return;
+    list.innerHTML = '';
+    if (videos.length === 0) {
+      list.innerHTML = '<p class="text-muted text-center py-3">No lectures added yet.</p>';
+      return;
+    }
+    videos.forEach(v => {
+      const div = document.createElement('div');
+      div.className = 'admin-lecture-item';
+      div.innerHTML = `
+        <span><strong>${v.title}</strong> (${v.category}) — ${v.file}</span>
+        <button class="remove-btn" onclick="removeVideo(${v.id})"><i class="fa-regular fa-trash-can"></i></button>
+      `;
+      list.appendChild(div);
+    });
+  }
+
+  // ---------- add video ----------
+  function addVideo() {
+    const title = document.getElementById('newTitle').value.trim();
+    const file = document.getElementById('newFile').value.trim();
+    const category = document.getElementById('newCategory').value;
+    const duration = document.getElementById('newDuration').value.trim() || '45min';
+    
+    if (!title || !file) {
+      alert('Please enter title and filename.');
+      return;
+    }
+
+    let videos = getVideos();
+    // Check duplicate
+    if (videos.some(v => v.file === file)) {
+      alert(`Video "${file}" already exists. Use a different filename.`);
+      return;
+    }
+
+    const newVideo = {
+      id: Date.now(),
+      title,
+      file,
+      category,
+      duration,
+      status: 'approved'
+    };
+    videos.push(newVideo);
+    saveVideos(videos);
+    loadAdminData();
+    
+    // Clear fields
+    document.getElementById('newTitle').value = '';
+    document.getElementById('newFile').value = '';
+    document.getElementById('newDuration').value = '';
+    
+    alert(`✅ "${title}" added successfully!`);
+  }
+
+  // ---------- remove video ----------
+  function removeVideo(id) {
+    if (!confirm('Delete this lecture?')) return;
+    let videos = getVideos();
+    videos = videos.filter(v => v.id !== id);
+    saveVideos(videos);
+    loadAdminData();
+  }
+
+  // ---------- auth stubs ----------
+  if (typeof protectPage === 'undefined') {
+    window.protectPage = function() { console.log('protectPage stub'); };
+  }
+  if (typeof showUser === 'undefined') {
+    window.showUser = function() {
+      const el = document.getElementById('loggedUser');
+      if (el) el.textContent = '👤 Admin';
+    };
+  }
+  if (typeof logout === 'undefined') {
+    window.logout = function() {
+      alert('Logout (stub) — redirect to login');
+      window.location.href = 'login.html';
+    };
+  }
+
+  // Sidebar toggle
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+    if (menuBtn && sidebar) {
+      menuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        sidebar.classList.toggle('show');
+      });
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth < 768 && !sidebar.contains(e.target) && e.target !== menuBtn) {
+          sidebar.classList.remove('show');
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>

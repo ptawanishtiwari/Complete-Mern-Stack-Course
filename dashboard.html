@@ -1,344 +1,669 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>MERN LMS Dashboard</title>
-
-    <!-- Bootstrap -->
-
+    <title>Student Dashboard · MERN LMS</title>
+    <!-- Bootstrap + Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* ----- global styles ----- */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background: #f0f2f5;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
 
-    <!-- Font Awesome -->
+        /* sidebar */
+        .sidebar {
+            width: 270px;
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 28px 18px;
+            transition: 0.3s;
+            flex-shrink: 0;
+            overflow-y: auto;
+            height: calc(100vh - 70px);
+            position: sticky;
+            top: 70px;
+        }
+        .sidebar h5 {
+            border-bottom: 1px solid #334155;
+            padding-bottom: 14px;
+            font-weight: 600;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 500;
+            transition: 0.15s;
+        }
+        .sidebar ul li i {
+            width: 24px;
+            color: #60a5fa;
+        }
+        .sidebar ul li.active {
+            background: #1e293b;
+            color: white;
+        }
+        .sidebar ul li.active i {
+            color: #34d399;
+        }
+        .sidebar ul li:hover {
+            background: #1e293b;
+            color: white;
+        }
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        .content {
+            flex: 1;
+            padding: 28px 32px;
+            background: #f8fafc;
+        }
 
-    <link rel="stylesheet" href="./css/dashboard.css">
+        /* welcome banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            padding: 24px 30px;
+            border-radius: 28px;
+            color: white;
+            margin-bottom: 30px;
+        }
+        .welcome-banner h2 {
+            font-weight: 600;
+        }
+        .welcome-banner p {
+            opacity: 0.8;
+        }
 
+        /* course cards */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+        .course-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e9edf2;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .course-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+        }
+        .course-card .course-image {
+            height: 180px;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .course-card .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .course-card .course-image .course-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+        }
+        .course-card .course-body {
+            padding: 20px 22px 24px;
+        }
+        .course-card .course-body h4 {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+        }
+        .course-card .course-body .course-meta {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 14px;
+        }
+        .course-card .course-body .btn-see-all {
+            background: #0f172a;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 8px 24px;
+            font-weight: 500;
+            transition: 0.2s;
+            width: 100%;
+        }
+        .course-card .course-body .btn-see-all:hover {
+            background: #1e293b;
+            transform: scale(1.02);
+        }
+        .course-card.active {
+            border-color: #34d399;
+            box-shadow: 0 8px 30px rgba(52, 211, 153, 0.15);
+        }
+
+        /* video list panel (right side) */
+        .video-list-panel {
+            background: white;
+            border-radius: 28px;
+            padding: 24px 28px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e9edf2;
+            margin-top: 20px;
+            display: none;
+            animation: slideUp 0.3s ease;
+        }
+        .video-list-panel.show {
+            display: block;
+        }
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .video-list-panel .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+        .video-list-panel .panel-header h4 {
+            font-weight: 700;
+            margin: 0;
+        }
+        .video-list-panel .panel-header .close-panel {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .video-list-panel .panel-header .close-panel:hover {
+            color: #dc2626;
+            transform: rotate(90deg);
+        }
+
+        .video-row-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+        .video-row-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        .video-row-list::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .video-row-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 14px 18px;
+            background: #f8fafc;
+            border-radius: 16px;
+            border: 1px solid #f1f5f9;
+            transition: 0.2s;
+        }
+        .video-row-item:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+        .video-row-item .video-thumb {
+            width: 160px;
+            height: 90px;
+            background: #0f172a;
+            border-radius: 12px;
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .video-row-item .video-thumb video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-row-item .video-info {
+            flex: 1;
+        }
+        .video-row-item .video-info h6 {
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 1rem;
+        }
+        .video-row-item .video-info .video-details {
+            font-size: 0.85rem;
+            color: #64748b;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .video-row-item .video-info .video-details span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .video-row-item .video-play-btn {
+            background: #0f172a;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 6px 18px;
+            font-size: 0.8rem;
+            transition: 0.2s;
+            flex-shrink: 0;
+        }
+        .video-row-item .video-play-btn:hover {
+            background: #1e293b;
+            transform: scale(1.05);
+        }
+
+        .topics .card {
+            border: none;
+            border-radius: 24px;
+        }
+        .topics ul {
+            columns: 2;
+            list-style: none;
+            padding-left: 0;
+        }
+        .topics ul li {
+            padding: 6px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .resource-item {
+            background: white;
+            padding: 18px 10px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #eef2f6;
+            transition: 0.2s;
+        }
+        .resource-item i {
+            font-size: 2rem;
+            color: #0f172a;
+        }
+        .resource-item h5 {
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+
+        #loggedUser {
+            background: #2d3b4f;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #94a3b8;
+        }
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+                position: fixed;
+                height: 100%;
+                z-index: 999;
+                left: -260px;
+                top: 70px;
+            }
+            .sidebar.show {
+                left: 0;
+            }
+            .content {
+                padding: 20px 15px;
+            }
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+            .video-row-item {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .video-row-item .video-thumb {
+                width: 100%;
+                height: 160px;
+            }
+            .topics ul {
+                columns: 1;
+            }
+        }
+    </style>
 </head>
+<body onload="protectPage(); showUser(); loadStudentVideos();">
 
-<body onload="protectPage();showUser();">
-
-<!-- ================= NAVBAR ================= -->
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
-
-    <div class="container-fluid">
-
-        <button class="btn btn-dark d-lg-none me-2" id="menuBtn">
-
-            <i class="fa-solid fa-bars"></i>
-
-        </button>
-
-        <a class="navbar-brand fw-bold" href="#">
-
-            <i class="fa-solid fa-graduation-cap"></i>
-
-            MERN LMS
-
-        </a>
-
-        <form class="d-none d-md-flex mx-auto w-50">
-
-            <input
-                type="search"
-                class="form-control"
-                placeholder="Search lesson...">
-
-        </form>
-
-        <div class="d-flex align-items-center">
-
-            <span id="loggedUser" class="text-white me-3"></span>
-
-            <button class="btn btn-success btn-sm" onclick="logout()">
-
-                Logout
-
-            </button>
-
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
+        <div class="container-fluid">
+            <button class="btn btn-dark d-lg-none me-2" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
+            <a class="navbar-brand fw-bold" href="#"><i class="fa-solid fa-graduation-cap"></i> MERN LMS</a>
+            <form class="d-none d-md-flex mx-auto w-50">
+                <input type="search" class="form-control" placeholder="Search lessons...">
+            </form>
+            <div class="d-flex align-items-center gap-2">
+                <span id="loggedUser" class="text-white me-1"></span>
+                <span class="badge bg-success me-2">Student</span>
+                <button class="btn btn-outline-light btn-sm" onclick="logout()">Logout</button>
+            </div>
         </div>
+    </nav>
 
+    <!-- ================= MAIN ================= -->
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <h5 class="text-success mb-4"><i class="fa-regular fa-rectangle-list me-2"></i>Course Content</h5>
+            <ul>
+                <li class="active"><i class="fa-solid fa-circle-play"></i> Day 1 - Project-Building</li>
+                <li><i class="fa-solid fa-circle-play"></i> Day 2 - Networking</li>
+                <li><i class="fa-solid fa-circle-play"></i> Day 3 - HTML</li>
+                <li><i class="fa-solid fa-circle-play"></i> Day 4 - CSS</li>
+                <li><i class="fa-solid fa-circle-play"></i> Day 5 - JavaScript</li>
+                <li><i class="fa-solid fa-circle-play"></i> Day 6 - React</li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Welcome -->
+            <section class="welcome-banner">
+                <h2>Welcome Back, Student 👋</h2>
+                <p>Continue your MERN Stack Journey</p>
+                <div class="progress mt-3" style="max-width:300px;">
+                    <div class="progress-bar bg-success" style="width:42%">42%</div>
+                </div>
+            </section>
+
+            <!-- Course Cards -->
+            <h4 class="fw-bold mb-3"><i class="fa-solid fa-layer-group me-2 text-success"></i>Your Courses</h4>
+            <div class="course-grid" id="courseGrid">
+                <!-- dynamically rendered -->
+            </div>
+
+            <!-- Video List Panel (right side) -->
+            <div class="video-list-panel" id="videoListPanel">
+                <div class="panel-header">
+                    <h4 id="panelTitle"><i class="fa-solid fa-video me-2"></i>All Lectures</h4>
+                    <button class="close-panel" onclick="closeVideoPanel()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="video-row-list" id="videoRowList">
+                    <!-- dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Today's Topics -->
+            <section class="topics mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4><i class="fa-regular fa-clock me-2"></i>Today's Learning</h4>
+                        <ul>
+                            <li>Introduction</li>
+                            <li>Frontend vs Backend</li>
+                            <li>Node.js Overview</li>
+                            <li>React Overview</li>
+                            <li>MongoDB Overview</li>
+                            <li>Career Roadmap</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources -->
+            <section class="resources mt-4">
+                <h3>Resources</h3>
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <div class="resource-item"><i class="fa-solid fa-file-pdf"></i>
+                            <h5>Notes</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="resource-item"><i class="fa-solid fa-code"></i>
+                            <h5>Source Code</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="resource-item"><i class="fa-solid fa-file-powerpoint"></i>
+                            <h5>PPT</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="resource-item"><i class="fa-solid fa-book"></i>
+                            <h5>Assignment</h5>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
 
-</nav>
-
-<!-- ================= MAIN ================= -->
-
-<div class="wrapper">
-
-    <!-- Sidebar -->
-
-    <aside class="sidebar" id="sidebar">
-
-        <h5 class="text-success mb-4">
-
-            Course Content
-
-        </h5>
-
-        <ul>
-
-            <li class="active">
-
-                <i class="fa-solid fa-circle-play"></i>
-
-                Day 1 - Introduction
-
-            </li>
-
-            <li>
-
-                <i class="fa-solid fa-circle-play"></i>
-
-                Day 2 - Networking
-
-            </li>
-
-            <li>
-
-                <i class="fa-solid fa-circle-play"></i>
-
-                Day 3 - HTML
-
-            </li>
-
-            <li>
-
-                <i class="fa-solid fa-circle-play"></i>
-
-                Day 4 - CSS
-
-            </li>
-
-            <li>
-
-                <i class="fa-solid fa-circle-play"></i>
-
-                Day 5 - JavaScript
-
-            </li>
-
-            <li>
-
-                <i class="fa-solid fa-circle-play"></i>
-
-                Day 6 - React
-
-            </li>
-
-        </ul>
-
-    </aside>
-
-    <!-- Main Content -->
-
-    <main class="content">
-
-        <!-- Welcome Banner -->
-
-        <section class="welcome">
-
-            <h2>
-
-                Welcome Back 👋
-
-            </h2>
-
-            <p>
-
-                Continue your MERN Stack Journey
-
-            </p>
-
-            <div class="progress mt-3">
-
-                <div
-                    class="progress-bar bg-success"
-                    style="width:42%">
-
-                    42%
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- Video Section -->
-
-        <section class="video-card">
-
-            <video
-                controls
-                controlsList="nodownload"
-                width="100%"
-                poster="./images/poster.jpg">
-
-                <source src="./videos/day1.mp4" type="video/mp4">
-
-            </video>
-
-            <h3 class="mt-4">
-
-                Day 1 : Introduction to MERN Stack
-
-            </h3>
-
-            <p>
-
-                Duration : 1 Hour 20 Minutes
-
-            </p>
-
-        </section>
-
-        <!-- Previous Next -->
-
-        <div class="lesson-nav">
-
-            <button class="btn btn-outline-success">
-
-                ← Previous Lesson
-
-            </button>
-
-            <button class="btn btn-success">
-
-                Next Lesson →
-
-            </button>
-
-        </div>
-
-        <!-- Today's Topics -->
-
-        <section class="topics">
-
-            <div class="card shadow-sm">
-
-                <div class="card-body">
-
-                    <h4>
-
-                        Today's Learning
-
-                    </h4>
-
-                    <ul>
-
-                        <li>Introduction</li>
-
-                        <li>Frontend vs Backend</li>
-
-                        <li>Node.js Overview</li>
-
-                        <li>React Overview</li>
-
-                        <li>MongoDB Overview</li>
-
-                        <li>Career Roadmap</li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- Resources -->
-
-        <section class="resources">
-
-            <h3>
-
-                Resources
-
-            </h3>
-
-            <div class="row">
-
-                <div class="col-md-3">
-
-                    <div class="resource">
-
-                        <i class="fa-solid fa-file-pdf"></i>
-
-                        <h5>
-
-                            Notes
-
-                        </h5>
-
+    <!-- ================= SCRIPTS ================= -->
+    <script>
+        // ---------- data ----------
+        function getVideos() {
+            return JSON.parse(localStorage.getItem('lms_videos')) || [];
+        }
+
+        let currentCategory = '';
+
+        // ---------- load student videos ----------
+        function loadStudentVideos() {
+            const grid = document.getElementById('courseGrid');
+            if (!grid) return;
+
+            const videos = getVideos();
+
+            // Default videos if none exist
+            if (videos.length === 0) {
+                const defaultVideos = [
+                    { id: 1, title: "Project Setup & Architecture", file: "day1.mp4", category: "Project",
+                    duration: "1h 20min" },
+                    { id: 2, title: "MERN Deployment Guide", file: "day2.mp4", category: "Project",
+                    duration: "55min" },
+                    { id: 3, title: "JS Closures & Prototypes", file: "day5.mp4", category: "JavaScript",
+                        duration: "1h 10min" },
+                    { id: 4, title: "Async/Await & Fetch API", file: "day6.mp4", category: "JavaScript",
+                        duration: "48min" }
+                ];
+                localStorage.setItem('lms_videos', JSON.stringify(defaultVideos));
+                loadStudentVideos();
+                return;
+            }
+
+            // Get unique categories
+            const categories = [...new Set(videos.map(v => v.category))];
+
+            grid.innerHTML = '';
+            categories.forEach(cat => {
+                const catVideos = videos.filter(v => v.category === cat && v.status !== 'deleted');
+                const card = document.createElement('div');
+                card.className = 'course-card';
+                card.id = `course-${cat.replace(/\s/g, '')}`;
+
+                // Course image (different colors for different categories)
+                const colors = {
+                    'Project': 'linear-gradient(135deg, #1e293b, #0f172a)',
+                    'JavaScript': 'linear-gradient(135deg, #2d1f3a, #1e1b2e)'
+                };
+                const bgColor = colors[cat] || 'linear-gradient(135deg, #1e293b, #334155)';
+                const icon = cat === 'Project' ? 'fa-code' : 'fa-brands fa-js';
+
+                card.innerHTML = `
+                    <div class="course-image" style="background: ${bgColor};">
+                        <i class="fa-solid ${icon}" style="font-size: 4rem; color: rgba(255,255,255,0.15);"></i>
+                        <span class="course-badge"><i class="fa-regular fa-clock me-1"></i>${catVideos.length} lectures</span>
                     </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div class="resource">
-
-                        <i class="fa-solid fa-code"></i>
-
-                        <h5>
-
-                            Source Code
-
-                        </h5>
-
+                    <div class="course-body">
+                        <h4>${cat} Videos</h4>
+                        <div class="course-meta">
+                            <i class="fa-regular fa-graduation-cap me-1"></i> Full-Stack Course
+                            <span class="mx-2">•</span>
+                            <i class="fa-regular fa-file-video me-1"></i> ${catVideos.length} videos
+                        </div>
+                        <button class="btn-see-all" onclick="showVideosByCategory('${cat}')">
+                            <i class="fa-regular fa-eye me-2"></i>See All Lectures
+                        </button>
                     </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
 
-                </div>
+        // ---------- show videos by category (right panel) ----------
+        function showVideosByCategory(category) {
+            currentCategory = category;
+            const panel = document.getElementById('videoListPanel');
+            const title = document.getElementById('panelTitle');
+            const list = document.getElementById('videoRowList');
 
-                <div class="col-md-3">
+            // Update title
+            title.innerHTML = `<i class="fa-solid fa-video me-2"></i>${category} · All Lectures`;
 
-                    <div class="resource">
+            // Get videos
+            const videos = getVideos().filter(v => v.category === category && v.status !== 'deleted');
 
-                        <i class="fa-solid fa-file-powerpoint"></i>
-
-                        <h5>
-
-                            PPT
-
-                        </h5>
-
+            list.innerHTML = '';
+            if (videos.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fa-regular fa-folder-open"></i>
+                        <p>No videos available in this category.</p>
                     </div>
+                `;
+            } else {
+                videos.forEach(v => {
+                    const row = document.createElement('div');
+                    row.className = 'video-row-item';
+                    row.innerHTML = `
+                        <div class="video-thumb">
+                            <video controls controlsList="nodownload" poster="./images/poster.jpg">
+                                <source src="./videos/${v.file}" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-info">
+                            <h6>${v.title}</h6>
+                            <div class="video-details">
+                                <span><i class="fa-regular fa-clock"></i> ${v.duration}</span>
+                                <span><i class="fa-regular fa-folder-open"></i> ${v.category}</span>
+                            </div>
+                        </div>
+                        <button class="video-play-btn" onclick="playVideo('${v.file}')">
+                            <i class="fa-solid fa-play me-1"></i> Play
+                        </button>
+                    `;
+                    list.appendChild(row);
+                });
+            }
 
-                </div>
+            // Show panel with animation
+            panel.classList.add('show');
+            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-                <div class="col-md-3">
+            // Highlight active course card
+            document.querySelectorAll('.course-card').forEach(c => c.classList.remove('active'));
+            const activeCard = document.getElementById(`course-${category.replace(/\s/g, '')}`);
+            if (activeCard) activeCard.classList.add('active');
+        }
 
-                    <div class="resource">
+        // ---------- close panel ----------
+        function closeVideoPanel() {
+            const panel = document.getElementById('videoListPanel');
+            panel.classList.remove('show');
+            document.querySelectorAll('.course-card').forEach(c => c.classList.remove('active'));
+        }
 
-                        <i class="fa-solid fa-book"></i>
+        // ---------- play video (opens in new tab or triggers play) ----------
+        function playVideo(file) {
+            // Find the video in the panel and play it
+            const videos = document.querySelectorAll('#videoRowList video');
+            videos.forEach(v => {
+                if (v.querySelector('source')?.src.includes(file)) {
+                    v.play();
+                    v.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        }
 
-                        <h5>
+        // ---------- auth stubs ----------
+        if (typeof protectPage === 'undefined') {
+            window.protectPage = function() { console.log('protectPage stub'); };
+        }
+        if (typeof showUser === 'undefined') {
+            window.showUser = function() {
+                const el = document.getElementById('loggedUser');
+                if (el) el.textContent = '👤 Student';
+            };
+        }
+        if (typeof logout === 'undefined') {
+            window.logout = function() {
+                alert('Logout (stub) — redirect to login');
+                window.location.href = 'login.html';
+            };
+        }
 
-                            Assignment
-
-                        </h5>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-</div>
-
-<script src="./js/auth.js"></script>
-<script src="./js/dashboard.js"></script>
-
+        // Sidebar toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('menuBtn');
+            const sidebar = document.getElementById('sidebar');
+            if (menuBtn && sidebar) {
+                menuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    sidebar.classList.toggle('show');
+                });
+                document.addEventListener('click', function(e) {
+                    if (window.innerWidth < 768 && !sidebar.contains(e.target) && e.target !== menuBtn) {
+                        sidebar.classList.remove('show');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
-
 </html>
